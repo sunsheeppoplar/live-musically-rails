@@ -35,9 +35,27 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# helps rails console readability
+gem 'pry-rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+
+  # test suite
+  gem 'rspec-rails', '~> 3.6'
+
+  # watcher for test suite
+  gem 'guard-rspec', require: false
+
+  # add-on for data management in testing
+  gem 'factory_girl_rails'
+
+  # makes sure our db doesn't have residual objects
+  gem 'database_cleaner'
+
+  # additional add-on for rspec testing ease
+  gem 'shoulda-matchers'
 end
 
 group :development do
