@@ -1,0 +1,14 @@
+.header {
+	border-bottom: 0.125em solid grey;
+	font-size: 1.125em;
+	height: 9.5%;
+
+	&__logo {
+		float: left;
+	}
+
+	&__sign-up {
+		cursor: pointer;
+		float: right;
+	}
+}
