@@ -1,0 +1,17 @@
+body {
+	font-size: 16px;
+	min-height: 100vh;
+}
+
+html {
+	height: 100vh;
+}
+
+html, body, form, fieldset, h1, h2, h3, h4, h5, h6, p, pre, blockquote, ul, ol, dl, address {
+	margin: 0;
+	padding: 0;
+}
+
+ul,li {
+	list-style-type: none;
+}
