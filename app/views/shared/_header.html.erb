@@ -1,12 +1,12 @@
-<header class="header">
-	<div class="header__logo">
+<header class="header pure-g">
+	<div class="header__logo pure-u-1-2">
 		Live Musically (banner placeholder)
 	</div>
-	<div class="header__sign-up">
+	<div class="header__sign-up pure-u-1-2">
 		<% if user_signed_in? %>
 			<%= link_to('Logout', destroy_user_session_path, method: :delete) %>
 		<% else %>
-			<%= link_to('Login', new_user_session_path) %>
+			<%= link_to('Sign up / Login', auth_path) %>
 		<% end %>
 	</div>
 </header>
