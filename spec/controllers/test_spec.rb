@@ -3,8 +3,8 @@ RSpec.describe 'GET /test-landing', :type => :request do
 
 	context 'setting up test suite for travis ci' do
 
-		it 'says hello' do
-			expect(response.body).to eq('hi s&m')
+		it 'redirects' do
+			expect(response.body).to eq("<html><body>You are being <a href=\"http://www.example.com/auth\">redirected</a>.</body></html>")
 		end
 	end
 end
