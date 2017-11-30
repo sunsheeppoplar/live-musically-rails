@@ -2,28 +2,40 @@ $(function(){
 	function handleAuthClick(e) {
 		var formSelected = e.target.dataset.authType;
 		var loginClass = '.js-login';
-		var signupClass = '.js-signup-primary';
+		var signupPrimaryClass = '.js-signup-primary';
+		var loginSwitchTextClass = '.auth-form-toggler > h3[data-auth-type="login"]';
+		var signupSwitchTextClass = '.auth-form-toggler > h3[data-auth-type="signup"]';
 
 		if (formSelected === 'login') {
-			handleForms(loginClass, signupClass, toggleForm('.js-signup-secondary', 'hide'));
+			handleForms(loginClass, signupPrimaryClass);
+			toggleSelectedText(loginSwitchTextClass, signupSwitchTextClass);
 		}
 
 		if (formSelected === 'signup') {
-			handleForms(signupClass, loginClass);
+			handleForms(signupPrimaryClass, loginClass);
+			toggleSelectedText(signupSwitchTextClass, loginSwitchTextClass);
 		}
 	}
 
-	function handleForms(toShow, toHide, callback) {
+	function toggleSelectedText(selected, deselected) {
+		var selectIt = 'auth-form-toggler--selected';
+
+		$(selected).addClass(selectIt);
+		$(deselected).removeClass(selectIt);
+	}
+
+	function handleForms(toShow, toHide) {
+		var signupSecondaryClass = '.js-signup-secondary';
+		var facebookSignupClass = '.js-signup-fb';
+
 		if (isVisible(toShow)) {
 			return;
 		}
 
 		toggleForm(toShow, 'show');
 		toggleForm(toHide, 'hide');
-
-		if (callback) {
-			callback();
-		}
+		toggleForm(signupSecondaryClass, 'hide');
+		toggleForm(facebookSignupClass, 'hide');
 	}
 
 	function isVisible(form) {
@@ -39,7 +51,7 @@ $(function(){
 		}
 
 		if (visibility === 'hide') {
-			$(selector).addClass(hideIt).removeClass(showIt)
+			$(selector).addClass(hideIt).removeClass(showIt);
 		}
 	}
 	
@@ -47,22 +59,52 @@ $(function(){
 		$('.auth-form__next-button').click(function(e) {
 			var signupForm = '.js-signup-secondary';
 			var userChoiceForm = '.js-signup-primary';
-			var hiddenInput = '#user_role';
-			var userRoleChosen = userRole;
+			var facebookSignupForm = '.js-signup-fb';
 
 			toggleForm(signupForm, 'show');
-			$(signupForm).find(hiddenInput)[0].value = userRoleChosen;
+			toggleForm(facebookSignupForm, 'show');
+			assignUserRoleToSignup(signupForm, userRole)
+			assignUserRoleCallbackQueryString(facebookSignupForm, userRole);
 			toggleForm(userChoiceForm, 'hide');
 		})
 	}
 
 	function chooseUserRole(e) {
 		var userRoleChosen = e.target.dataset.userRole;
+		toggleUserRoleButtonSelected(userRoleChosen);
 		showProperSignupForm(userRoleChosen);
+	}
+
+	function toggleUserRoleButtonSelected(userRole) {
+		var selectIt = 'auth-form__user-roles-button--selected';
+		var musicianButtonClass = '.auth-form__user-roles-button[data-user-role="musician"]'
+		var employerButtonClass = '.auth-form__user-roles-button[data-user-role="artist_employer"]'
+
+		if (userRole === 'musician') {
+			$(musicianButtonClass).addClass(selectIt);
+			$(employerButtonClass).removeClass(selectIt);
+		}
+
+		if (userRole === 'artist_employer') {
+			$(employerButtonClass).addClass(selectIt);
+			$(musicianButtonClass).removeClass(selectIt);
+		}
+	}
+
+	function assignUserRoleCallbackQueryString(form, role) {
+		var userRoleQueryString = "?user_role=" + role;
+		var facebookAuthUrl = 'http://localhost:3000/users/auth/facebook';
+		$(form)[0].href = "";
+		$(form)[0].href = facebookAuthUrl.concat(userRoleQueryString);
+	}
+
+	function assignUserRoleToSignup(form, role) {
+		var hiddenInput = '#user_role';
+
+		$(form).find(hiddenInput)[0].value = role;
 	}
 
 	// assign event handlers
 	$('.auth-form-toggler').click(handleAuthClick)
-
-	$('.auth-form__user-role').click(chooseUserRole)
+	$('.auth-form__user-roles-button').click(chooseUserRole)
 })
