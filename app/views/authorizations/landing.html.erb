@@ -1,17 +1,11 @@
-<div class="auth-form-toggler">
-  <h3 data-auth-type="login">
-  	Login
-  </h3>
-  </br></br></br>
-  <h3 data-auth-type="signup">
-  	Sign Up
-  </h3>
+<div class="auth-form-container">
+	<%= render "auth_form_toggler" %>
+
+	<%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'auth-form--hidden js-signup-fb' %>
+
+	<%= render "user_signup_role" %>
+
+	<%= render "login" %>
+
+	<%= render "signup" %>
 </div>
-
-<%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'auth-form--hidden js-signup-fb' %>
-
-<%= render "user_signup_role" %>
-
-<%= render "login" %>
-
-<%= render "signup" %>
