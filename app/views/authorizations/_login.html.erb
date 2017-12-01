@@ -16,14 +16,14 @@
 		</div>
 
 		<% if devise_mapping.rememberable? -%>
-		<div class="field">
-			<%= f.check_box :remember_me %>
-			<%= f.label :remember_me %>
+		<div class="auth-form__input-container__field">
+			<%= f.check_box :remember_me,  class: 'auth-form__remember-me__checkbox' %>
+			<%= f.label :remember_me, class: 'auth-form__remember-me__label' %>
 		</div>
 		<% end -%>
 
-		<div class="actions">
-			<%= f.submit "LOGIN" %>
+		<div class="auth-form__input-container__field">
+			<%= f.submit "LOGIN", class: 'auth-form__submit-button' %>
 		</div>
 		<% end %>
 	</div>

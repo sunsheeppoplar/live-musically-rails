@@ -15,7 +15,7 @@
 		margin-top: 2em;
 
 		&__field {
-			margin-top: 3em;
+			margin-top: 2em;
 		}
 	}
 
@@ -37,6 +37,28 @@
 	    height: 2em;
 	    margin-left: 40%;
 	    width: 20%;
+	}
+
+	&__remember-me {
+		&__checkbox {
+			@extend %checkbox;
+		}
+
+		&__label {
+			@extend %label;
+
+			width: 40%;
+			margin-left: 30%;
+		}
+	}
+
+	&__submit-button {
+		@extend %button;
+		@include button-theme($grey-button-border-color, $grey-button-text-color, $grey-button-background-color);
+
+		height: 2.5em;
+		width: 15%;
+		margin-left: 42.5%
 	}
 
 	&__user-roles {
