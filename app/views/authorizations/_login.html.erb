@@ -1,28 +1,30 @@
-<div class="auth-form--visible js-login" data-auth-type="login">
-  <h2>Log in</h2>
+<div class="auth-form--visible js-login pure-g" data-auth-type="login">
 
-  <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: ' js-signup-fb' %>
+	<div class="pure-u-1-1">
+		<%= render "facebook_login" %>
+	</div>
 
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true %>
-    </div>
+	<div class="pure-u-1-1 auth-form__input-container">
+		<%= form_for(resource, as: resource_name, url:session_path(resource_name)) do |f| %>
 
-    <div class="field">
-      <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "off" %>
-    </div>
+		<div class="auth-form__input-container__field">
+			<%= f.email_field :email, placeholder: 'Email', class: 'auth-form__input' %>
+		</div>
 
-    <% if devise_mapping.rememberable? -%>
-      <div class="field">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
-      </div>
-    <% end -%>
+		<div class="auth-form__input-container__field">
+			<%= f.password_field :password, autocomplete: "off", placeholder: 'Password', class: 'auth-form__input' %>
+		</div>
 
-    <div class="actions">
-      <%= f.submit "Log in" %>
-    </div>
-  <% end %>
+		<% if devise_mapping.rememberable? -%>
+		<div class="field">
+			<%= f.check_box :remember_me %>
+			<%= f.label :remember_me %>
+		</div>
+		<% end -%>
+
+		<div class="actions">
+			<%= f.submit "LOGIN" %>
+		</div>
+		<% end %>
+	</div>
 </div>

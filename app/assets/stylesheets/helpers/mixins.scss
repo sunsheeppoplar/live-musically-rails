@@ -1,0 +1,5 @@
+@mixin button-theme($border-color, $color, $background-color: transparent) {
+	background-color: $background-color;
+	border-color: $border-color;
+	color: $color;
+}
