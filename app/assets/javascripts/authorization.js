@@ -35,7 +35,7 @@ $(function(){
 		toggleForm(toShow, 'show');
 		toggleForm(toHide, 'hide');
 		toggleForm(signupSecondaryClass, 'hide');
-		toggleForm(facebookSignupClass, 'hide');
+		// toggleForm(facebookSignupClass, 'hide');
 	}
 
 	function isVisible(form) {
@@ -62,7 +62,7 @@ $(function(){
 			var facebookSignupForm = '.js-signup-fb';
 
 			toggleForm(signupForm, 'show');
-			toggleForm(facebookSignupForm, 'show');
+			// toggleForm(facebookSignupForm, 'show');
 			assignUserRoleToSignup(signupForm, userRole)
 			assignUserRoleCallbackQueryString(facebookSignupForm, userRole);
 			toggleForm(userChoiceForm, 'hide');
@@ -94,8 +94,8 @@ $(function(){
 	function assignUserRoleCallbackQueryString(form, role) {
 		var userRoleQueryString = "?user_role=" + role;
 		var facebookAuthUrl = 'http://localhost:3000/users/auth/facebook';
-		$(form)[0].href = "";
-		$(form)[0].href = facebookAuthUrl.concat(userRoleQueryString);
+		$(form).attr('href', '');
+		$(form).attr('href', facebookAuthUrl.concat(userRoleQueryString));
 	}
 
 	function assignUserRoleToSignup(form, role) {
