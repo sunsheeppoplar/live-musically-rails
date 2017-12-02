@@ -1,47 +1,40 @@
 <div class="auth-form--hidden js-signup-secondary pure-g">
-  <h2>Sign up</h2>
 
-  <div class="pure-u-1-1">
-    <%= render "facebook_login" %>
-  </div>
-  
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= devise_error_messages! %>
+	<div class="pure-u-1-1">
+		<%= render "facebook_login" %>
+	</div>
 
-    <div class="field">
-      <%= f.label :first_name %><br />
-      <%= f.text_field :first_name %>
-    </div>
+	<div class="pure-u-1-1 auth-form__input-container">
+		<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+		<%= devise_error_messages! %>
 
-    <div class="field">
-      <%= f.label :last_name %><br />
-      <%= f.text_field :last_name %>
-    </div>
+		<div class="auth-form__input-container__field">
+			<%= f.text_field :first_name, placeholder: 'First', class: 'auth-form__input auth-form__input--halved' %>
+			<%= f.text_field :last_name, placeholder: 'Last', class: 'auth-form__input auth-form__input--halved' %>
+		</div>
 
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email %>
-    </div>
+		<div class="auth-form__input-container__field">
+			<%= f.email_field :email, placeholder: 'Email', class: 'auth-form__input' %>
+		</div>
 
-    <div class="field">
-      <%= f.label :password %>
-      <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "off" %>
-    </div>
+		<div class="auth-form__input-container__field">
+			<% if @minimum_password_length %>
+			<em>(<%= @minimum_password_length %> characters minimum)</em>
+			<% end %>
+			<%= f.password_field :password, autocomplete: "off", placeholder: 'Password', class: 'auth-form__input' %>
+		</div>
 
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "off" %>
-    </div>
+		<div class="auth-form__input-container__field">
+			<%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Password Confirmation', class: 'auth-form__input' %>
+		</div>
 
-    <div class="field">
-      <%= f.hidden_field :role, :value => "musician" %>
-    </div>
+		<div class="auth-form__input-container__field">
+			<%= f.hidden_field :role, :value => "musician" %>
+		</div>
 
-    <div class="actions">
-      <%= f.submit "Sign up" %>
-    </div>
-  <% end %>
+		<div class="auth-form__input-container__field">
+			<%= f.submit "SIGN UP", class: 'auth-form__submit-button' %>
+		</div>
+		<% end %>
+	</div>
 </div>

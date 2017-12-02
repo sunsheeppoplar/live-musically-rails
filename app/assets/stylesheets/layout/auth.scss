@@ -9,6 +9,10 @@
 
 	&__input {
 		@extend %auth-input;
+
+		&--halved {
+			width: 20% !important;
+		}
 	}
 
 	&__input-container {
