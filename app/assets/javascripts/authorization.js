@@ -26,7 +26,6 @@ $(function(){
 
 	function handleForms(toShow, toHide) {
 		var signupSecondaryClass = '.js-signup-secondary';
-		var facebookSignupClass = '.js-signup-fb';
 
 		if (isVisible(toShow)) {
 			return;
@@ -35,7 +34,6 @@ $(function(){
 		toggleForm(toShow, 'show');
 		toggleForm(toHide, 'hide');
 		toggleForm(signupSecondaryClass, 'hide');
-		// toggleForm(facebookSignupClass, 'hide');
 	}
 
 	function isVisible(form) {
@@ -62,7 +60,6 @@ $(function(){
 			var facebookSignupForm = '.js-signup-fb';
 
 			toggleForm(signupForm, 'show');
-			// toggleForm(facebookSignupForm, 'show');
 			assignUserRoleToSignup(signupForm, userRole)
 			assignUserRoleCallbackQueryString(facebookSignupForm, userRole);
 			toggleForm(userChoiceForm, 'hide');
