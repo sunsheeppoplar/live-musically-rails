@@ -1,5 +1,7 @@
-$(function(){
+$(document).on('turbolinks:load', function(){
+	console.log('page loaded')
 	function handleAuthClick(e) {
+		console.log('click')
 		var formSelected = e.target.dataset.authType;
 		var loginClass = '.js-login';
 		var signupPrimaryClass = '.js-signup-primary';
@@ -7,11 +9,13 @@ $(function(){
 		var signupSwitchTextClass = '.auth-form-toggler > h3[data-auth-type="signup"]';
 
 		if (formSelected === 'login') {
+			console.log('hi, login')
 			handleForms(loginClass, signupPrimaryClass);
 			toggleSelectedText(loginSwitchTextClass, signupSwitchTextClass);
 		}
 
 		if (formSelected === 'signup') {
+			console.log('hi, signup')
 			handleForms(signupPrimaryClass, loginClass);
 			toggleSelectedText(signupSwitchTextClass, loginSwitchTextClass);
 		}
