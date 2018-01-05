@@ -10,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171117195119) do
+ActiveRecord::Schema.define(version: 20180105221638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "artist_profiles", force: :cascade do |t|
+    t.text     "about"
+    t.integer  "desired_compensation_lower_bound"
+    t.integer  "desired_compensation_upper_bound"
+    t.string   "youtube_link"
+    t.string   "facebook_link"
+    t.string   "instagram_link"
+    t.integer  "user_id"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.index ["user_id"], name: "index_artist_profiles_on_user_id", using: :btree
+  end
+
+  create_table "opportunities", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -35,6 +55,18 @@ ActiveRecord::Schema.define(version: 20171117195119) do
     t.string   "uid"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  end
+
+  create_table "venues", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "city"
+    t.integer  "zip"
+    t.integer  "category"
+    t.integer  "opportunity_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["opportunity_id"], name: "index_venues_on_opportunity_id", using: :btree
   end
 
 end
