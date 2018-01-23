@@ -1,8 +1,11 @@
 <header class="header pure-g">
-	<div class="header__logo pure-u-1-2">
-		Live Musically (banner placeholder)
+	<div class="header__logo pure-u-1-3">
+		Live Musically
 	</div>
-	<div class="header__sign-up pure-u-1-2">
+	<div class="header__logo pure-u-1-3">
+		<%= link_to('Post an Opportunity', new_opportunity_path) %>
+	</div>
+	<div class="header__sign-up pure-u-1-3">
 		<% if user_signed_in? %>
 			<%= link_to('Logout', destroy_user_session_path, method: :delete) %>
 		<% else %>

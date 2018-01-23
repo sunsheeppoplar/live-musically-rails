@@ -1,0 +1,72 @@
+<h1>POST AN OPPORTUNITY</h1>
+
+<%= form_for @employer_opportunity_form, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+	<h3>What:</h3>
+	<% Venue.categories.each do |k, v| %>
+		<%= check_box_tag :category, k, nil, :id => "category_#{k}" %>
+		<%= label :category, k %>
+	<% end %>
+	<br /><br />
+
+	<h3>TYPE OF ARTISTS YOU NEED (select all that apply):</h3>
+	<% User.instruments.each do |k, v| %>
+		<%= check_box_tag :artist_type, k, nil, :id => "artist_type_#{k}" %>
+		<%= label :artist_type_, k %>
+		</br>
+	<% end %>
+	<br /><br />
+	<h3>Where:</h3>
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+	<br />
+	<%= f.label :address %>
+	<%= f.text_field :address %>
+	<br />
+	<%= f.label :city %>
+	<%= f.text_field :city %>
+	<br />
+	<%= f.label :zip %>
+	<%= f.number_field :zip %>
+	<br /><br />
+	<h3>The Opportunity</h3>
+	<%= f.label :title %>
+	<%= f.text_field :title %>
+	<br />
+	<%= f.label :description %>
+	<br />
+	<%= f.text_area :description, size: "30x5" %>
+	<br /><br />
+	<h3>WHEN:</h3>
+
+	<%= f.hidden_field(:event_start_time) %>
+	<%= f.hidden_field(:event_end_time) %>
+	<%= f.hidden_field(:event_start_date) %>
+	<%= f.hidden_field(:event_end_date) %>
+	<br /><br /><br />
+	<p>Select start time:</p>
+	<div class="input-group bootstrap-timepicker timepicker">
+            <input id="newOppStartTime" type="text" class="form-control input-small">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+        </div>
+	</div>
+	</br></br>
+
+	<p>Select end time:</p>
+	<div class="input-group bootstrap-timepicker timepicker">
+            <input id="newOppEndTime" type="text" class="form-control input-small">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+        </div>
+	</div>
+	</br></br>
+
+	<div class="input-group input-daterange" >
+    <input id="newOppStartDate" type="text" class="form-control" value=<%= DateTime.now.strftime("%m/%d/%Y") %>>
+    <div class="input-group-addon">to</div>
+    <input id="newOppEndDate" type="text" class="form-control" value=<%= DateTime.now.strftime("%m/%d/%Y") %>>
+	</div>
+
+<%= f.submit "POST NOW" %>
+	
+
+
+<% end %>
