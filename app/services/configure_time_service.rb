@@ -5,6 +5,7 @@ class ConfigureTimeService
 	attribute :event_end_time, String
 	attribute :event_start_date, DateTime
 	attribute :event_start_time, String
+	attribute :timeframe_of_post, String
 
 	attr_reader :full_date_hash
 
@@ -12,7 +13,7 @@ class ConfigureTimeService
 		@start_date_object = convert_date_string(event_start_date)
 		@end_date_object = convert_date_string(event_end_date)
 
-		return_hash
+		return_full_date_hash
 	end
 
 	def is_end_time_before_start_time?
@@ -29,13 +30,25 @@ class ConfigureTimeService
 		end
 	end
 
+	def convert_timeframe_string(timeframe, event_start_date)
+		if timeframe != 'until_filled'
+			temp = timeframe.split('_')
+			today = DateTime.now
+			opportunity_expiration_date = today + (temp[0].to_i).send(temp[1])
+		else
+			opportunity_expiration_date = event_start_date
+		end
+	end
 
-	def return_hash
+	def return_full_date_hash
 		@full_date_hash = {
 			full_start_date: set_date(@start_date_object,event_start_time),
 			full_end_date: set_date(@end_date_object,
-				event_end_time)
+				event_end_time),
 		}
+
+		converted_timeframe = convert_timeframe_string(timeframe_of_post, @full_date_hash[:full_start_date])
+		@full_date_hash[:timeframe_of_post] = converted_timeframe
 	end
 
 	def set_date(date, time)

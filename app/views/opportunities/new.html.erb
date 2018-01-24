@@ -1,7 +1,17 @@
 <h1>POST AN OPPORTUNITY</h1>
 
 <%= form_for @employer_opportunity_form, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
-	<h3>What:</h3>
+	<h3>TIMEFRAME OF POST</h3>
+
+	<% TIMEFRAME_OF_POST_OPTIONS.each do |e| %>
+	<%= check_box_tag :timeframe_of_post, f.object, nil, value: e %>
+	<%= label :timeframe_of_post, e %>
+
+	<% end %>
+
+	</br></br></br>
+
+	<h3>WHAT:</h3>
 	<% Venue.categories.each do |k, v| %>
 		<%= check_box_tag :category, k, nil, :id => "category_#{k}" %>
 		<%= label :category, k %>

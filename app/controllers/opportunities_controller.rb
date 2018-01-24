@@ -23,6 +23,10 @@ class OpportunitiesController < ApplicationController
 			params[:employer_opportunity_form][:artist_type] = params[:artist_type]
 		end
 
-		params.require(:employer_opportunity_form).permit(:address, :artist_type, :category, :city, :description, :event_start_date, :event_end_date, :event_end_time, :event_start_time, :name, :title, :zip)
+		if params[:timeframe_of_post]
+			params[:employer_opportunity_form][:timeframe_of_post] = params[:timeframe_of_post]
+		end
+
+		params.require(:employer_opportunity_form).permit(:address, :artist_type, :category, :city, :description, :event_start_date, :event_end_date, :event_end_time, :event_start_time, :name, :timeframe_of_post, :title, :zip)
 	end
 end
