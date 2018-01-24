@@ -4,7 +4,7 @@
 	<h3>TIMEFRAME OF POST</h3>
 
 	<% TIMEFRAME_OF_POST_OPTIONS.each do |e| %>
-	<%= check_box_tag :timeframe_of_post, f.object, nil, value: e %>
+	<%= check_box_tag :timeframe_of_post, f.object, nil, value: e, class: "js-new-opp-form-timeframe-checkbox" %>
 	<%= label :timeframe_of_post, e %>
 
 	<% end %>
@@ -13,7 +13,7 @@
 
 	<h3>WHAT:</h3>
 	<% Venue.categories.each do |k, v| %>
-		<%= check_box_tag :category, k, nil, :id => "category_#{k}" %>
+		<%= check_box_tag :category, k, nil, :id => "category_#{k}", class: 'js-new-opp-form-venue-checkbox' %>
 		<%= label :category, k %>
 	<% end %>
 	<br /><br />
