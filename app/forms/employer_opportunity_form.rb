@@ -48,6 +48,7 @@ class EmployerOpportunityForm
 			description: description,
 			event_end_date: @time_service[:full_date_hash][:full_start_date],
 			event_start_date: @time_service[:full_date_hash][:full_end_date],
+			timeframe_of_post: @time_service[:full_date_hash][:timeframe_of_post],
 			title: title
 		)
 		@venue = opportunity.create_venue!(

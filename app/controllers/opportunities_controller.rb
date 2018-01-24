@@ -14,7 +14,6 @@ class OpportunitiesController < ApplicationController
 	end
 
 	def employer_opportunity_form_params
-		binding.pry
 		if params[:category]
 			params[:employer_opportunity_form][:category] = params[:category]
 		end
