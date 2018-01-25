@@ -11,6 +11,10 @@ class User < ApplicationRecord
 		[value]
 	end
 
+	has_many :employing_opportunities, :class_name => 'Opportunity', :foreign_key => 'employer_id'
+	has_many :artist_opportunities
+	has_many :performing_opportunities, :through => :artist_opportunities, source: :opportunity
+
 	def self.from_omniauth(auth)
 		where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
 			user.email = auth.info.email

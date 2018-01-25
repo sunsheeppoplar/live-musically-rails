@@ -7,6 +7,7 @@ class EmployerOpportunityForm
 	attribute :category, String
 	attribute :city, String
 	attribute :description, String
+	attribute :employer, Hash
 	attribute :event_duration, Integer
 	attribute :event_end_date, DateTime
 	attribute :event_end_time, String
@@ -43,7 +44,7 @@ class EmployerOpportunityForm
 
 	private
 	def persist!
-		opportunity = Opportunity.create!(
+		opportunity = employer.employing_opportunities.create!(
 			artist_type: artist_type,
 			description: description,
 			event_end_date: @time_service[:full_date_hash][:full_start_date],

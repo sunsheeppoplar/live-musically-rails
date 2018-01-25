@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123222509) do
+ActiveRecord::Schema.define(version: 20180125205859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "artist_opportunities", force: :cascade do |t|
+    t.integer  "opportunity_id"
+    t.integer  "user_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["opportunity_id"], name: "index_artist_opportunities_on_opportunity_id", using: :btree
+    t.index ["user_id"], name: "index_artist_opportunities_on_user_id", using: :btree
+  end
 
   create_table "artist_profiles", force: :cascade do |t|
     t.text     "about"
@@ -37,6 +46,8 @@ ActiveRecord::Schema.define(version: 20180123222509) do
     t.datetime "event_start_date"
     t.datetime "event_end_date"
     t.datetime "timeframe_of_post"
+    t.integer  "employer_id"
+    t.index ["employer_id"], name: "index_opportunities_on_employer_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
