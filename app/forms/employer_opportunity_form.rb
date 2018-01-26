@@ -61,7 +61,6 @@ class EmployerOpportunityForm
 			name: name,
 			zip: zip
 		)
-		binding.pry
 	end
 
 	def event_params
