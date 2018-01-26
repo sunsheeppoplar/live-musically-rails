@@ -6,6 +6,7 @@ class OpportunitiesController < ApplicationController
 	def create
 		@employer_opportunity_form = EmployerOpportunityForm.new(employer_opportunity_form_params)
 		if @employer_opportunity_form.save
+			flash[:notice] = 'Opportunity created'
 			redirect_to my_profile_path
 		else
 			flash[:alert] = @employer_opportunity_form.errors.full_messages
