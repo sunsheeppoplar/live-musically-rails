@@ -19,9 +19,9 @@
 	<br /><br />
 
 	<h3>TYPE OF ARTISTS YOU NEED (select all that apply):</h3>
-	<% User.instruments.each do |k, v| %>
-		<%= check_box_tag :artist_type, k, nil, :id => "artist_type_#{k}" %>
-		<%= label :artist_type_, k %>
+	<% ARTIST_INSTRUMENTS.each_with_index do |val, index| %>
+		<%= check_box_tag 'artist_types[]', val, nil, :id => "artist_type_#{index}" %>
+		<%= label :artist_type_, val %>
 		</br>
 	<% end %>
 	<br /><br />

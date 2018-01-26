@@ -19,14 +19,14 @@ class OpportunitiesController < ApplicationController
 			params[:employer_opportunity_form][:category] = params[:category]
 		end
 
-		if params[:artist_type]
-			params[:employer_opportunity_form][:artist_type] = params[:artist_type]
+		if params[:artist_types]
+			params[:employer_opportunity_form][:artist_types] = params[:artist_types]
 		end
 
 		if params[:timeframe_of_post]
 			params[:employer_opportunity_form][:timeframe_of_post] = params[:timeframe_of_post]
 		end
-
-		params.require(:employer_opportunity_form).permit(:address, :artist_type, :category, :city, :description, :event_start_date, :event_end_date, :event_end_time, :event_start_time, :name, :timeframe_of_post, :title, :zip).merge(employer: current_user)
+		binding.pry
+		params.require(:employer_opportunity_form).permit(:address, :category, :city, :description, :event_start_date, :event_end_date, :event_end_time, :event_start_time, :name, :timeframe_of_post, :title, :zip, :artist_types => []).merge(employer: current_user)
 	end
 end

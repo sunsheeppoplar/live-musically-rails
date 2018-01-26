@@ -3,7 +3,7 @@ class EmployerOpportunityForm
 	include Virtus.model
 
 	attribute :address, String
-	attribute :artist_type, String
+	attribute :artist_types, Array[String]
 	attribute :category, String
 	attribute :city, String
 	attribute :description, String
@@ -45,13 +45,15 @@ class EmployerOpportunityForm
 	private
 	def persist!
 		opportunity = employer.employing_opportunities.create!(
-			artist_type: artist_type,
 			description: description,
 			event_end_date: @time_service[:full_date_hash][:full_start_date],
 			event_start_date: @time_service[:full_date_hash][:full_end_date],
 			timeframe_of_post: @time_service[:full_date_hash][:timeframe_of_post],
 			title: title
 		)
+		artist_types.each do |artist_type|
+			opportunity.artist_opportunities.create(artist_type: artist_type)
+		end
 		@venue = opportunity.create_venue!(
 			address: address,
 			category: category,
@@ -59,6 +61,7 @@ class EmployerOpportunityForm
 			name: name,
 			zip: zip
 		)
+		binding.pry
 	end
 
 	def event_params
