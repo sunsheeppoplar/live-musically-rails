@@ -1,6 +1,8 @@
 class EmployerOpportunityForm
 	include ActiveModel::Model
 	include Virtus.model
+	include ActiveModel::Validations
+  	include ActiveModel::Validations::Callbacks
 
 	attribute :address, String
 	attribute :artist_types, Array[String]
@@ -14,15 +16,19 @@ class EmployerOpportunityForm
 	attribute :event_start_date, DateTime
 	attribute :event_start_time, String
 	attribute :name, String
+	attribute :state, String
 	attribute :timeframe_of_post, String
 	attribute :title, String
 	attribute :zip, Integer
 
 	attr_reader :venue
 
+	before_validation { self.state = self.state.upcase }
+
 	# validates :title, presence: true
 	# validates :category, presence: true
 	validate :is_timerange_valid?
+	validates_inclusion_of :state, :in => STATES_ARRAY
 
 	def save
 		if valid?
@@ -59,6 +65,7 @@ class EmployerOpportunityForm
 			category: category,
 			city: city,
 			name: name,
+			state: state,
 			zip: zip
 		)
 	end

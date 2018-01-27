@@ -1,0 +1,56 @@
+.new-opp-form {
+	font-size: 1.125em;
+
+	> section {
+		border: 0.125em solid $form-section-border-color;
+		border-radius: 0.25em;
+		margin-bottom: 1.5em;
+		margin-left: 10%;
+		margin-right: 10%;
+		padding: 0.625em;
+
+	}
+
+	&__header {
+		background-color: $header-color;
+		color: $header-text-color;
+		text-align: center;
+	}
+
+	&__checkbox-input-group {
+		display: inline-block;
+		width: 20%;
+	}
+
+	&__checkbox {
+		@extend %checkbox;
+	}
+
+	&__label {
+		@extend %label;
+		font-weight: normal;
+	}
+
+	&__input {
+		@extend %auth-input;
+		width: 100%;
+		margin-bottom: 0.5em;
+	}
+}
+
+.calendar-input-group {
+	margin-top: 1.5em;
+
+	> div {
+		display: block;
+
+		&.input-daterange {
+			width: 50%;
+		}
+
+		&.input-group-addon {
+			margin: 0.5em 45%;
+			width: 10%;
+		}
+	}
+}
