@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180126204447) do
+ActiveRecord::Schema.define(version: 20180128202509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,25 +25,11 @@ ActiveRecord::Schema.define(version: 20180126204447) do
     t.index ["user_id"], name: "index_artist_opportunities_on_user_id", using: :btree
   end
 
-  create_table "artist_profiles", force: :cascade do |t|
-    t.text     "about"
-    t.integer  "desired_compensation_lower_bound"
-    t.integer  "desired_compensation_upper_bound"
-    t.string   "youtube_link"
-    t.string   "facebook_link"
-    t.string   "instagram_link"
-    t.integer  "user_id"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.index ["user_id"], name: "index_artist_profiles_on_user_id", using: :btree
-  end
-
   create_table "opportunities", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.integer  "artist_type"
     t.datetime "event_start_date"
     t.datetime "event_end_date"
     t.datetime "timeframe_of_post"
@@ -88,4 +74,5 @@ ActiveRecord::Schema.define(version: 20180126204447) do
     t.index ["opportunity_id"], name: "index_venues_on_opportunity_id", using: :btree
   end
 
+  add_foreign_key "opportunities", "users", column: "employer_id"
 end
