@@ -1,95 +1,13 @@
 <div class="new-opp-form-container">
-
-
 	<h1 class="new-opp-form__header">POST AN OPPORTUNITY</h1>
 	<%= form_for @employer_opportunity_form, url: {action: "create"}, html: {class: "js-new-opp-form new-opp-form"}, remote: true do |f| %>
 		
-		<section class="new-opp-form__section new-opp-form__section--full">
-			<h5>WHAT:</h5>
-			<div>
-				<% Venue.categories.each do |k, v| %>
-					<div class="new-opp-form__checkbox-input-group">
-						<%= check_box_tag :category, k, nil, :id => "category_#{k}", class: 'js-new-opp-form-venue-checkbox new-opp-form__checkbox' %>
-						<%= label :category, k, class: "new-opp-form__label" %>
-					</div>
-				<% end %>
-			</div>
-		</section>
-		
-		<section class="new-opp-form__section new-opp-form__section--half new-opp-form__section--row-offset">
-			<h5>WHEN:</h5>
-			
-			<div class="calendar-input-group">
-				<div class="input-group input-daterange" >
-				    <input id="newOppStartDate" type="text" class="form-control" value=<%= DateTime.now.strftime("%m/%d/%Y") %>>
-				</div>
-				<div class="timepicker-range-input-group">
-					<!-- <p>Select start time:</p> -->
-					<div class="input-group bootstrap-timepicker timepicker">
-				            <input id="newOppStartTime" type="text" class="form-control input-small">
-				            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-				    </div>
-				</div>
-				<div class="input-group-addon">to</div>
-				<div class="input-group input-daterange" >
-				    <input id="newOppEndDate" type="text" class="form-control" value=<%= DateTime.now.strftime("%m/%d/%Y") %>>
-				</div>
-				<div class="timepicker-range-input-group">
-					<!-- <p>Select end time:</p> -->
-					<div class="input-group bootstrap-timepicker timepicker">
-				            <input id="newOppEndTime" type="text" class="form-control input-small" name="event_end_time">
-				            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-				     
-					</div>
-				</div>
-			</div>
-		</section>
-		<section class="new-opp-form__section new-opp-form__section--half">
-			<h5>WHERE:</h5>
-
-			<%= f.text_field :name, placeholder: 'Name', class: "new-opp-form__input" %>
-			<br />
-			<%= f.text_field :address, placeholder: 'Address', class: "new-opp-form__input" %>
-			<br />
-			<%= f.text_field :city, placeholder: 'City', class: "new-opp-form__input" %>
-			<br />
-			<%= f.text_field :state, placeholder: 'State', :maxlength => 2, class: "new-opp-form__input" %>
-			<br />
-			<%= f.number_field :zip, placeholder: 'Zip', class: "new-opp-form__input" %>
-		</section>
-		<section class="new-opp-form__section new-opp-form__section--full">
-			<h5>TYPE OF ARTISTS YOU NEED (select all that apply):</h5>
-			<% ARTIST_INSTRUMENTS.each_with_index do |val, index| %>
-				<div class="new-opp-form__checkbox-input-group">
-
-						<%= check_box_tag 'artist_types[]', val, nil, :id => "artist_type_#{val}", class: "new-opp-form__checkbox" %>
-						<%= label :artist_type_, val, class: "new-opp-form__label" %>
-				</div>
-			<% end %>
-		</section>
-		<section class="new-opp-form__section new-opp-form__section--half new-opp-form__section--row-offset">
-			<h5>The Opportunity</h5>
-			<%= f.text_field :title, placeholder: 'Title', class: "new-opp-form__input" %>
-			<br />
-			<%= f.text_area :description, placeholder: 'Describe the opportunity here...', size: "30x5" %>
-
-			<%= f.hidden_field(:event_start_time) %>
-			<%= f.hidden_field(:event_end_time) %>
-			<%= f.hidden_field(:event_start_date) %>
-			<%= f.hidden_field(:event_end_date) %>
-		</section>
-		
-		<section class="new-opp-form__section new-opp-form__section--half">
-			<h5>TIMEFRAME OF POST</h5>
-
-			<% TIMEFRAME_OF_POST_OPTIONS.each do |e| %>
-				<div class="new-opp-form__checkbox-input-group">
-					<%= check_box_tag :timeframe_of_post, f.object, nil, id: "timeframe_of_post_#{e}", value: e, class: "js-new-opp-form-timeframe-checkbox new-opp-form__checkbox" %>
-					<%= label :timeframe_of_post, e, class: "new-opp-form__label" %>
-
-				</div>
-			<% end %>
-		</section>
+		<%= render "venue_category_section" %>
+		<%= render "calendar_section", f: f %>
+		<%= render "venue_location_section", f: f %>
+		<%= render "artist_type_section" %>
+		<%= render "info_section", f: f %>
+		<%= render "timeframe_of_post_section", f: f %>
 	<br/>
 	<%= f.submit "POST NOW" %>
 	<% end %>

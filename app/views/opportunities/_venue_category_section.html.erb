@@ -1,0 +1,11 @@
+<section class="new-opp-form__section new-opp-form__section--full">
+	<h5>WHAT:</h5>
+	<div>
+		<% Venue.categories.each do |k, v| %>
+			<div class="new-opp-form__checkbox-input-group">
+				<%= check_box_tag :category, k, nil, :id => "category_#{k}", class: 'js-new-opp-form-venue-checkbox new-opp-form__checkbox' %>
+				<%= label :category, k, class: "new-opp-form__label" %>
+			</div>
+		<% end %>
+	</div>
+</section>

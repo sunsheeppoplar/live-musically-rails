@@ -1,0 +1,13 @@
+<section class="new-opp-form__section new-opp-form__section--half">
+	<h5>WHERE:</h5>
+
+	<%= f.text_field :name, placeholder: 'Name', class: "new-opp-form__input" %>
+	<br />
+	<%= f.text_field :address, placeholder: 'Address', class: "new-opp-form__input" %>
+	<br />
+	<%= f.text_field :city, placeholder: 'City', class: "new-opp-form__input" %>
+	<br />
+	<%= f.text_field :state, placeholder: 'State', :maxlength => 2, class: "new-opp-form__input" %>
+	<br />
+	<%= f.number_field :zip, placeholder: 'Zip', class: "new-opp-form__input" %>
+</section>

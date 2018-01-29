@@ -1,0 +1,30 @@
+<section class="new-opp-form__section new-opp-form__section--half new-opp-form__section--row-offset">
+	<h5>WHEN:</h5>
+	
+	<div class="calendar-input-group">
+		<div class="input-group input-daterange" >
+			<input id="newOppStartDate" type="text" class="form-control" value=<%= DateTime.now.strftime("%m/%d/%Y") %>>
+		</div>
+		<div class="timepicker-range-input-group">
+			<div class="input-group bootstrap-timepicker timepicker">
+					<input id="newOppStartTime" type="text" class="form-control input-small">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+			</div>
+		</div>
+		<div class="input-group-addon">to</div>
+		<div class="input-group input-daterange" >
+			<input id="newOppEndDate" type="text" class="form-control" value=<%= DateTime.now.strftime("%m/%d/%Y") %>>
+		</div>
+		<div class="timepicker-range-input-group">
+			<div class="input-group bootstrap-timepicker timepicker">
+					<input id="newOppEndTime" type="text" class="form-control input-small" name="event_end_time">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+			</div>
+		</div>
+	</div>
+
+	<%= f.hidden_field(:event_start_time) %>
+	<%= f.hidden_field(:event_end_time) %>
+	<%= f.hidden_field(:event_start_date) %>
+	<%= f.hidden_field(:event_end_date) %>
+</section>
