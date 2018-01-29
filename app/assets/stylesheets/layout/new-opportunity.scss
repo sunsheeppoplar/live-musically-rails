@@ -1,14 +1,32 @@
 .new-opp-form {
-	font-size: 1.125em;
+	// font-size: 1.125em;
+	// letter-spacing: normal;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
 
-	> section {
+	&__section {
+		box-sizing: border-box;
 		border: 0.125em solid $form-section-border-color;
 		border-radius: 0.25em;
 		margin-bottom: 1.5em;
-		margin-left: 10%;
-		margin-right: 10%;
 		padding: 0.625em;
 
+		&--full {
+			margin-left: 10%;
+			margin-right: 10%;
+			flex-basis: 80%;
+		}
+
+		&--half {
+			height: 12em;
+			flex-basis: 38.5%;
+		}
+
+		&--row-offset {
+			margin-left: 10%;
+			margin-right: 3%;
+		}
 	}
 
 	&__header {
