@@ -31,6 +31,10 @@ class ConfigureTimeService
 	end
 
 	def convert_timeframe_string(timeframe, event_start_date)
+		if timeframe == nil
+			return
+		end
+
 		if timeframe != 'until_filled'
 			temp = timeframe.split('_')
 			today = DateTime.now

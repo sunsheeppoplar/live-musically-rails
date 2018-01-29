@@ -10,7 +10,6 @@ class EmployerOpportunityForm
 	attribute :city, String
 	attribute :description, String
 	attribute :employer, Hash
-	attribute :event_duration, Integer
 	attribute :event_end_date, DateTime
 	attribute :event_end_time, String
 	attribute :event_start_date, DateTime
@@ -25,10 +24,21 @@ class EmployerOpportunityForm
 
 	before_validation { self.state = self.state.upcase }
 
-	# validates :title, presence: true
-	# validates :category, presence: true
-	validate :is_timerange_valid?
+	# time & date related validations for presence always pass because we set the values through js on page load
+
+	validates :address, presence: true
+	validates :artist_types, presence: true
+	validates :category, presence: true
+	validates :city, presence: true
+	validates :description, presence: true
+	validates :name, presence: true
+	validates :state, presence: true
+	validates :timeframe_of_post, presence: true
+	validates :title, presence: true
+	validates :zip, presence: true
 	validates_inclusion_of :state, :in => STATES_ARRAY
+
+	validate :is_timerange_valid?
 
 	def save
 		if valid?

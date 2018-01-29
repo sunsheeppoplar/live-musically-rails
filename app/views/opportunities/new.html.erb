@@ -1,20 +1,22 @@
-<div class="new-opp-form-container pure-g">
+<div class="new-opp-form-container">
 
 
-	<h1 class="new-opp-form__header pure-u-1">POST AN OPPORTUNITY</h1>
-	<%= form_for @employer_opportunity_form, url: {action: "create"}, html: {class: "new-opp-form"} do |f| %>
+	<h1 class="new-opp-form__header">POST AN OPPORTUNITY</h1>
+	<%= form_for @employer_opportunity_form, url: {action: "create"}, html: {class: "js-new-opp-form new-opp-form"}, remote: true do |f| %>
 		
-		<section class="pure-u-4-5">
+		<section class="new-opp-form__section new-opp-form__section--full">
 			<h5>WHAT:</h5>
-			<% Venue.categories.each do |k, v| %>
-				<div class="new-opp-form__checkbox-input-group">
-					<%= check_box_tag :category, k, nil, :id => "category_#{k}", class: 'js-new-opp-form-venue-checkbox new-opp-form__checkbox' %>
-					<%= label :category, k, class: "new-opp-form__label" %>
-				</div>
-			<% end %>
+			<div>
+				<% Venue.categories.each do |k, v| %>
+					<div class="new-opp-form__checkbox-input-group">
+						<%= check_box_tag :category, k, nil, :id => "category_#{k}", class: 'js-new-opp-form-venue-checkbox new-opp-form__checkbox' %>
+						<%= label :category, k, class: "new-opp-form__label" %>
+					</div>
+				<% end %>
+			</div>
 		</section>
 		
-		<section class="pure-u-2-5">
+		<section class="new-opp-form__section new-opp-form__section--half new-opp-form__section--row-offset">
 			<h5>WHEN:</h5>
 			
 			<div class="calendar-input-group">
@@ -35,16 +37,15 @@
 				<div class="timepicker-range-input-group">
 					<!-- <p>Select end time:</p> -->
 					<div class="input-group bootstrap-timepicker timepicker">
-				            <input id="newOppEndTime" type="text" class="form-control input-small">
+				            <input id="newOppEndTime" type="text" class="form-control input-small" name="event_end_time">
 				            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
 				     
 					</div>
 				</div>
 			</div>
 		</section>
-
-		<section class="pure-u-2-5">
-			<h5>Where:</h5>
+		<section class="new-opp-form__section new-opp-form__section--half">
+			<h5>WHERE:</h5>
 
 			<%= f.text_field :name, placeholder: 'Name', class: "new-opp-form__input" %>
 			<br />
@@ -56,7 +57,7 @@
 			<br />
 			<%= f.number_field :zip, placeholder: 'Zip', class: "new-opp-form__input" %>
 		</section>
-		<section class="pure-u-4-5">
+		<section class="new-opp-form__section new-opp-form__section--full">
 			<h5>TYPE OF ARTISTS YOU NEED (select all that apply):</h5>
 			<% ARTIST_INSTRUMENTS.each_with_index do |val, index| %>
 				<div class="new-opp-form__checkbox-input-group">
@@ -66,7 +67,7 @@
 				</div>
 			<% end %>
 		</section>
-		<section class="pure-u-2-5">
+		<section class="new-opp-form__section new-opp-form__section--half new-opp-form__section--row-offset">
 			<h5>The Opportunity</h5>
 			<%= f.text_field :title, placeholder: 'Title', class: "new-opp-form__input" %>
 			<br />
@@ -78,7 +79,7 @@
 			<%= f.hidden_field(:event_end_date) %>
 		</section>
 		
-		<section class="pure-u-2-5">
+		<section class="new-opp-form__section new-opp-form__section--half">
 			<h5>TIMEFRAME OF POST</h5>
 
 			<% TIMEFRAME_OF_POST_OPTIONS.each do |e| %>

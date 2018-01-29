@@ -17,6 +17,7 @@
 //= require bootstrap-datepicker
 //= require bootstrap-timepicker
 //= require authorization
+//= require config
 //= require datepicker
 //= require my-profile
 //= require new-opportunity-form

@@ -5,12 +5,16 @@ class OpportunitiesController < ApplicationController
 
 	def create
 		@employer_opportunity_form = EmployerOpportunityForm.new(employer_opportunity_form_params)
-		if @employer_opportunity_form.save
-			flash[:notice] = 'Opportunity created'
-			redirect_to my_profile_path
-		else
-			flash[:alert] = @employer_opportunity_form.errors.full_messages
-			redirect_to new_opportunity_path
+		respond_to do |format|
+			if @employer_opportunity_form.save
+				format.html { redirect_to my_profile_path, notice: 'Opportunity created' }
+			else
+				format.html {
+					render action: "new"
+				}
+				format.json { render json: @employer_opportunity_form.errors, status: :unprocessable_entity
+				}
+			end
 		end
 	end
 

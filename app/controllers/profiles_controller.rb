@@ -11,8 +11,8 @@ class ProfilesController < ApplicationController
 			if @my_profile_form.update
 				# flash[:notice] = 'Updated'
 				format.json { render json: { my_profile_form: @my_profile_form }
-				format.html { redirect_to my_profile_path, notice: 'Updated'}
 				}
+				format.html { redirect_to my_profile_path, notice: 'Updated'}
 			else
 				# flash[:alert]
 				redirect_to my_profile_path
