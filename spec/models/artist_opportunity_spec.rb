@@ -1,5 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe ArtistOpportunity, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+	describe "ActiveModel associations" do
+		# belongs_to
+		it "belongs to an opportunity" do
+			expect(subject).to belong_to(:opportunity)
+		end
+
+		it "belongs to an user" do
+			expect(subject). to belong_to(:user)
+		end
+	end
 end
