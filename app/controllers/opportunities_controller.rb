@@ -12,7 +12,7 @@ class OpportunitiesController < ApplicationController
 				format.html {
 					render action: "new"
 				}
-				format.json { render json: @employer_opportunity_form.errors, status: :unprocessable_entity
+				format.json { render json: {errors: @employer_opportunity_form.errors, full_messages: @employer_opportunity_form.errors.full_messages}, status: :unprocessable_entity
 				}
 			end
 		end

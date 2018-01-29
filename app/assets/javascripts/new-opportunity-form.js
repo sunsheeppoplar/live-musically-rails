@@ -12,12 +12,30 @@ $(document).on('turbolinks:load', function() {
 	$(formClass).on("ajax:success", function(e, data) {
 
 	}).on("ajax:error", function(e, data, status, error) {
-		Object.keys(data.responseJSON).forEach(function(key) {
-			showErrors(key)
-		})
+		var errorResponse = data.responseJSON;
+		handleErrors(errorResponse);
 	})
 
-	function showErrors(inputName) {
+	function handleErrors(errorObject) {
+		Object.keys(errorObject.errors).forEach(function(key) {
+			highlightBlankSections(key);
+		})
+
+		flashErrorMessages(errorObject.full_messages);
+	}
+
+	function flashErrorMessages(messages) {
+		errorContainerClass = '.alert';
+
+		var formattedMessages = messages.map(function(message) {
+			var spanStart = '<span>';
+			var spanEnd = '</span>';
+			return spanStart + message + spanEnd;
+		})
+		$(errorContainerClass).html(formattedMessages);
+	}
+
+	function highlightBlankSections(inputName) {
 		$(formClass).find('input, textarea').each(function() {
 			name = $(this).attr('name')
 			console.log(name)
