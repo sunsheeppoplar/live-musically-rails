@@ -57,7 +57,6 @@ class MyProfileForm
 	end
 
 	def set_safe_hash(params)
-		binding.pry
 		params.reject { |k,v| v.nil? }
 	end
 end

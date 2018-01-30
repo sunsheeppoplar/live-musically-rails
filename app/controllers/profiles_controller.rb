@@ -7,7 +7,6 @@ class ProfilesController < ApplicationController
 
 	def update
 		@my_profile_form = MyProfileForm.new(profile_form_params)
-		binding.pry
 		respond_to do |format|
 			if @my_profile_form.update
 				# flash[:notice] = 'Updated'
