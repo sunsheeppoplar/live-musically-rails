@@ -4,6 +4,13 @@ class MyProfileForm
 
 	attribute :about, String
 	attribute :current_user, Hash
+	attribute :email, String
+	attribute :first_name, String
+	attribute :last_name, String
+	attribute :password, String
+	attribute :password_confirmation, String
+
+	validates :last_name, presence: true
 
 	def update
 		if valid?
@@ -14,14 +21,43 @@ class MyProfileForm
 		end
 	end
 
+	def update_password
+		if valid?
+			persist_password!
+			true
+		else
+			false
+		end
+	end
+
 	private
 	def persist!
-		current_user.update(user_params)
+		sanitized_hash = set_safe_hash(user_params)
+		current_user.update!(sanitized_hash)
+	end
+
+	def persist_password!
+		current_user.update!(user_password_params)
 	end
 
 	def user_params
 		{
-			about: about
+			about: about,
+			email: email,
+			first_name: first_name,
+			last_name: last_name
 		}
+	end
+
+	def user_password_params
+		{
+			password: password,
+			password_confirmation: password_confirmation
+		}
+	end
+
+	def set_safe_hash(params)
+		binding.pry
+		params.reject { |k,v| v.nil? }
 	end
 end

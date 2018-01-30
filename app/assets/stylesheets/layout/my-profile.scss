@@ -1,5 +1,5 @@
 .my-profile-form {
-	&__textarea-edit-submit {
+	&__textarea-edit-submit, &__input-group-edit-submit, &__password-edit-submit, &__password-fields {
 		visibility: hidden;
 	}
 }

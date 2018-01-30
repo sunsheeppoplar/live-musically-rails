@@ -7,7 +7,8 @@ Rails.application.routes.draw do
 
 	resources :opportunities
 	get '/my_profile', to: 'profiles#my_profile'
-	put 'my_profile', to: 'profiles#update'
+	patch 'my_profile', to: 'profiles#update'
+	patch 'my_profile/update_password', to: 'profiles#update_password'
 
 	get '/auth', to: 'authorizations#landing'
 
