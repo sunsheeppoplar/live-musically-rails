@@ -16,7 +16,9 @@
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
 //= require bootstrap-timepicker
+//= require jquery-ui/widgets/autocomplete
 //= require authorization
+//= require autocomplete
 //= require config
 //= require datepicker
 //= require my-profile

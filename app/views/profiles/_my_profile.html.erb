@@ -1,7 +1,7 @@
 <h3>MY PROFILE</h3>
 
 <h5>ABOUT</h5>
-<%=form_for @my_profile_form, remote: :true, url: { action: "update"}, method: :patch, html: {class: "js-my-profile--basic"} do |f| %>
+
 	<%= f.text_area :about, :value => current_user.about, disabled: "disabled", class: "js-my-profile-textarea" %>
 		<span class="js-my-profile-textarea-edit-icon"><i class="glyphicon glyphicon-pencil"></i></span>
 		<span class="js-my-profile-textarea-edit-submit my-profile-form__textarea-edit-submit"><i class="glyphicon glyphicon-ok"></i></span>
@@ -43,7 +43,6 @@
 	<%= o.venue.city %><br />
 	<%= o.event_start_date %><br />
 </p>
-<% end %>
 
 
 

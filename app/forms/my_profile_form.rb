@@ -6,6 +6,7 @@ class MyProfileForm
 	attribute :current_user, Hash
 	attribute :email, String
 	attribute :first_name, String
+	attribute :instruments, String
 	attribute :last_name, String
 	attribute :password, String
 	attribute :password_confirmation, String

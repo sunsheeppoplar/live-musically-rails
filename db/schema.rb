@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180128202509) do
+ActiveRecord::Schema.define(version: 20180130235450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "artist_instruments", force: :cascade do |t|
+    t.integer "instrument_id"
+    t.integer "user_id"
+    t.index ["instrument_id"], name: "index_artist_instruments_on_instrument_id", using: :btree
+    t.index ["user_id"], name: "index_artist_instruments_on_user_id", using: :btree
+  end
 
   create_table "artist_opportunities", force: :cascade do |t|
     t.integer  "opportunity_id"
@@ -23,6 +30,10 @@ ActiveRecord::Schema.define(version: 20180128202509) do
     t.string   "artist_type"
     t.index ["opportunity_id"], name: "index_artist_opportunities_on_opportunity_id", using: :btree
     t.index ["user_id"], name: "index_artist_opportunities_on_user_id", using: :btree
+  end
+
+  create_table "instruments", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "opportunities", force: :cascade do |t|
@@ -55,7 +66,6 @@ ActiveRecord::Schema.define(version: 20180128202509) do
     t.integer  "role"
     t.string   "provider"
     t.string   "uid"
-    t.integer  "instrument"
     t.text     "about"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
@@ -74,5 +84,7 @@ ActiveRecord::Schema.define(version: 20180128202509) do
     t.index ["opportunity_id"], name: "index_venues_on_opportunity_id", using: :btree
   end
 
+  add_foreign_key "artist_instruments", "instruments"
+  add_foreign_key "artist_instruments", "users"
   add_foreign_key "opportunities", "users", column: "employer_id"
 end
