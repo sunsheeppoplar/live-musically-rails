@@ -12,7 +12,6 @@ class ConfigureTimeService
 	def convert
 		@start_date_object = convert_date_string(event_start_date)
 		@end_date_object = convert_date_string(event_end_date)
-
 		return_full_date_hash
 	end
 
@@ -27,6 +26,8 @@ class ConfigureTimeService
 	def convert_date_string(date)
 		if date.is_a? String
 			DateTime.strptime(date, "%m/%d/%Y")
+		else
+			date
 		end
 	end
 
@@ -46,9 +47,8 @@ class ConfigureTimeService
 
 	def return_full_date_hash
 		@full_date_hash = {
-			full_start_date: set_date(@start_date_object,event_start_time),
-			full_end_date: set_date(@end_date_object,
-				event_end_time),
+			full_start_date: set_date(@start_date_object, event_start_time),
+			full_end_date: set_date(@end_date_object, event_end_time)
 		}
 
 		converted_timeframe = convert_timeframe_string(timeframe_of_post, @full_date_hash[:full_start_date])
