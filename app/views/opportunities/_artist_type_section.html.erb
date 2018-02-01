@@ -3,7 +3,7 @@
 	<% ARTIST_INSTRUMENTS.each_with_index do |val, index| %>
 		<div class="new-opp-form__checkbox-input-group">
 
-				<%= check_box_tag 'artist_types[]', val, nil, :id => "artist_type_#{val}", class: "new-opp-form__checkbox" %>
+				<%= check_box_tag "employer_opportunity_form[artist_types][]", val, nil, :id => "artist_type_#{val}", class: "new-opp-form__checkbox" %>
 				<%= label :artist_type_, val, class: "new-opp-form__label" %>
 		</div>
 	<% end %>
