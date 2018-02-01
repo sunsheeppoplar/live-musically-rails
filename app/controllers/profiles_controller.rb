@@ -38,8 +38,8 @@ class ProfilesController < ApplicationController
 				redirect_to my_profile_path
 			end
 		end
-	end
-
+    end
+    
 	private
 	def profile_form_params
 		params.require(:my_profile_form).permit(:about, :email, :first_name, :last_name, :password, :password_confirmation).merge(current_user: current_user)
