@@ -9,10 +9,11 @@ $(document).on('turbolinks:load', function() {
 		$('.js-new-opp-form-venue-checkbox').not(this).prop('checked', false);
 	})
 
-	$(formClass).on("ajax:success", function(e, data) {
-
-	}).on("ajax:error", function(e, data, status, error) {
-		var errorResponse = data.responseJSON;
+	$(formClass).on("ajax:success", function(e, data, status, xhr) {
+		var redirectURL = xhr.getResponseHeader('location')
+		window.location = redirectURL;
+	}).on("ajax:error", function(e, xhr, status, error) {
+		var errorResponse = xhr.responseJSON;
 		handleErrors(errorResponse);
 	})
 
