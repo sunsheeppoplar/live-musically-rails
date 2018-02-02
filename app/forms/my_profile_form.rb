@@ -6,18 +6,18 @@ class MyProfileForm
 	attribute :current_user, Hash
 	attribute :email, String
 	attribute :first_name, String
-	attribute :instruments, String
+	attribute :instruments, Array
 	attribute :last_name, String
 	attribute :password, String
 	attribute :password_confirmation, String
 
-	validates :last_name, presence: true
+	# validates :last_name, presence: true
 
-	def update
-		if valid?
+    def update
+        if valid?
 			persist!
 			true
-		else
+        else
 			false
 		end
 	end
@@ -33,13 +33,34 @@ class MyProfileForm
 
 	private
 	def persist!
-		sanitized_hash = set_safe_hash(user_params)
+        sanitized_hash = set_safe_hash(user_params)
+        temp_array = prepare_instruments(instruments)
+        update_instruments(temp_array)
 		current_user.update!(sanitized_hash)
 	end
 
 	def persist_password!
 		current_user.update!(user_password_params)
-	end
+    end
+    
+    def prepare_instruments(ins_name_array)
+        prepared_array = []
+        for ins_name in ins_name_array
+            current_ins = Instrument.where(name: ins_name)
+            if current_ins.length == 0
+                current_ins = [Instrument.create(name: ins_name)]
+            end
+            prepared_array << current_ins[0] # just in case of duplicate instruments
+        end
+        return prepared_array
+    end
+
+    def update_instruments(prepared_array)
+        current_user.instruments = []
+        current_user.instruments << prepared_array
+        current_user.save!
+    end
+
 
 	def user_params
 		{
