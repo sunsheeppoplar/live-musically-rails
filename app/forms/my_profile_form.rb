@@ -30,6 +30,14 @@ class MyProfileForm
 		end
 	end
 
+	# decorators
+	def decorated_employing_opportunities
+		opp = Opportunity.includes(:venue).where(employer_id: current_user.id)
+		opp.map do |o|
+			OpportunityDecorator.new(o)
+		end
+	end
+
 	private
 	def persist!
 		sanitized_hash = set_safe_hash(user_params)
