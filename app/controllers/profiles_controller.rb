@@ -8,16 +8,16 @@ class ProfilesController < ApplicationController
 	end
 
 	def update
-		@my_profile_form = MyProfileForm.new(profile_form_params)
+        @my_profile_form = MyProfileForm.new(profile_form_params)
 		respond_to do |format|
 			if @my_profile_form.update
-				# flash[:notice] = 'Updated'
-				format.json { render json: { my_profile_form: @my_profile_form }
-				}
+                # flash[:notice] = 'Updated'
 				format.html { redirect_to my_profile_path, notice: 'Updated'}
+				format.json { render json: @my_profile_form
+				}
 			else
-				# flash[:alert]
-				redirect_to my_profile_path
+                # flash[:alert]
+				format.html { redirect_to my_profile_path }
 			end
 		end
 	end
@@ -38,11 +38,11 @@ class ProfilesController < ApplicationController
 				redirect_to my_profile_path
 			end
 		end
-	end
-
+    end
+    
 	private
 	def profile_form_params
-		params.require(:my_profile_form).permit(:about, :email, :first_name, :last_name, :password, :password_confirmation).merge(current_user: current_user)
+		params.require(:my_profile_form).permit(:about, :email, :first_name, :last_name, :password, :password_confirmation, :instruments => []).merge(current_user: current_user)
 	end
 
 	def find_user_role(role)

@@ -1,7 +1,20 @@
-<%=form_for @my_profile_form, remote: :true, url: { action: "update"}, method: :patch, html: {class: "js-my-profile--basic"} do |f| %>
+<%=form_for @my_profile_form, remote: :true, url: { action: "update"}, method: :patch, html: {class: "js-my-profile--basic", :multipart => true } do |f| %>
 
 	<%#= render "profiles/my_profile", f: f %>
 
-	<div id="box" style="margin-left: 200px; border: 1px solid red; height:100px; width: 100px;"></div>
-	<%= f.text_field :instruments, data: { autocomplete_source: ARTIST_INSTRUMENTS }, placeholder: "ADD TITLE" %>
+	<div id="js-instrument-container" style="margin-left: 200px; border: 1px solid red; height:100px; width: 100px;"></div>
+
+    <%= text_field_tag 'my_profile_form_instruments', nil, :data => { :autocomplete_source => ARTIST_INSTRUMENTS } %>
+    
+	<%#= f.text_field :instruments, data: { autocomplete_source: ARTIST_INSTRUMENTS }, placeholder: "ADD TITLE" %>
+    <% ARTIST_INSTRUMENTS.each_with_index do |val, index| %>
+        <div class="my-profile-form__checkbox-input-group">
+
+                <%= check_box_tag 'my_profile_form[instruments][]', val, nil, :id => "instruments_#{val}", class: "my-profile-form__checkbox" %>
+                <%= label :instrument_, val, class: "my-profile-form__label" %>
+        </div>
+        
+	<% end %>
+
+<%#= check_box_tag 'my_profile_form[instruments][]', val, nil, :id => "instrument_#{val}", class: "new-opp-form__checkbox" %>
 <% end %>
