@@ -36,6 +36,18 @@ ActiveRecord::Schema.define(version: 20180130235450) do
     t.string "name"
   end
 
+  create_table "locations", id: false, force: :cascade do |t|
+    t.text "zipcode"
+    t.text "zip_code_type"
+    t.text "city"
+    t.text "state"
+    t.text "location_type"
+    t.text "lat"
+    t.text "long"
+    t.text "world_region"
+    t.text "country"
+  end
+
   create_table "opportunities", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
