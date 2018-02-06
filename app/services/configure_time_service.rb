@@ -10,9 +10,6 @@ class ConfigureTimeService
 	attr_reader :full_date_hash
 
 	def convert
-		binding.pry
-		# @start_date_object = convert_date_string(event_start_date)
-		# @end_date_object = convert_date_string(event_end_date)
 		return_full_date_hash
 	end
 
