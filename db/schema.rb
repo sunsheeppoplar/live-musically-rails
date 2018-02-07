@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(version: 20180130235450) do
     t.index ["user_id"], name: "index_artist_instruments_on_user_id", using: :btree
   end
 
+  create_table "artist_locations", force: :cascade do |t|
+    t.integer "location_id"
+    t.integer "user_id"
+    t.index ["location_id"], name: "index_artist_locations_on_location_id", using: :btree
+    t.index ["user_id"], name: "index_artist_locations_on_user_id", using: :btree
+  end
+
   create_table "artist_opportunities", force: :cascade do |t|
     t.integer  "opportunity_id"
     t.integer  "user_id"
@@ -98,5 +105,7 @@ ActiveRecord::Schema.define(version: 20180130235450) do
 
   add_foreign_key "artist_instruments", "instruments"
   add_foreign_key "artist_instruments", "users"
+  add_foreign_key "artist_locations", "locations"
+  add_foreign_key "artist_locations", "users"
   add_foreign_key "opportunities", "users", column: "employer_id"
 end
