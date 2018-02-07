@@ -12,7 +12,8 @@ class ProfilesController < ApplicationController
 		respond_to do |format|
 			if @my_profile_form.update
                 # flash[:notice] = 'Updated'
-				format.html { redirect_to my_profile_path, notice: 'Updated'}
+                format.html { redirect_to my_profile_path, notice: 'Updated'
+                }
 				format.json { render json: @my_profile_form
 				}
 			else
@@ -20,7 +21,17 @@ class ProfilesController < ApplicationController
 				format.html { redirect_to my_profile_path }
 			end
 		end
-	end
+    end
+    
+    def get_single_zipcode
+        @location  = Location.where(zipcode: params[:zipcode])
+        respond_to do |format|
+            format.html { redirect_to my_profile_path, notice: 'Updated'
+            }
+            format.json { render json: { location: @location }
+            }
+        end
+    end
 
 	def update_password
 		@my_profile_form = MyProfileForm.new(profile_form_params)

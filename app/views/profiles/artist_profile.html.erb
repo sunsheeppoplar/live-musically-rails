@@ -2,11 +2,13 @@
 
 	<%#= render "profiles/my_profile", f: f %>
 
-	<div id="js-instrument-container" style="margin-left: 200px; border: 1px solid red; height:100px; width: 100px;"></div>
+	<div id="js-instrument-container" style="margin: 50px; border: 1px solid red; height:100px; width: 200px;"></div>
+	<div id="js-location-container" style="margin: 50px; border: 1px solid blue; height:100px; width: 200px;"></div>
 
     <%= text_field_tag 'my_profile_form_instruments', nil, :data => { :autocomplete_source => ARTIST_INSTRUMENTS } %>
+    <br/>
+    <br/>
     
-	<%#= f.text_field :instruments, data: { autocomplete_source: ARTIST_INSTRUMENTS }, placeholder: "ADD TITLE" %>
     <% ARTIST_INSTRUMENTS.each_with_index do |val, index| %>
         <div class="my-profile-form__checkbox-input-group">
 
@@ -16,5 +18,8 @@
         
 	<% end %>
 
-<%#= check_box_tag 'my_profile_form[instruments][]', val, nil, :id => "instrument_#{val}", class: "new-opp-form__checkbox" %>
+<% end %>
+
+<%= form_tag "/my_profile/get_single_zipcode", method: 'get', remote: true do %>
+    <%= text_field_tag 'my_profile_form_locations', nil, :data => { } %>
 <% end %>

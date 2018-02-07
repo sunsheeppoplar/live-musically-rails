@@ -10,8 +10,10 @@ class User < ApplicationRecord
 	has_many :employing_opportunities, :class_name => 'Opportunity', :foreign_key => 'employer_id'
 	has_many :artist_opportunities
 	has_many :performing_opportunities, :through => :artist_opportunities, source: :opportunity
-	has_many :instruments, :through => :artist_instruments
+    has_many :instruments, :through => :artist_instruments
 	has_many :artist_instruments
+    has_many :locations, :through => :artist_locations
+    has_many :artist_locations
 
 	def self.from_omniauth(auth)
 		where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
