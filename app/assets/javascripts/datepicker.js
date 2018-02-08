@@ -1,32 +1,55 @@
 $(document).on('turbolinks:load', function() {
 	function instantiateDatePickers() {
-		$('.input-daterange').each(function() {
-			$(this).datepicker({
-				todayHighlight: true,
-				startDate: new Date()
+		if (this.page.controller() == 'opportunities' && this.page.action() == 'edit') {
+
+			var initialStartDate = $('#employer_opportunity_form_event_start_date').val();
+			var initialEndDate = $('#employer_opportunity_form_event_end_date').val();
+
+			var datesWithoutUTCStamp = produceRubyStringsArray([initialStartDate, initialEndDate])
+
+			$('.input-daterange input').each(function(index) {
+				$(this).datepicker('setDate', datesWithoutUTCStamp[index])
 			})
+		}
+
+		if (this.page.controller() == 'opportunities' && this.page.action() == 'new') {
+			$('.input-daterange').each(function() {
+				$(this).datepicker({
+					todayHighlight: true,
+					startDate: new Date()
+				})
+			})
+			setInitialDateValues();
+		}
+	}
+
+	function produceRubyStringsArray(datesArray) {
+		var returnArray = [];
+		datesArray.forEach(function(e) {
+			var temp = e.split(' ')[0].split('-');
+			var year = temp[0]
+			var month = temp[1]
+			var day = temp[2]
+			var rearrangedDateString = month + '/' + day + '/' + year;
+			returnArray.push(new Date(rearrangedDateString))
 		})
+		return returnArray;
 	}
 
 	function setInitialDateValues() {
-		var initialStartDate = $('#newOppStartDate').val();
-		var initialEndDate = $('#newOppEndDate').val();
+		var startElementClass = '#newOppStartDate';
+		var endElementClass = '#newOppEndDate';
 
-		var rubyStartDateString = switchMonthAndDate(initialStartDate);
-		var rubyEndDateString = switchMonthAndDate(initialEndDate);
+		var initialStartDate = $(startElementClass).val();
+		var initialEndDate = $(endElementClass).val();
+
+		var rubyStartDateString = formatDateStringForRuby(new Date(initialStartDate));
+		var rubyEndDateString = formatDateStringForRuby(new Date(initialEndDate));
 
 		$('#employer_opportunity_form_event_start_date').val(rubyStartDateString);
 		$('#employer_opportunity_form_event_end_date').val(rubyEndDateString);
 	}
 
-	function switchMonthAndDate(dateString) {
-		var splitDateStringArray = dateString.split('/');
-		var month = splitDateStringArray[0];
-		var day = splitDateStringArray[1];
-		var year = splitDateStringArray[2];
-
-		return day + '/' + month + '/' + year;
-	}
 
 	function formatDateStringForRuby(date) {
 		var day = date.getDate();
@@ -38,7 +61,6 @@ $(document).on('turbolinks:load', function() {
 
 	$('#newOppStartDate').on('changeDate', function(event) {
 		var rubyDateString = formatDateStringForRuby(event.date)
-
 		$('#employer_opportunity_form_event_start_date').val(rubyDateString);
 	})
 
@@ -50,5 +72,4 @@ $(document).on('turbolinks:load', function() {
 
 
 	instantiateDatePickers();
-	setInitialDateValues();
 });
