@@ -7,9 +7,10 @@ $(document).on('turbolinks:load', function() {
         );
     };
 
-    hideInstrumentInputs();
+    // hideInstrumentInputs();
 
     $.ajax({
+        cache: false,
         method: "GET",
         url: "/my_profile",
         dataType: "json"
