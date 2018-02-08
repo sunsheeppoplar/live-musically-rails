@@ -1,9 +1,11 @@
+<button id="js-the-button">THE SUBMIT BUTTON</button>
+
 <%=form_for @my_profile_form, remote: :true, url: { action: "update"}, method: :patch, html: {class: "js-my-profile--basic", :multipart => true } do |f| %>
 
 	<%#= render "profiles/my_profile", f: f %>
 
-	<div id="js-instrument-container" style="margin: 50px; border: 1px solid red; height:100px; width: 200px;"></div>
-	<div id="js-location-container" style="margin: 50px; border: 1px solid blue; height:100px; width: 200px;"></div>
+	<div id="js-instrument-container" style="margin: 50px; border: 1px solid red; height:150px; width: 300px;"></div>
+	<div id="js-location-container" style="margin: 50px; border: 1px solid blue; height:150px; width: 300px;"></div>
 
     <%= text_field_tag 'my_profile_form_instruments', nil, :data => { :autocomplete_source => ARTIST_INSTRUMENTS } %>
     <br/>
