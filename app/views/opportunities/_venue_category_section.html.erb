@@ -3,7 +3,7 @@
 	<div>
 		<% Venue.categories.each do |k, v| %>
 			<div class="new-opp-form__checkbox-input-group">
-				<%= check_box_tag "employer_opportunity_form[category]", k, nil, :id => "category_#{k}", class: 'js-new-opp-form-venue-checkbox new-opp-form__checkbox' %>
+				<%= check_box_tag "employer_opportunity_form[category]", k, f.object.is_checked?(f.object.category, k), :id => "category_#{k}", class: 'js-new-opp-form-venue-checkbox new-opp-form__checkbox' %>
 				<%= label :category, k, class: "new-opp-form__label" %>
 			</div>
 		<% end %>
