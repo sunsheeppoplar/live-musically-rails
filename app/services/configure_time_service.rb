@@ -21,7 +21,6 @@ class ConfigureTimeService
 	end
 
 	def find_event_times
-		binding.pry
 		{
 			start_time: find_hours_and_minutes(event_start_date),
 			end_time: find_hours_and_minutes(event_end_date)
@@ -72,6 +71,6 @@ class ConfigureTimeService
 	end
 
 	def find_hours_and_minutes(datetime_object)
-		"#{datetime_object.hour}:#{datetime_object.min}"
+		datetime_object.strftime("%I:%M %p")
 	end
 end
