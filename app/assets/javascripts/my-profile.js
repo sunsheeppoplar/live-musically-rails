@@ -1,12 +1,6 @@
 $(document).on('turbolinks:load', function() {
 	$('#new_my_profile_form').on("ajax:success", function(e, data, status, xhr) {
-		console.log('event', e)
-
-		console.log('data', data)
-		console.log('status', status)
-		// $("#new_article").append xhr.responseText
 	}).on("ajax:error", function(e, xhr, status, error) {
-		// $("#new_article").append "<p>ERROR</p>"
 	})
 
 
@@ -14,8 +8,7 @@ $(document).on('turbolinks:load', function() {
 		$(targetElement).prop('disabled', function(index, value) {
 			return !value;
 		})
-		console.log(submitButton)
-		console.log(visibilityClass)
+
 		$(submitButton).toggleClass(visibilityClass);
 	}
 	function listenForSubmit(submitButtonClass, formPostedClass) {
