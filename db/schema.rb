@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180130235450) do
+ActiveRecord::Schema.define(version: 20180209204912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,11 +39,18 @@ ActiveRecord::Schema.define(version: 20180130235450) do
     t.index ["user_id"], name: "index_artist_opportunities_on_user_id", using: :btree
   end
 
+  create_table "external_links", force: :cascade do |t|
+    t.integer "user_id"
+    t.string  "origin_site"
+    t.string  "link_to_content"
+    t.index ["user_id"], name: "index_external_links_on_user_id", using: :btree
+  end
+
   create_table "instruments", force: :cascade do |t|
     t.string "name"
   end
 
-  create_table "locations", id: false, force: :cascade do |t|
+  create_table "locations", force: :cascade do |t|
     t.text "zipcode"
     t.text "zip_code_type"
     t.text "city"
@@ -107,5 +114,6 @@ ActiveRecord::Schema.define(version: 20180130235450) do
   add_foreign_key "artist_instruments", "users"
   add_foreign_key "artist_locations", "locations"
   add_foreign_key "artist_locations", "users"
+  add_foreign_key "external_links", "users"
   add_foreign_key "opportunities", "users", column: "employer_id"
 end
