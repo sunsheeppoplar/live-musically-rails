@@ -7,7 +7,13 @@ class ProfilesController < ApplicationController
         respond_to do |format|
             # binding.pry
             format.html { render layout }
-            format.json { render json: { instruments: current_user.instruments, locations: current_user.locations} }
+            format.json { render json: 
+                { 
+                    instruments: current_user.instruments, 
+                    locations: current_user.locations, 
+                    ext_links: current_user.external_links
+                } 
+            }
         end
 	end
 
@@ -57,7 +63,7 @@ class ProfilesController < ApplicationController
     
 	private
 	def profile_form_params
-		params.require(:my_profile_form).permit(:about, :email, :first_name, :last_name, :password, :password_confirmation, :instruments => [], :locations => []).merge(current_user: current_user)
+		params.require(:my_profile_form).permit(:about, :email, :first_name, :last_name, :password, :password_confirmation, :instruments => [], :locations => [], :soundcloud_links => [], :youtube_links => []).merge(current_user: current_user)
 	end
 
 	def find_user_role(role)

@@ -5,7 +5,8 @@ class MyProfileForm
 	attribute :about, String
 	attribute :current_user, Hash
     attribute :email, String
-    attribute :external_links, Array
+    attribute :soundcloud_links, Array
+    attribute :youtube_links, Array
 	attribute :first_name, String
 	attribute :instruments, Array
     attribute :last_name, String
@@ -38,6 +39,8 @@ class MyProfileForm
         sanitized_hash = set_safe_hash(user_params)
         update_instruments(instruments)
         update_locations(locations)
+        update_soundcloud_links(soundcloud_links)
+        update_youtube_links(youtube_links)
 		current_user.update!(sanitized_hash)
 	end
 
@@ -59,6 +62,26 @@ class MyProfileForm
         current_user.save!
     end
 
+    def update_soundcloud_links(sc_link_array)
+        current_user.external_links.where(origin_site:"sc").destroy_all
+        sc_link_array.each_with_index do |link, index|
+            if index < 3
+                current_user.external_links.create(origin_site:"sc", link_to_content: link)
+            end
+        end
+        current_user.save!
+    end
+
+    def update_youtube_links(yt_link_array)
+        current_user.external_links.where(origin_site:"yt").destroy_all
+        yt_link_array.each_with_index do |link, index|
+            if index < 2
+            current_user.external_links.create(origin_site:"yt", link_to_content: link)
+            end
+        end
+        current_user.save!
+    end
+
 	def user_params
 		{
 			about: about,
@@ -77,5 +100,6 @@ class MyProfileForm
 
 	def set_safe_hash(params)
 		params.reject { |k,v| v.nil? }
-	end
+    end
+    
 end

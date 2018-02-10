@@ -29,21 +29,26 @@
 
 <div id="js-soundcloud-container" style="margin: 50px; border: 1px solid orange; height:150px; width: 300px;"></div>
 
-<%#= binding.pry %>
-<% for ext_link in current_user.external_links %>
-    <% if ext_link.origin_site == "sc" %>
+<%= text_field_tag 'my_profile_form_soundcloud', '', placeholder: "soundcloud link here", :data => { } %>
+
+<br/>
+<br/>
+
+<div id="js-embedded-soundcloud-container">
+    <% for ext_link in current_user.external_links.where(origin_site: "sc") %>
         <%= ExternalContentService.soundcloud_frame(ext_link.link_to_content) %>
     <% end %>
-<% end %>
-
-<%#= ExternalContentService.soundcloud_frame("https://soundcloud.com/white-chocolate-762395523/pre-tradeline-pipe") %>
-<%#= ExternalContentService.soundcloud_frame("https://soundcloud.com/trapgod1017bricksquad/gucci-mane-pussy-print-kanye-west-2") %>
-<%#= ExternalContentService.soundcloud_frame("pat_duffy") %>
+</div>
 
 <div id="js-youtube-container" style="margin: 50px; border: 1px solid purple; height:150px; width: 300px;"></div>
 
-<% for ext_link in current_user.external_links %>
-    <% if ext_link.origin_site == "yt" %>
+<%= text_field_tag 'my_profile_form_youtube', '', placeholder: "youtube link here", :data => { } %>
+
+<br/>
+<br/>
+
+<div id="js-embedded-youtube-container">
+    <% for ext_link in current_user.external_links.where(origin_site: "yt") %>
         <%= ExternalContentService.youtube_frame(ext_link.link_to_content) %>
     <% end %>
-<% end %>
+</div>
