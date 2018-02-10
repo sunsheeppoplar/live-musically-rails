@@ -4,7 +4,8 @@ class MyProfileForm
 
 	attribute :about, String
 	attribute :current_user, Hash
-	attribute :email, String
+    attribute :email, String
+    attribute :external_links, Array
 	attribute :first_name, String
 	attribute :instruments, Array
     attribute :last_name, String
@@ -49,14 +50,6 @@ class MyProfileForm
         current_user.instruments = []
         current_user.instruments << selected_ins_array
         current_user.save!
-        # for ins_name in ins_name_array
-        #     current_ins = Instrument.where(name: ins_name)
-        #     if current_ins.length == 0
-        #         current_ins = [Instrument.create(name: ins_name)]
-        #     end
-        #     prepared_array << current_ins[0] # just in case of duplicate instruments
-        # end
-        # return prepared_array
     end
 
     def update_locations(zipcode_array)
@@ -65,13 +58,6 @@ class MyProfileForm
         current_user.locations << selected_location_array
         current_user.save!
     end
-
-    # def update_instruments(prepared_array)
-    #     current_user.instruments = []
-    #     current_user.instruments << prepared_array
-    #     current_user.save!
-    # end
-
 
 	def user_params
 		{
