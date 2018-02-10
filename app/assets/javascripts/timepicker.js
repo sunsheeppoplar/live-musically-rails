@@ -1,6 +1,21 @@
 $(document).on('turbolinks:load', function() {
 	function instantiateTimePickers() {
+		var startTimeTarget, endTimeTarget, defaultStartTime, defaultEndTime;
+
+		if (this.page.controller()== 'opportunities' && this.page.action() == 'edit') {
+			startTimeTarget = '#employer_opportunity_form_event_start_time';
+			endTimeTarget = '#employer_opportunity_form_event_end_time';
+
+			defaultStartTime = $(startTimeTarget).val();
+			defaultEndTime = $(endTimeTarget).val();
+		} else {
+			defaultStartTime = 'current';
+			defaultEndTime = 'current';
+		}
+
+
 		$('#newOppStartTime').timepicker({
+			defaultTime: defaultStartTime,
 			minuteStep: 15,
 			icons: {
 				up: 'glyphicon glyphicon-chevron-up',
@@ -8,6 +23,7 @@ $(document).on('turbolinks:load', function() {
 			}
 		});
 		$('#newOppEndTime').timepicker({
+			defaultTime: defaultEndTime,
 			minuteStep: 15,
 			icons: {
 				up: 'glyphicon glyphicon-chevron-up',
