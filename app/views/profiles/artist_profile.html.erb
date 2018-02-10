@@ -2,8 +2,6 @@
 
 <%=form_for @my_profile_form, remote: :true, url: { action: "update"}, method: :patch, html: {class: "js-my-profile--basic", :multipart => true } do |f| %>
 
-	<%#= render "profiles/my_profile", f: f %>
-
 	<div id="js-instrument-container" style="margin: 50px; border: 1px solid red; height:150px; width: 300px;"></div>
 	<div id="js-location-container" style="margin: 50px; border: 1px solid blue; height:150px; width: 300px;"></div>
 
@@ -19,9 +17,9 @@
         </div>
         
 	<% end %>
-
 <% end %>
 
 <%= form_tag "/my_profile/get_single_zipcode", method: 'get', remote: true do %>
     <%= text_field_tag 'my_profile_form_locations', nil, :data => { } %>
+
 <% end %>
