@@ -7,8 +7,6 @@ $(document).on('turbolinks:load', function() {
         );
     };
 
-    // hideInstrumentInputs();
-
     $.ajax({
         cache: false,
         method: "GET",
@@ -21,6 +19,14 @@ $(document).on('turbolinks:load', function() {
         });
         response.locations.forEach(function(location) {
             appendLocation(location);
+        });
+        response.ext_links.forEach(function(ext_link) {
+            if (ext_link.origin_site == "sc") {
+                appendSoundcloudLink(ext_link.link_to_content);
+            }
+            else if (ext_link.origin_site == "yt") {
+                appendYoutubeLink(ext_link.link_to_content);
+            }
         });
     });
 
@@ -40,11 +46,34 @@ $(document).on('turbolinks:load', function() {
         }
     });
 
+    $('#my_profile_form_soundcloud').on('keydown', function(e) {
+        if (e.key == "Enter") {
+            e.preventDefault();
+            appendSoundcloudLink($('#my_profile_form_soundcloud').val());
+            appendEmbeddedSoundcloud($('#my_profile_form_soundcloud').val());
+            $('#my_profile_form_soundcloud').val("");
+        }
+    });
+
+    $('#my_profile_form_youtube').on('keydown', function(e) {
+        if (e.key == "Enter") {
+            e.preventDefault();
+            appendYoutubeLink($('#my_profile_form_youtube').val());
+            appendEmbeddedYoutube($('#my_profile_form_youtube').val());
+            $('#my_profile_form_youtube').val("")
+        }
+    });
+
     $('#js-the-button').on('click', function() {
-        var instruments = $('.js-instrument-list-node');
-        var locations = $('.js-location-list-node');
-        var plainInsArray = [];
-        var plainZipArray = [];
+        var instruments = $('.js-instrument-list-node'),
+            locations = $('.js-location-list-node'),
+            sc_links = $('.js-soundcloud-list-node'),
+            yt_links = $('.js-youtube-list-node');
+
+        var plainInsArray = [],
+            plainZipArray = [],
+            scLinksArray = [],
+            ytLinksArray = [];
 
         $.each(instruments, function(index, value) {
             plainInsArray[index] = instruments[index].firstChild.nodeValue;
@@ -52,6 +81,13 @@ $(document).on('turbolinks:load', function() {
         $.each(locations, function(index, value) {
             plainZipArray[index] = locations[index].firstChild.nodeValue.split(" ")[0];
         });
+        $.each(sc_links, function(index, value) {
+            scLinksArray[index] = sc_links[index].firstChild.nodeValue;
+        });
+        $.each(yt_links, function(index, value) {
+            ytLinksArray[index] = yt_links[index].firstChild.nodeValue;
+        });
+
         // console.log(plainInsArray);
         $.ajax({
             method: "PATCH",
@@ -59,13 +95,15 @@ $(document).on('turbolinks:load', function() {
             data: {
                 "my_profile_form": {
                     "instruments": plainInsArray,
-                    "locations": plainZipArray
+                    "locations": plainZipArray,
+                    "soundcloud_links": scLinksArray,
+                    "youtube_links": ytLinksArray
                 }
             },
             dataType: "json"
         })
         .done(function(response) {
-            console.log(response)
+            console.log(response);
         });
     });
 
@@ -154,4 +192,95 @@ $(document).on('turbolinks:load', function() {
     function submitInstruments() {
 
     }
+
+    function appendSoundcloudLink(link) {
+        var track_id = link.split("/")[link.split("/").length-1];
+        $('#js-soundcloud-container').append(
+            $('<div/>')
+                .addClass('js-soundcloud-list-node')
+                    .text(link)
+                    .append(
+                        $('<div style="display:inline"> (x)</div>')
+                                .addClass('x-button')
+                                .click( function() {
+                                    $(this)
+                                        .closest('.js-soundcloud-list-node')
+                                        .remove()
+                                        console.log(track_id);
+                                    destroyEmbeddedSoundcloudFrame(track_id);
+                                })
+                    )
+        );
+    }
+
+    function appendYoutubeLink(link) {
+        var video_id = link.split("v=")[1];
+        $('#js-youtube-container').append(
+            $('<div/>')
+                .addClass('js-youtube-list-node')
+                    .text(link)
+                    .append(
+                        $('<div style="display:inline"> (x)</div>')
+                            .addClass('x-button')
+                            .click( function() {
+                                $(this)
+                                    .closest('.js-youtube-list-node')
+                                    .remove()
+                                destroyEmbeddedYoutubeFrame(video_id);
+                            })
+                    )
+        );
+    }
+
+    // very hacky atm
+
+    function appendEmbeddedSoundcloud(link) {
+        var track_id = link.split("/")[link.split("/").length];
+        var player_url = "https://w.soundcloud.com/player/?url=";
+        var player_options = "&show_artwork=false";
+        
+        constructed_link = player_url + link + player_options;
+
+        
+        $('<iframe>', {
+            src: constructed_link,
+            id:  track_id,
+            margin: "50px",
+            width: "50%",
+            height: "100",
+            frameborder: "no",
+            scrolling: 'no'
+            })
+            .appendTo('#js-embedded-soundcloud-container');
+    }
+
+    function appendEmbeddedYoutube(link) {
+        var video_id = link.split("v=")[1];
+        var player_options = "?start=0",
+        constructed_link = "https://www.youtube.com/embed/" + video_id + player_options;
+        
+        $('<iframe>', {
+            src: constructed_link,
+            id: video_id,
+            width: "250",
+            height: "140",
+            allow: "encrypted-media",
+            allowfullscreen: "",
+            frameborder: 0,
+            scrolling: 'no'
+            })
+            .appendTo('#js-embedded-youtube-container');
+    }
+
+    function destroyEmbeddedSoundcloudFrame(track_id) {
+        var id = "#" + track_id;
+        console.log(id);
+        $(id).remove();
+    }
+
+    function destroyEmbeddedYoutubeFrame(video_id) {
+        var id = "#" + video_id;
+        $(id).remove();
+    }
+
 })
