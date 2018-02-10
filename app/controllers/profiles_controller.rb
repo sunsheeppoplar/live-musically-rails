@@ -3,16 +3,21 @@ class ProfilesController < ApplicationController
 	
 	def my_profile
 		layout = find_user_role(current_user.role)
-		@my_profile_form = MyProfileForm.new(current_user: current_user)
-		render layout
+        @my_profile_form = MyProfileForm.new(current_user: current_user)
+        respond_to do |format|
+            # binding.pry
+            format.html { render layout }
+            format.json { render json: { instruments: current_user.instruments, locations: current_user.locations} }
+        end
 	end
 
-	def update
+    def update
         @my_profile_form = MyProfileForm.new(profile_form_params)
 		respond_to do |format|
-			if @my_profile_form.update
+            if @my_profile_form.update
                 # flash[:notice] = 'Updated'
-				format.html { redirect_to my_profile_path, notice: 'Updated'}
+                format.html { redirect_to my_profile_path, notice: 'Updated'
+                }
 				format.json { render json: @my_profile_form
 				}
 			else
@@ -20,7 +25,17 @@ class ProfilesController < ApplicationController
 				format.html { redirect_to my_profile_path }
 			end
 		end
-	end
+    end
+    
+    def get_single_zipcode
+        @location  = Location.where(zipcode: params[:zipcode])
+        respond_to do |format|
+            format.html { redirect_to my_profile_path, notice: 'Updated'
+            }
+            format.json { render json: { location: @location }
+            }
+        end
+    end
 
 	def update_password
 		@my_profile_form = MyProfileForm.new(profile_form_params)
@@ -42,7 +57,7 @@ class ProfilesController < ApplicationController
     
 	private
 	def profile_form_params
-		params.require(:my_profile_form).permit(:about, :email, :first_name, :last_name, :password, :password_confirmation, :instruments => []).merge(current_user: current_user)
+		params.require(:my_profile_form).permit(:about, :email, :first_name, :last_name, :password, :password_confirmation, :instruments => [], :locations => []).merge(current_user: current_user)
 	end
 
 	def find_user_role(role)

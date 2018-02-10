@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(version: 20180130235450) do
     t.index ["user_id"], name: "index_artist_instruments_on_user_id", using: :btree
   end
 
+  create_table "artist_locations", force: :cascade do |t|
+    t.integer "location_id"
+    t.integer "user_id"
+    t.index ["location_id"], name: "index_artist_locations_on_location_id", using: :btree
+    t.index ["user_id"], name: "index_artist_locations_on_user_id", using: :btree
+  end
+
   create_table "artist_opportunities", force: :cascade do |t|
     t.integer  "opportunity_id"
     t.integer  "user_id"
@@ -34,6 +41,31 @@ ActiveRecord::Schema.define(version: 20180130235450) do
 
   create_table "instruments", force: :cascade do |t|
     t.string "name"
+  end
+
+<<<<<<< Updated upstream
+  create_table "locations", id: false, force: :cascade do |t|
+    t.text "zipcode"
+    t.text "zip_code_type"
+    t.text "city"
+    t.text "state"
+    t.text "location_type"
+    t.text "lat"
+    t.text "long"
+    t.text "world_region"
+    t.text "country"
+=======
+  create_table "locations", force: :cascade do |t|
+    t.string "zipcode"
+    t.string "zip_code_type"
+    t.string "city"
+    t.string "state"
+    t.string "location_type"
+    t.string "lat"
+    t.string "long"
+    t.string "world_region"
+    t.string "country"
+>>>>>>> Stashed changes
   end
 
   create_table "opportunities", force: :cascade do |t|
@@ -86,5 +118,7 @@ ActiveRecord::Schema.define(version: 20180130235450) do
 
   add_foreign_key "artist_instruments", "instruments"
   add_foreign_key "artist_instruments", "users"
+  add_foreign_key "artist_locations", "locations"
+  add_foreign_key "artist_locations", "users"
   add_foreign_key "opportunities", "users", column: "employer_id"
 end
