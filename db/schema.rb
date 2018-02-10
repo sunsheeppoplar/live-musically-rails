@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20180130235450) do
     t.string "name"
   end
 
+<<<<<<< Updated upstream
   create_table "locations", id: false, force: :cascade do |t|
     t.text "zipcode"
     t.text "zip_code_type"
@@ -53,6 +54,18 @@ ActiveRecord::Schema.define(version: 20180130235450) do
     t.text "long"
     t.text "world_region"
     t.text "country"
+=======
+  create_table "locations", force: :cascade do |t|
+    t.string "zipcode"
+    t.string "zip_code_type"
+    t.string "city"
+    t.string "state"
+    t.string "location_type"
+    t.string "lat"
+    t.string "long"
+    t.string "world_region"
+    t.string "country"
+>>>>>>> Stashed changes
   end
 
   create_table "opportunities", force: :cascade do |t|
