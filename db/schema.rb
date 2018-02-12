@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20180209204912) do
   create_table "instruments", force: :cascade do |t|
     t.string "name"
   end
+
   create_table "locations", force: :cascade do |t|
     t.string "zipcode"
     t.string "zip_code_type"
