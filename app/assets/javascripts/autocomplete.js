@@ -7,29 +7,6 @@ $(document).on('turbolinks:load', function() {
         );
     };
 
-    // $.ajax({
-    //     cache: false,
-    //     method: "GET",
-    //     url: "/my_profile",
-    //     dataType: "json"
-    // })
-    // .done(function(response) {
-    //     response.instruments.forEach(function(instrument) {
-    //         appendInstrument(instrument.name);
-    //     });
-    //     response.locations.forEach(function(location) {
-    //         appendLocation(location);
-    //     });
-    //     response.ext_links.forEach(function(ext_link) {
-    //         if (ext_link.origin_site == "sc") {
-    //             appendSoundcloudLink(ext_link.link_to_content);
-    //         }
-    //         else if (ext_link.origin_site == "yt") {
-    //             appendYoutubeLink(ext_link.link_to_content);
-    //         }
-    //     });
-    // });
-
     $('#js-instrument-container').children()
     .append(
         $('<div style="display:inline"> (x)</div>')
@@ -61,7 +38,7 @@ $(document).on('turbolinks:load', function() {
                 $(this)
                 .closest('.js-soundcloud-list-node')
                 .remove();
-                var text = this.parentNode.textContent;
+                var text = this.parentNode.firstChild.textContent;
                 var track_id = text.split("/")[text.split("/").length-1];
                 destroyEmbeddedSoundcloudFrame(track_id);
             })
@@ -75,6 +52,7 @@ $(document).on('turbolinks:load', function() {
                 $(this)
                 .closest('.js-youtube-list-node')
                 .remove();
+                var text = this.parentNode.firstChild.textContent;
                 var video_id = text.split("v=")[1];
                 destroyEmbeddedYoutubeFrame(video_id);
             })

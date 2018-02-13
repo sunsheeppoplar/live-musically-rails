@@ -2,7 +2,11 @@
 
 <%=form_for @my_profile_form, remote: :true, url: { action: "update"}, method: :patch, html: {class: "js-my-profile--basic", :multipart => true } do |f| %>
 
-	<div id="js-instrument-container" style="margin: 50px; border: 1px solid red; height:150px; width: 300px;"></div>
+	<div id="js-instrument-container" style="margin: 50px; border: 1px solid red; height:150px; width: 300px;">
+        <% for instrument in current_user.instruments %>
+            <%= ArtistProfileService.render_instrument(instrument) %>
+        <% end %>
+    </div>
 
     <%= text_field_tag 'my_profile_form_instruments', '', placeholder: "instrument here", :data => { :autocomplete_source => ARTIST_INSTRUMENTS } %>
     <br/>
@@ -18,7 +22,11 @@
 	<% end %>
 <% end %>
 
-<div id="js-location-container" style="margin: 50px; border: 1px solid blue; height:150px; width: 300px;"></div>
+<div id="js-location-container" style="margin: 50px; border: 1px solid blue; height:150px; width: 300px;">
+    <% for location in current_user.locations %>
+        <%= ArtistProfileService.render_location(location) %>
+    <% end %>
+</div>
 
 <%= form_tag "/my_profile/get_single_zipcode", method: 'get', remote: true do %>
     <%= text_field_tag 'my_profile_form_locations', '', placeholder: "zipcode here", :data => { } %>
@@ -26,7 +34,11 @@
 
 <script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>
 
-<div id="js-soundcloud-container" style="margin: 50px; border: 1px solid orange; height:150px; width: 300px;"></div>
+<div id="js-soundcloud-container" style="margin: 50px; border: 1px solid orange; height:150px; width: 300px;">
+    <% for ext_link in current_user.external_links.where(origin_site:"sc") %>
+        <%= ArtistProfileService.render_soundcloud_link(ext_link.link_to_content) %>
+    <% end %>
+</div>
 
 <%= text_field_tag 'my_profile_form_soundcloud', '', placeholder: "soundcloud link here", :data => { } %>
 
@@ -35,11 +47,15 @@
 
 <div id="js-embedded-soundcloud-container">
     <% for ext_link in current_user.external_links.where(origin_site: "sc") %>
-        <%= ExternalContentService.soundcloud_frame(ext_link.link_to_content) %>
+        <%= ArtistProfileService.soundcloud_frame(ext_link.link_to_content) %>
     <% end %>
 </div>
 
-<div id="js-youtube-container" style="margin: 50px; border: 1px solid purple; height:150px; width: 300px;"></div>
+<div id="js-youtube-container" style="margin: 50px; border: 1px solid purple; height:150px; width: 300px;">
+    <% for ext_link in current_user.external_links.where(origin_site:"yt") %>
+        <%= ArtistProfileService.render_youtube_link(ext_link.link_to_content) %>
+    <% end %>
+</div>
 
 <%= text_field_tag 'my_profile_form_youtube', '', placeholder: "youtube link here", :data => { } %>
 
@@ -48,6 +64,6 @@
 
 <div id="js-embedded-youtube-container">
     <% for ext_link in current_user.external_links.where(origin_site: "yt") %>
-        <%= ExternalContentService.youtube_frame(ext_link.link_to_content) %>
+        <%= ArtistProfileService.youtube_frame(ext_link.link_to_content) %>
     <% end %>
 </div>
