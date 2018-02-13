@@ -1,6 +1,13 @@
 class OpportunitiesController < ApplicationController
+	before_action :authenticate_user!
+	before_action :set_opportunity, only: [:create, :edit, :destroy]
+
 	def new
-		@employer_opportunity_form = EmployerOpportunityForm.new
+		if opportunity_policy.able_to_view?
+			@employer_opportunity_form = EmployerOpportunityForm.new
+		else
+			redirect_to root_path, alert: "Not authorized, sorry!"
+		end
 	end
 
 	def create
@@ -20,34 +27,55 @@ class OpportunitiesController < ApplicationController
 	end
 
 	def edit
-		@employer_opportunity_form = EmployerOpportunityForm.new(id: params[:id])
+		if opportunity_policy.able_to_manage?
+			@employer_opportunity_form = EmployerOpportunityForm.new(id: params[:id])
+		else
+			redirect_to root_path, alert: "Not authorized, sorry!"
+		end
 	end
 
 	def update
-		@employer_opportunity_form = EmployerOpportunityForm.new(employer_opportunity_form_params.merge(id: params[:id]))
-		respond_to do |format|
-			if @employer_opportunity_form.update
-				format.html { redirect_to my_profile_path, notice: "Opportunity updated"}
-				format.json { render json: @employer_opportunity_form, status: :ok, location: my_profile_url }
-			else
-				format.html {}
-				format.json { render json: {errors: @employer_opportunity_form.errors, full_messages: @employer_opportunity_form.errors.full_messages}, status: :unprocessable_entity
-				}
+		if opportunity_policy.able_to_manage?
+			@employer_opportunity_form = EmployerOpportunityForm.new(employer_opportunity_form_params.merge(id: params[:id]))
+			respond_to do |format|
+				if @employer_opportunity_form.update
+					format.html { redirect_to my_profile_path, notice: "Opportunity updated"}
+					format.json { render json: @employer_opportunity_form, status: :ok, location: my_profile_url }
+				else
+					format.html {}
+					format.json { render json: {errors: @employer_opportunity_form.errors, full_messages: @employer_opportunity_form.errors.full_messages}, status: :unprocessable_entity
+					}
+				end
 			end
+		else
+			redirect_to root_path, alert: "Not authorized, sorry!"
 		end
 	end
 
 	def destroy
-		@employer_opportunity_form = EmployerOpportunityForm.new(id: params[:id])
-		respond_to do |format|
-			if @employer_opportunity_form.destroy
-				format.html { redirect_to my_profile_path, notice: "Opportunity was successfully deleted" }
-				format.json { head :no_content }
-			else
-				format.html {}
-				format.json {}
+		if opportunity_policy.able_to_manage?
+			@employer_opportunity_form = EmployerOpportunityForm.new(id: params[:id])
+			respond_to do |format|
+				if @employer_opportunity_form.destroy
+					format.html { redirect_to my_profile_path, notice: "Opportunity was successfully deleted" }
+					format.json { head :no_content }
+				else
+					format.html {}
+					format.json {}
+				end
 			end
+		else
+			redirect_to root_path, alert: "Not authorized, sorry!"
 		end
+	end
+
+	private
+	def set_opportunity
+		@opportunity = Opportunity.find(params[:id])
+	end
+
+	def opportunity_policy
+		OpportunityPolicy.new(current_user, @opportunity)
 	end
 
 	def employer_opportunity_form_params

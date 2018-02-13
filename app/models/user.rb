@@ -25,6 +25,10 @@ class User < ApplicationRecord
 		end
 	end
 
+	def owner?(opportunity)
+		id == opportunity.employer_id
+	end
+
 	private
 	def self.parse_name(user, name)
 		name_arr = name.split(" ")
