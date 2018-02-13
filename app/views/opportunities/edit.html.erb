@@ -1,14 +1,15 @@
 <div class="new-opp-form-container">
 	<h1 class="new-opp-form__header">POST AN OPPORTUNITY</h1>
-	<%= form_for @employer_opportunity_form, url: {action: "create"}, html: {class: "js-new-opp-form new-opp-form"}, remote: true do |f| %>
+	<%= form_for @employer_opportunity_form, url: {action: "update"}, :method => "put", html: {class: "js-new-opp-form new-opp-form"}, remote: true do |f| %>
 		
 		<%= render "venue_category_section", f: f %>
 		<%= render "calendar_section", f: f %>
 		<%= render "venue_location_section", f: f %>
 		<%= render "artist_type_section", f: f %>
 		<%= render "info_section", f: f %>
-		<%= render "timeframe_of_post_section" %>
+		<%= render "timeframe_of_post_section", f: f %>
 	<br/>
-	<%= f.submit "POST NOW" %>
+	<%= f.submit "EDIT NOW" %>
+	<%= link_to "DELETE NOW", opportunity_path, method: :delete %>
 	<% end %>
 </div>

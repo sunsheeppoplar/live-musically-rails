@@ -1,7 +1,7 @@
 <h3>MY PROFILE</h3>
 
 <h5>ABOUT</h5>
-
+<%=form_for @my_profile_form, remote: :true, url: { action: "update"}, method: :patch, html: {class: "js-my-profile--basic" } do |f| %>
 	<%= f.text_area :about, :value => current_user.about, disabled: "disabled", class: "js-my-profile-textarea" %>
 		<span class="js-my-profile-textarea-edit-icon"><i class="glyphicon glyphicon-pencil"></i></span>
 		<span class="js-my-profile-textarea-edit-submit my-profile-form__textarea-edit-submit"><i class="glyphicon glyphicon-ok"></i></span>
@@ -34,16 +34,14 @@
 
 
 <h3>OPPORTUNITIES CREATED</h3><br />
-<h5>DETAILS</h5>
-<% @my_profile_form.current_user.employing_opportunities.each do |o| %>
-<p>
-	<%= o.title %><br />
-	<%= o.venue.name %><br />
-	<%= o.venue.address %><br />
-	<%= o.venue.city %><br />
-	<%= o.event_start_date %><br />
-</p>
 
-
+<% @my_profile_form.decorated_employing_opportunities.each do |o| %>
+	<h5>DETAILS</h5>
+	<p><%= o.full_address %></p>
+	<p><%= o.formatted_time %></p>
+	<p><%= o.formatted_date %></p>
+	<%= link_to 'EDIT / REMOVE', edit_opportunity_path(o.id) %>
+<% end %>
+</br>
 
 <%= link_to "POST NEW OPPORTUNITY", new_opportunity_path %>

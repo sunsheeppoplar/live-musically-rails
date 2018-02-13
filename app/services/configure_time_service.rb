@@ -10,9 +10,6 @@ class ConfigureTimeService
 	attr_reader :full_date_hash
 
 	def convert
-		@start_date_object = convert_date_string(event_start_date)
-		@end_date_object = convert_date_string(event_end_date)
-
 		return_full_date_hash
 	end
 
@@ -23,14 +20,15 @@ class ConfigureTimeService
 		end_time < start_time
 	end
 
-	private
-	def convert_date_string(date)
-		if date.is_a? String
-			DateTime.strptime(date, "%m/%d/%Y")
-		end
+	def find_event_times
+		{
+			start_time: find_hours_and_minutes(event_start_date),
+			end_time: find_hours_and_minutes(event_end_date)
+		}
 	end
 
-	def convert_timeframe_string(timeframe, event_start_date)
+	private
+	def convert_timeframe_string_to_datetime(timeframe, event_end_date)
 		if timeframe == nil
 			return
 		end
@@ -39,19 +37,27 @@ class ConfigureTimeService
 			temp = timeframe.split('_')
 			today = DateTime.now
 			opportunity_expiration_date = today + (temp[0].to_i).send(temp[1])
+
+			expiration_date_as_integer = datetime_to_integer(opportunity_expiration_date)
+			event_end_date_as_integer = datetime_to_integer(event_end_date)
+
+			if expiration_date_as_integer > event_end_date_as_integer
+				opportunity_expiration_date = event_end_date
+			end
+
+			opportunity_expiration_date
 		else
-			opportunity_expiration_date = event_start_date
+			opportunity_expiration_date = event_end_date
 		end
 	end
 
 	def return_full_date_hash
 		@full_date_hash = {
-			full_start_date: set_date(@start_date_object,event_start_time),
-			full_end_date: set_date(@end_date_object,
-				event_end_time),
+			full_start_date: set_date(event_start_date, event_start_time),
+			full_end_date: set_date(event_end_date, event_end_time)
 		}
 
-		converted_timeframe = convert_timeframe_string(timeframe_of_post, @full_date_hash[:full_start_date])
+		converted_timeframe = convert_timeframe_string_to_datetime(timeframe_of_post, @full_date_hash[:full_end_date])
 		@full_date_hash[:timeframe_of_post] = converted_timeframe
 	end
 
@@ -62,5 +68,9 @@ class ConfigureTimeService
 
 	def datetime_to_integer(datetime_object)
 		datetime_object.strftime("%Y%m%d%H%M").to_i
+	end
+
+	def find_hours_and_minutes(datetime_object)
+		datetime_object.strftime("%I:%M %p")
 	end
 end

@@ -3,7 +3,7 @@
 
 	<% TIMEFRAME_OF_POST_OPTIONS.each do |e| %>
 		<div class="new-opp-form__checkbox-input-group">
-			<%= check_box_tag :timeframe_of_post, f.object, nil, id: "timeframe_of_post_#{e}", value: e, class: "js-new-opp-form-timeframe-checkbox new-opp-form__checkbox" %>
+			<%= check_box_tag "employer_opportunity_form[timeframe_of_post]", e, nil, id: "timeframe_of_post_#{e}", value: e, class: "js-new-opp-form-timeframe-checkbox new-opp-form__checkbox" %>
 			<%= label :timeframe_of_post, e, class: "new-opp-form__label" %>
 
 		</div>
