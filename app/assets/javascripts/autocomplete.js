@@ -33,7 +33,7 @@ $(document).on('turbolinks:load', function() {
     }
 
     $('#my_profile_form_locations').on('keydown', function(e) {
-        if (e.key == "Enter" || e.keyCode == 13) {
+        if (e.keyCode == 13) {
             e.preventDefault();
             queryForZipcode( 
                 $('#my_profile_form_locations').val() 
@@ -43,13 +43,13 @@ $(document).on('turbolinks:load', function() {
     });
 
     $('#my_profile_form_instruments').on('keydown', function(e) {
-        if (e.key == "Enter" || e.keyCode == 13) {
+        if (e.keyCode == 13) {
             e.preventDefault();
         }
     });
 
     $('#my_profile_form_soundcloud').on('keydown', function(e) {
-        if (e.key == "Enter" || e.keyCode == 13) {
+        if (e.keyCode == 13) {
             e.preventDefault();
             appendSoundcloudLink($('#my_profile_form_soundcloud').val());
             appendEmbeddedSoundcloud($('#my_profile_form_soundcloud').val());
@@ -58,9 +58,7 @@ $(document).on('turbolinks:load', function() {
     });
 
     $('#my_profile_form_youtube').on('keydown', function(e) {
-        console.log(e)
-        console.log(e.key == "Enter")
-        if (e.key == "Enter" || e.keyCode == 13) {
+        if (e.keyCode == 13) {
             e.preventDefault();
             appendYoutubeLink($('#my_profile_form_youtube').val());
             appendEmbeddedYoutube($('#my_profile_form_youtube').val());
@@ -92,7 +90,6 @@ $(document).on('turbolinks:load', function() {
             ytLinksArray[index] = yt_links[index].firstChild.nodeValue;
         });
 
-        // console.log(plainInsArray);
         $.ajax({
             method: "PATCH",
             url: "/my_profile",
@@ -210,7 +207,6 @@ $(document).on('turbolinks:load', function() {
                                     $(this)
                                         .closest('.js-soundcloud-list-node')
                                         .remove()
-                                        console.log(track_id);
                                     destroyEmbeddedSoundcloudFrame(track_id);
                                 })
                     )
