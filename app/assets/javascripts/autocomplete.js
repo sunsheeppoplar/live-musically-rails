@@ -7,28 +7,30 @@ $(document).on('turbolinks:load', function() {
         );
     };
 
-    $.ajax({
-        cache: false,
-        method: "GET",
-        url: "/my_profile",
-        dataType: "json"
-    })
-    .done(function(response) {
-        response.instruments.forEach(function(instrument) {
-            appendInstrument(instrument.name);
+    if (page.controller() == 'profiles' && page.action() == 'my_profile') {
+        $.ajax({
+            cache: false,
+            method: "GET",
+            url: "/my_profile",
+            dataType: "json"
+        })
+        .done(function(response) {
+            response.instruments.forEach(function(instrument) {
+                appendInstrument(instrument.name);
+            });
+            response.locations.forEach(function(location) {
+                appendLocation(location);
+            });
+            response.ext_links.forEach(function(ext_link) {
+                if (ext_link.origin_site == "sc") {
+                    appendSoundcloudLink(ext_link.link_to_content);
+                }
+                else if (ext_link.origin_site == "yt") {
+                    appendYoutubeLink(ext_link.link_to_content);
+                }
+            });
         });
-        response.locations.forEach(function(location) {
-            appendLocation(location);
-        });
-        response.ext_links.forEach(function(ext_link) {
-            if (ext_link.origin_site == "sc") {
-                appendSoundcloudLink(ext_link.link_to_content);
-            }
-            else if (ext_link.origin_site == "yt") {
-                appendYoutubeLink(ext_link.link_to_content);
-            }
-        });
-    });
+    }
 
     $('#my_profile_form_locations').on('keydown', function(e) {
         if (e.key == "Enter") {
