@@ -33,7 +33,7 @@ $(document).on('turbolinks:load', function() {
     }
 
     $('#my_profile_form_locations').on('keydown', function(e) {
-        if (e.key == "Enter") {
+        if (e.key == "Enter" || e.keyCode == 13) {
             e.preventDefault();
             queryForZipcode( 
                 $('#my_profile_form_locations').val() 
@@ -43,13 +43,13 @@ $(document).on('turbolinks:load', function() {
     });
 
     $('#my_profile_form_instruments').on('keydown', function(e) {
-        if (e.key == "Enter") {
+        if (e.key == "Enter" || e.keyCode == 13) {
             e.preventDefault();
         }
     });
 
     $('#my_profile_form_soundcloud').on('keydown', function(e) {
-        if (e.key == "Enter") {
+        if (e.key == "Enter" || e.keyCode == 13) {
             e.preventDefault();
             appendSoundcloudLink($('#my_profile_form_soundcloud').val());
             appendEmbeddedSoundcloud($('#my_profile_form_soundcloud').val());
@@ -58,7 +58,9 @@ $(document).on('turbolinks:load', function() {
     });
 
     $('#my_profile_form_youtube').on('keydown', function(e) {
-        if (e.key == "Enter") {
+        console.log(e)
+        console.log(e.key == "Enter")
+        if (e.key == "Enter" || e.keyCode == 13) {
             e.preventDefault();
             appendYoutubeLink($('#my_profile_form_youtube').val());
             appendEmbeddedYoutube($('#my_profile_form_youtube').val());
@@ -216,6 +218,7 @@ $(document).on('turbolinks:load', function() {
     }
 
     function appendYoutubeLink(link) {
+        console.log(link, 'appending!!!')
         var video_id = link.split("v=")[1];
         $('#js-youtube-container').append(
             $('<div/>')

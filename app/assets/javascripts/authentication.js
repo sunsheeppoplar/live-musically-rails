@@ -1,5 +1,4 @@
 $(document).on('turbolinks:load', function(){
-	console.log('page loaded')
 	function handleAuthClick(e) {
 		var formSelected = e.target.dataset.authType;
 		var loginClass = '.js-login';
