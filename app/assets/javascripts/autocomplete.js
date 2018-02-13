@@ -7,31 +7,81 @@ $(document).on('turbolinks:load', function() {
         );
     };
 
-    $.ajax({
-        cache: false,
-        method: "GET",
-        url: "/my_profile",
-        dataType: "json"
-    })
-    .done(function(response) {
-        response.instruments.forEach(function(instrument) {
-            appendInstrument(instrument.name);
-        });
-        response.locations.forEach(function(location) {
-            appendLocation(location);
-        });
-        response.ext_links.forEach(function(ext_link) {
-            if (ext_link.origin_site == "sc") {
-                appendSoundcloudLink(ext_link.link_to_content);
-            }
-            else if (ext_link.origin_site == "yt") {
-                appendYoutubeLink(ext_link.link_to_content);
-            }
-        });
-    });
+    // $.ajax({
+    //     cache: false,
+    //     method: "GET",
+    //     url: "/my_profile",
+    //     dataType: "json"
+    // })
+    // .done(function(response) {
+    //     response.instruments.forEach(function(instrument) {
+    //         appendInstrument(instrument.name);
+    //     });
+    //     response.locations.forEach(function(location) {
+    //         appendLocation(location);
+    //     });
+    //     response.ext_links.forEach(function(ext_link) {
+    //         if (ext_link.origin_site == "sc") {
+    //             appendSoundcloudLink(ext_link.link_to_content);
+    //         }
+    //         else if (ext_link.origin_site == "yt") {
+    //             appendYoutubeLink(ext_link.link_to_content);
+    //         }
+    //     });
+    // });
 
+    $('#js-instrument-container').children()
+    .append(
+        $('<div style="display:inline"> (x)</div>')
+            .addClass('x-button')
+            .click( function() {
+                $(this)
+                .closest('.js-instrument-list-node')
+                .remove();
+                unselectHiddenInstrument(instrument);
+            })
+    );
+
+    $('#js-location-container').children()
+    .append(
+        $('<div style="display:inline"> (x)</div>')
+            .addClass('x-button')
+            .click( function() {
+                $(this)
+                .closest('.js-location-list-node')
+                .remove();
+            })
+    );
+
+    $('#js-soundcloud-container').children()
+    .append(
+        $('<div style="display:inline"> (x)</div>')
+            .addClass('x-button')
+            .click( function() {
+                $(this)
+                .closest('.js-soundcloud-list-node')
+                .remove();
+                var text = this.parentNode.textContent;
+                var track_id = text.split("/")[text.split("/").length-1];
+                destroyEmbeddedSoundcloudFrame(track_id);
+            })
+    );
+
+    $('#js-youtube-container').children()
+    .append(
+        $('<div style="display:inline"> (x)</div>')
+            .addClass('x-button')
+            .click( function() {
+                $(this)
+                .closest('.js-youtube-list-node')
+                .remove();
+                var video_id = text.split("v=")[1];
+                destroyEmbeddedYoutubeFrame(video_id);
+            })
+    );
+    
     $('#my_profile_form_locations').on('keydown', function(e) {
-        if (e.keyCode == 13) {
+        if (e.key == 13) {
             e.preventDefault();
             queryForZipcode( 
                 $('#my_profile_form_locations').val() 
@@ -41,13 +91,13 @@ $(document).on('turbolinks:load', function() {
     });
 
     $('#my_profile_form_instruments').on('keydown', function(e) {
-        if (e.keyCode == 13) {
+        if (e.key == 13) {
             e.preventDefault();
         }
     });
 
     $('#my_profile_form_soundcloud').on('keydown', function(e) {
-        if (e.keyCode == 13) {
+        if (e.key == 13) {
             e.preventDefault();
             appendSoundcloudLink($('#my_profile_form_soundcloud').val());
             appendEmbeddedSoundcloud($('#my_profile_form_soundcloud').val());
@@ -56,7 +106,7 @@ $(document).on('turbolinks:load', function() {
     });
 
     $('#my_profile_form_youtube').on('keydown', function(e) {
-        if (e.keyCode == 13) {
+        if (e.key == 13) {
             e.preventDefault();
             appendYoutubeLink($('#my_profile_form_youtube').val());
             appendEmbeddedYoutube($('#my_profile_form_youtube').val());
@@ -88,6 +138,7 @@ $(document).on('turbolinks:load', function() {
             ytLinksArray[index] = yt_links[index].firstChild.nodeValue;
         });
 
+        // console.log(plainInsArray);
         $.ajax({
             method: "PATCH",
             url: "/my_profile",
@@ -205,6 +256,7 @@ $(document).on('turbolinks:load', function() {
                                     $(this)
                                         .closest('.js-soundcloud-list-node')
                                         .remove()
+                                        console.log(track_id);
                                     destroyEmbeddedSoundcloudFrame(track_id);
                                 })
                     )

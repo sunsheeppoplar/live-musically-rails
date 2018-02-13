@@ -1,6 +1,6 @@
 $(document).on('turbolinks:load', function() {
 	function instantiateDatePickers() {
-		if (this.page.controller() == 'opportunities' && this.page.action() == 'edit') {
+		if (page.controller() == 'opportunities' && page.action() == 'edit') {
 
 			var initialStartDate = $('#employer_opportunity_form_event_start_date').val();
 			var initialEndDate = $('#employer_opportunity_form_event_end_date').val();
