@@ -1,4 +1,4 @@
-<h3>MY PROFILE</h3>
+<h3 class="my-profile-form__header">MY PROFILE</h3>
 
 <h5>ABOUT</h5>
 <%=form_for @my_profile_form, remote: :true, url: { action: "update"}, method: :patch, html: {class: "js-my-profile--basic" } do |f| %>

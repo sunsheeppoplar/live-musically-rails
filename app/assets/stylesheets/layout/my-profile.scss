@@ -1,5 +1,146 @@
 .my-profile-form {
+    
+    &__header {
+        background-color: $header-color;
+        color: $header-text-color;
+        text-align: center;
+        padding: 1%;
+
+        grid-column-start: 1;
+        grid-column-end: 4;
+    }
+    
+    &-container {
+        display: grid;
+        grid-template-columns: 7% 86% 7%;
+
+        .user-info {
+            grid-column-start: 2;
+        }
+
+        .instruments-and-locations-container {
+            grid-column-start: 2;
+
+            display: grid;
+            grid-template-columns: 33% 33% 33%;
+            grid-column-gap: 10px;
+            justify-content: center;
+
+            .instrument-wrapper {
+                grid-column-start: 2;
+
+                &__subheader {
+                    background-color: $grey-1;
+                    color: black;
+                    text-align: center;
+                    padding: 1%;
+                }
+
+                .js-instrument-list-node {
+                    display: inline-block;
+
+                    border: solid;
+                    border-width: 1px;
+                    border-color: lightgrey;
+                    border-radius: 5px;
+
+                    background-color: white;
+                    padding: 1%;
+                    margin: 2%;
+                }
+            }
+
+            .location-wrapper {
+                grid-column-start: 3;
+
+                &__subheader {
+                    background-color: $grey-1;
+                    color: black;
+                    text-align: center;
+                    padding: 1%;
+                }
+                .js-location-list-node {
+                    display: inline-block;
+
+                    border: solid;
+                    border-width: 1px;
+                    border-color: lightgrey;
+                    border-radius: 5px;
+
+                    background-color: white;
+                    padding: 1%;
+                    margin: 2%;
+                }
+            }
+        }
+
+        .playlist-container {
+            grid-column-start: 2;
+
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-column-gap: 10px;
+            justify-content: center;
+
+            margin: 10% 0 10% 0;
+
+            &__subheader {
+                grid-column-start: 1;
+                grid-column-end: 3;
+
+                background-color: $grey-1;
+                color: black;
+                text-align: center;
+                padding: 1%;
+            }
+
+            .soundcloud-wrapper {
+                grid-column-start: 1;
+
+                &__subheader {
+                    text-align: center;
+                }
+
+                .js-soundcloud-list-node {
+                    display: inline-block;
+
+                    border: solid;
+                    border-width: 1px;
+                    border-color: lightgrey;
+                    border-radius: 5px;
+
+                    background-color: white;
+                    padding: 1%;
+                    margin: 2%;
+                }
+            }
+
+            .youtube-wrapper {
+                grid-column-start: 2;
+
+                &__subheader {
+                    text-align: center;
+                }
+
+                .js-youtube-list-node {
+                    display: inline-block;
+
+                    border: solid;
+                    border-width: 1px;
+                    border-color: lightgrey;
+                    border-radius: 5px;
+
+                    background-color: white;
+                    padding: 1%;
+                    margin: 2%;
+                }
+            }
+        }
+
+    }
+
 	&__textarea-edit-submit, &__input-group-edit-submit, &__password-edit-submit, &__password-fields {
 		visibility: hidden;
-	}
+    }
+    
 }
