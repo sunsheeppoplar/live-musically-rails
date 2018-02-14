@@ -15,21 +15,5 @@ class ArtistProfileService
         constructed_link = "https://www.youtube.com/embed/" + video_id + player_options
         content_tag(:iframe, '', :id => video_id, width: "250", height: "140", frameborder: "no", allow: "encrypted-media", allowfullscreen: "", src: constructed_link)
     end
-
-    def self.render_instrument(instrument)
-        content_tag(:div, instrument.name, :class => "js-instrument-list-node")
-    end
-
-    def self.render_location(location)
-        content_tag(:div, "#{location.zipcode} - #{location.city}, #{location.state}", :class => "js-location-list-node")
-    end
-
-    def self.render_soundcloud_link(link_to_content)
-        content_tag(:div, link_to_content, :class => "js-soundcloud-list-node")
-    end
-
-    def self.render_youtube_link(link_to_content)
-        content_tag(:div, link_to_content, :class => "js-youtube-list-node")
-    end
     
 end

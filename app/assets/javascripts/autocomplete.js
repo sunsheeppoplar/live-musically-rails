@@ -9,20 +9,20 @@ $(document).on('turbolinks:load', function() {
 
     $('#js-instrument-container').children()
     .append(
-        $('<div style="display:inline"> (x)</div>')
-            .addClass('x-button')
+        $('<span>')
+            .addClass('glyphicon glyphicon-remove')
             .click( function() {
                 $(this)
                 .closest('.js-instrument-list-node')
                 .remove();
-                unselectHiddenInstrument(instrument);
+                unselectHiddenInstrument(this.parentNode.firstChild.textContent);
             })
     );
 
     $('#js-location-container').children()
     .append(
-        $('<div style="display:inline"> (x)</div>')
-            .addClass('x-button')
+        $('<span>')
+            .addClass('glyphicon glyphicon-remove')
             .click( function() {
                 $(this)
                 .closest('.js-location-list-node')
@@ -32,8 +32,8 @@ $(document).on('turbolinks:load', function() {
 
     $('#js-soundcloud-container').children()
     .append(
-        $('<div style="display:inline"> (x)</div>')
-            .addClass('x-button')
+        $('<span>')
+            .addClass('glyphicon glyphicon-remove')
             .click( function() {
                 $(this)
                 .closest('.js-soundcloud-list-node')
@@ -46,8 +46,8 @@ $(document).on('turbolinks:load', function() {
 
     $('#js-youtube-container').children()
     .append(
-        $('<div style="display:inline"> (x)</div>')
-            .addClass('x-button')
+        $('<span>')
+            .addClass('glyphicon glyphicon-remove')
             .click( function() {
                 $(this)
                 .closest('.js-youtube-list-node')
@@ -59,23 +59,23 @@ $(document).on('turbolinks:load', function() {
     );
     
     $('#my_profile_form_locations').on('keydown', function(e) {
-        if (e.key == 13) {
+        if (e.keyCode == 13) {
             e.preventDefault();
-            queryForZipcode( 
-                $('#my_profile_form_locations').val() 
+            queryForZipcode(
+                $('#my_profile_form_locations').val()
             );
             $('#my_profile_form_locations').val("");
         }
     });
 
     $('#my_profile_form_instruments').on('keydown', function(e) {
-        if (e.key == 13) {
+        if (e.keyCode == 13) {
             e.preventDefault();
         }
     });
 
     $('#my_profile_form_soundcloud').on('keydown', function(e) {
-        if (e.key == 13) {
+        if (e.keyCode == 13) {
             e.preventDefault();
             appendSoundcloudLink($('#my_profile_form_soundcloud').val());
             appendEmbeddedSoundcloud($('#my_profile_form_soundcloud').val());
@@ -84,7 +84,7 @@ $(document).on('turbolinks:load', function() {
     });
 
     $('#my_profile_form_youtube').on('keydown', function(e) {
-        if (e.key == 13) {
+        if (e.keyCode == 13) {
             e.preventDefault();
             appendYoutubeLink($('#my_profile_form_youtube').val());
             appendEmbeddedYoutube($('#my_profile_form_youtube').val());
@@ -166,8 +166,8 @@ $(document).on('turbolinks:load', function() {
                 .addClass('js-location-list-node')
                 .text(loc_obj.zipcode + " - " + loc_obj.city + ", " + loc_obj.state)
                 .append(
-                    $('<div style="display:inline"> (x)</div>')
-                        .addClass('x-button')
+                    $('<span>')
+                        .addClass('glyphicon glyphicon-remove')
                         .click( function() {
                             $(this)
                             .closest('.js-location-list-node')
@@ -190,8 +190,8 @@ $(document).on('turbolinks:load', function() {
                 .addClass('js-instrument-list-node')
                 .text(instrument)
                 .append(
-                    $('<div style="display:inline"> (x)</div>')
-                        .addClass('x-button')
+                    $('<span>')
+                        .addClass('glyphicon glyphicon-remove')
                         .click( function() {
                             $(this)
                             .closest('.js-instrument-list-node')
@@ -228,8 +228,8 @@ $(document).on('turbolinks:load', function() {
                 .addClass('js-soundcloud-list-node')
                     .text(link)
                     .append(
-                        $('<div style="display:inline"> (x)</div>')
-                                .addClass('x-button')
+                        $('<span>')
+                                .addClass('glyphicon glyphicon-remove')
                                 .click( function() {
                                     $(this)
                                         .closest('.js-soundcloud-list-node')
@@ -248,8 +248,8 @@ $(document).on('turbolinks:load', function() {
                 .addClass('js-youtube-list-node')
                     .text(link)
                     .append(
-                        $('<div style="display:inline"> (x)</div>')
-                            .addClass('x-button')
+                        $('<span>')
+                            .addClass('glyphicon glyphicon-remove')
                             .click( function() {
                                 $(this)
                                     .closest('.js-youtube-list-node')

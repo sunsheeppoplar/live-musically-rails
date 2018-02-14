@@ -1,18 +1,18 @@
+<%= render "profiles/my_profile" %>
+
 <button id="js-the-button">THE SUBMIT BUTTON</button>
 
 <%=form_for @my_profile_form, remote: :true, url: { action: "update"}, method: :patch, html: {class: "js-my-profile--basic", :multipart => true } do |f| %>
 
-	<div id="js-instrument-container" style="margin: 50px; border: 1px solid red; height:150px; width: 300px;">
-        <% for instrument in current_user.instruments %>
-            <%= ArtistProfileService.render_instrument(instrument) %>
+	<div id="js-instrument-container">
+        <% current_user.instruments.each do |instrument| %>
+            <%= content_tag(:div, instrument.name, :class => "js-instrument-list-node") %>
         <% end %>
     </div>
 
     <%= text_field_tag 'my_profile_form_instruments', '', placeholder: "instrument here", :data => { :autocomplete_source => ARTIST_INSTRUMENTS } %>
-    <br/>
-    <br/>
-    
-    <% ARTIST_INSTRUMENTS.each_with_index do |val, index| %>
+
+    <% Instrument.all.each_with_index do |val, index| %>
         <div class="my-profile-form__checkbox-input-group" style="display:none">
 
                 <%= check_box_tag 'my_profile_form[instruments][]', val, nil, :id => "instruments_#{val}", class: "my-profile-form__checkbox" %>
@@ -22,9 +22,9 @@
 	<% end %>
 <% end %>
 
-<div id="js-location-container" style="margin: 50px; border: 1px solid blue; height:150px; width: 300px;">
-    <% for location in current_user.locations %>
-        <%= ArtistProfileService.render_location(location) %>
+<div id="js-location-container">
+    <% current_user.locations.each do |location| %>
+        <%= content_tag(:div, "#{location.zipcode} - #{location.city}, #{location.state}", :class => "js-location-list-node") %>
     <% end %>
 </div>
 
@@ -34,36 +34,30 @@
 
 <script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>
 
-<div id="js-soundcloud-container" style="margin: 50px; border: 1px solid orange; height:150px; width: 300px;">
-    <% for ext_link in current_user.external_links.where(origin_site:"sc") %>
-        <%= ArtistProfileService.render_soundcloud_link(ext_link.link_to_content) %>
+<div id="js-soundcloud-container">
+    <% current_user.external_links.where(origin_site:"sc").each do |ext_link| %>
+        <%= content_tag(:div, ext_link.link_to_content, :class => "js-soundcloud-list-node") %>
     <% end %>
 </div>
 
 <%= text_field_tag 'my_profile_form_soundcloud', '', placeholder: "soundcloud link here", :data => { } %>
 
-<br/>
-<br/>
-
 <div id="js-embedded-soundcloud-container">
-    <% for ext_link in current_user.external_links.where(origin_site: "sc") %>
+    <% current_user.external_links.where(origin_site: "sc").each do |ext_link| %>
         <%= ArtistProfileService.soundcloud_frame(ext_link.link_to_content) %>
     <% end %>
 </div>
 
-<div id="js-youtube-container" style="margin: 50px; border: 1px solid purple; height:150px; width: 300px;">
-    <% for ext_link in current_user.external_links.where(origin_site:"yt") %>
-        <%= ArtistProfileService.render_youtube_link(ext_link.link_to_content) %>
+<div id="js-youtube-container">
+    <% current_user.external_links.where(origin_site:"yt").each do |ext_link| %>
+        <%= content_tag(:div, ext_link.link_to_content, :class => "js-youtube-list-node") %>
     <% end %>
 </div>
 
 <%= text_field_tag 'my_profile_form_youtube', '', placeholder: "youtube link here", :data => { } %>
 
-<br/>
-<br/>
-
 <div id="js-embedded-youtube-container">
-    <% for ext_link in current_user.external_links.where(origin_site: "yt") %>
+    <% current_user.external_links.where(origin_site: "yt").each do |ext_link| %>
         <%= ArtistProfileService.youtube_frame(ext_link.link_to_content) %>
     <% end %>
 </div>
