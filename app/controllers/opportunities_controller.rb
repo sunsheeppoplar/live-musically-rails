@@ -1,6 +1,6 @@
 class OpportunitiesController < ApplicationController
 	before_action :authenticate_user!
-	before_action :set_opportunity, only: [:create, :edit, :destroy]
+	before_action :set_opportunity, only: [:edit, :destroy]
 
 	def new
 		if opportunity_policy.able_to_view?
