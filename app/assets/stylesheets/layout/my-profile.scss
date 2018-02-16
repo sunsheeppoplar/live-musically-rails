@@ -1,18 +1,26 @@
 .my-profile-form {
-    
-    &__header {
-        background-color: $header-color;
-        color: $header-text-color;
-        text-align: center;
-        padding: 1%;
 
-        grid-column-start: 1;
-        grid-column-end: 4;
-    }
+    display: grid;
+    grid-template-columns: 7% 86% 7%;
     
-    &-container {
-        display: grid;
-        grid-template-columns: 7% 86% 7%;
+    .js-my-profile--basic {
+        grid-column-start: 2;
+    }
+
+
+    .js-my-profile--password {
+        grid-column-start: 2;
+    }
+
+        &__header {
+            background-color: $header-color;
+            color: $header-text-color;
+            text-align: center;
+            padding: 1%;
+
+            grid-column-start: 1;
+            grid-column-end: 4;
+        }
 
         .user-info {
             grid-column-start: 2;
@@ -47,6 +55,9 @@
                     background-color: white;
                     padding: 1%;
                     margin: 2%;
+                    &:hover {
+                        background-color: $purple-1;
+                    }
                 }
             }
 
@@ -70,6 +81,9 @@
                     background-color: white;
                     padding: 1%;
                     margin: 2%;
+                    &:hover {
+                        background-color: $purple-1;
+                    }
                 }
             }
         }
@@ -112,6 +126,9 @@
                     background-color: white;
                     padding: 1%;
                     margin: 2%;
+                    &:hover {
+                        background-color: $purple-1;
+                    }
                 }
             }
 
@@ -133,14 +150,15 @@
                     background-color: white;
                     padding: 1%;
                     margin: 2%;
+                    &:hover {
+                        background-color: $purple-1;
+                    }
                 }
             }
         }
 
-    }
-
-	&__textarea-edit-submit, &__input-group-edit-submit, &__password-edit-submit, &__password-fields {
-		visibility: hidden;
-    }
-    
+        &__textarea-edit-submit, &__input-group-edit-submit, &__password-edit-submit, &__password-fields {
+            visibility: hidden;
+        }
+    // }
 }

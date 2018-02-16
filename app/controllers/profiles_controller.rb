@@ -5,7 +5,6 @@ class ProfilesController < ApplicationController
 		layout = find_user_role(current_user.role)
         @my_profile_form = MyProfileForm.new(current_user: current_user)
         respond_to do |format|
-            # binding.pry
             format.html { render layout }
             format.json { render json: 
                 { 
