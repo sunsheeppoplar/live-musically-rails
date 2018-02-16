@@ -1,0 +1,14 @@
+<h3 class="my-profile-form__header">UPCOMING BOOKED EVENTS:</h3>
+
+ <div class="opportunities-container">
+    <div class="opportunity-wrapper">
+    <% current_user.performing_opportunities.each do |opp| %>
+        <div class="js-opportunity-list-node">
+            <%= content_tag(:div, "TITLE: #{opp.title}") %>
+            <%= content_tag(:div, "DESCRIPTION: #{opp.description}") %>
+            <%= content_tag(:div, "START: #{opp.event_start_date}") %>
+            <%= content_tag(:div, "END: #{opp.event_end_date}") %>
+        </div>
+    <% end %>
+    </div>
+</div>
