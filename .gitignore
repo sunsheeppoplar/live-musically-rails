@@ -24,6 +24,8 @@
 ######################
 *.log
 *.sql
+!formatted_usa_zips.sql
+
 *.sqlite
 tmp
 
@@ -38,4 +40,4 @@ ehthumbs.db
 Thumbs.db
 
 # secret stuff
-config/secrets.yml
+/config/secrets.yml
