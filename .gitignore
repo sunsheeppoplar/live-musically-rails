@@ -36,3 +36,6 @@ tmp
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# secret stuff
+config/secrets.yml
