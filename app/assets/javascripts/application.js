@@ -13,13 +13,14 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require md5.min
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
 //= require bootstrap-timepicker
 //= require jquery-ui/widgets/autocomplete
-//= require authorization
-//= require autocomplete
 //= require config
+//= require authentication
+//= require autocomplete
 //= require datepicker
 //= require my-profile
 //= require new-opportunity-form

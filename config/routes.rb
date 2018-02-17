@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 	patch 'my_profile', to: 'profiles#update'
 	patch 'my_profile/update_password', to: 'profiles#update_password'
 
-	get '/auth', to: 'authorizations#landing'
+	get '/auth', to: 'authentications#landing'
 
 	get 'tests/index'
 

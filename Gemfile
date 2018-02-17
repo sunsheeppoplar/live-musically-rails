@@ -38,7 +38,7 @@ gem 'jbuilder', '~> 2.5'
 # helps rails console readability
 gem 'pry-rails'
 
-# helps with user authorization
+# helps with user authentication
 gem 'devise'
 
 # oauth

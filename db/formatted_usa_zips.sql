@@ -34,29 +34,6 @@ SET default_tablespace = '';
 
 SET default_with_oids = false;
 
---
--- Name: locations; Type: TABLE; Schema: public; Owner: hwang
---
-
--- CREATE TABLE locations (
---     zipcode text,
---     zip_code_type text,
---     city text,
---     state text,
---     location_type text,
---     lat text,
---     long text,
---     world_region text,
---     country text
--- );
-
-
-ALTER TABLE locations OWNER TO hwang;
-
---
--- Data for Name: locations; Type: TABLE DATA; Schema: public; Owner: hwang
---
-
 COPY locations (zipcode, zip_code_type, city, state, location_type, lat, long, world_region, country) FROM stdin;
 00501	UNIQUE	HOLTSVILLE	NY	PRIMARY	40.81	-73.04	NA	US
 00544	UNIQUE	HOLTSVILLE	NY	PRIMARY	40.81	-73.04	NA	US

@@ -1,4 +1,4 @@
-class ExternalContentService
+class ArtistProfileService
     extend ActionView::Helpers::TagHelper
 
     def self.soundcloud_frame(track_url)
@@ -15,4 +15,5 @@ class ExternalContentService
         constructed_link = "https://www.youtube.com/embed/" + video_id + player_options
         content_tag(:iframe, '', :id => video_id, width: "250", height: "140", frameborder: "no", allow: "encrypted-media", allowfullscreen: "", src: constructed_link)
     end
+    
 end
