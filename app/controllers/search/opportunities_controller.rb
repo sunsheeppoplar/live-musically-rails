@@ -7,7 +7,7 @@ class Search::OpportunitiesController < ApplicationController
 		@opportunities_search_form = OpportunitiesSearchForm.new(opportunities_search_params)
 		query_base = Opportunity.includes(:artist_opportunities, :employer, :venue)
 		basic_opportunities_query = BasicOpportunitiesQuery.new(scope:  query_base, params: @opportunities_search_form).call
-		@opportunity_query_decorator = OpportunityQueryDecorator.wrap(basic_opportunities_query)
+		@opportunity_query_decorator = OpportunityDecorator.wrap(basic_opportunities_query)
 	end
 
 	private
