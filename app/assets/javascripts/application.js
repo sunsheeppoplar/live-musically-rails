@@ -23,5 +23,6 @@
 //= require datepicker
 //= require my-profile
 //= require new-opportunity-form
+//= require search-opportunities-form
 //= require timepicker
 //= require_tree .
