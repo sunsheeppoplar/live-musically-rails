@@ -10,6 +10,11 @@ class OpportunitiesController < ApplicationController
 		end
 	end
 
+	def show
+		opportunity = Opportunity.includes(:artist_opportunities, :employer, :venue).find(params[:id])
+		@opportunity = OpportunityDecorator.new(opportunity)
+	end
+
 	def create
 		@employer_opportunity_form = EmployerOpportunityForm.new(employer_opportunity_form_params)
 		respond_to do |format|
