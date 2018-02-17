@@ -1,0 +1,14 @@
+<% if @opportunity_query_decorator.nil? %>
+	<%= render "shared/no_results" %>
+<% else %>
+	<% @opportunity_query_decorator.each do |opp| %>
+		<section>
+			<%= opp.title %><br />
+			<%= opp.employer %><br />
+			<%= opp.event_date %><br />
+			<%= opp.venue_name %><br />
+			<%= opp.venue_full_address %><br />
+			<%= link_to "VIEW DETAILS", opportunity_path(opp.id) %>
+		</section><br />
+	<% end %>
+<% end %>
