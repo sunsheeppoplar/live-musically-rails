@@ -1,4 +1,4 @@
-<% if @opportunity_query_decorator.nil? %>
+<% if @opportunity_query_decorator.empty? %>
 	<%= render "shared/no_results" %>
 <% else %>
 	<% @opportunity_query_decorator.each do |opp| %>
