@@ -14,6 +14,10 @@
                 <span class="js-my-profile-inputs-edit-submit my-profile-form__input-group-edit-submit"><i class="glyphicon glyphicon-ok"></i></span>
         </div>
 
+        <div class="">
+            <%= f.file_field :avatar %>
+        </div>
+
 <%
 =begin %>
     <%= form_for @my_profile_form, remote: :true, url: { :action => "update_password" }, method: :patch, html: {id: "asdfasdfasdf", class: "js-my-profile--password my-profile-form__password-fields"} do |f| %>

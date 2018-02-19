@@ -16,6 +16,14 @@ class User < ApplicationRecord
     has_many :artist_locations
     has_many :external_links
 
+    has_attached_file   :avatar, 
+                        :styles => {
+                            normal: "300x300>",
+                            thumb: "50x50#"
+                        }
+    validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+
+
 	def self.from_omniauth(auth)
 		where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
 			user.email = auth.info.email

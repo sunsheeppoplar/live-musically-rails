@@ -2,7 +2,8 @@ class MyProfileForm
 	include ActiveModel::Model
 	include Virtus.model
 
-	attribute :about, String
+    attribute :about, String
+    attribute :avatar
 	attribute :current_user, Hash
     attribute :email, String
     attribute :soundcloud_links, Array

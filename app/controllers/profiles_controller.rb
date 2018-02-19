@@ -62,7 +62,7 @@ class ProfilesController < ApplicationController
     
 	private
 	def profile_form_params
-		params.require(:my_profile_form).permit(:about, :email, :first_name, :last_name, :password, :password_confirmation, :instruments => [], :locations => [], :soundcloud_links => [], :youtube_links => []).merge(current_user: current_user)
+		params.require(:my_profile_form).permit(:about, :avatar, :email, :first_name, :last_name, :password, :password_confirmation, :instruments => [], :locations => [], :soundcloud_links => [], :youtube_links => []).merge(current_user: current_user)
 	end
 
 	def find_user_role(role)
