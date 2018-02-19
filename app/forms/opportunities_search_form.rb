@@ -1,6 +1,4 @@
 class OpportunitiesSearchForm
-	include ActiveModel::Model
-
 	attr_reader :event_start_time, :event_start_date, :event_end_time, :event_end_date, :instrument, :location
 
 	def initialize(args={})
