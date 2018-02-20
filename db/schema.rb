@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180215004129) do
+ActiveRecord::Schema.define(version: 20180220022126) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,17 @@ ActiveRecord::Schema.define(version: 20180215004129) do
     t.index ["employer_id"], name: "index_opportunities_on_employer_id", using: :btree
   end
 
+  create_table "submissions", force: :cascade do |t|
+    t.string   "phone_number"
+    t.string   "email"
+    t.integer  "user_id"
+    t.integer  "opportunity_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["opportunity_id"], name: "index_submissions_on_opportunity_id", using: :btree
+    t.index ["user_id"], name: "index_submissions_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -116,4 +127,6 @@ ActiveRecord::Schema.define(version: 20180215004129) do
   add_foreign_key "artist_locations", "users"
   add_foreign_key "external_links", "users"
   add_foreign_key "opportunities", "users", column: "employer_id"
+  add_foreign_key "submissions", "opportunities"
+  add_foreign_key "submissions", "users"
 end

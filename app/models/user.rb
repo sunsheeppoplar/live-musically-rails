@@ -15,6 +15,7 @@ class User < ApplicationRecord
     has_many :locations, :through => :artist_locations
     has_many :artist_locations
     has_many :external_links
+    has_many :submissions
 
 	def self.from_omniauth(auth)
 		where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
