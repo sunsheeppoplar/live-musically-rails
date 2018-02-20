@@ -5,8 +5,11 @@ class Search::OpportunitiesController < ApplicationController
 
 	def index
 		@opportunities_search_form = OpportunitiesSearchForm.new(opportunities_search_params)
+
 		query_base = Opportunity.includes(:artist_opportunities, :employer, :venue).where('timeframe_of_post >= ?', DateTime.now)
-		basic_opportunities_query = BasicOpportunitiesQuery.new(scope:  query_base, params: @opportunities_search_form).call
+		basic_opportunities_query = BasicOpportunitiesQuery.new(scope: query_base, params: @opportunities_search_form).call
+			.by_date
+
 		@opportunity_query_decorator = OpportunityDecorator.wrap(basic_opportunities_query)
 	end
 
