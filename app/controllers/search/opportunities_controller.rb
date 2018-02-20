@@ -1,6 +1,6 @@
 class Search::OpportunitiesController < ApplicationController
 	def new
-		@opportunity_search_form = OpportunitiesSearchForm.new
+		@opportunities_search_form = OpportunitiesSearchForm.new
 	end
 
 	def index

@@ -1,4 +1,4 @@
-<%= form_for @opportunity_search_form, url: { action: "index"}, html: {method: :get} do |f| %>
+<%= form_for @opportunities_search_form, url: { action: "index"}, html: {method: :get} do |f| %>
 What:
 <%= f.text_field :instrument, placeholder: "Piano, Acoustic, Teaching...", :data => { :autocomplete_source => ARTIST_INSTRUMENTS } %>
 
