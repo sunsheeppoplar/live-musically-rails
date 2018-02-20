@@ -18,10 +18,10 @@ class User < ApplicationRecord
 
     has_attached_file   :avatar, 
                         :styles => {
-                            normal: "300x300>",
-                            thumb: "50x50#"
+                            normal: ["250x250#", :png],
+                            thumb: ["50x50#", :png]
                         }
-    validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+    validates_attachment_content_type :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
 
 	def self.from_omniauth(auth)
@@ -43,5 +43,6 @@ class User < ApplicationRecord
 		user.last_name = name_arr.pop
 		user.first_name = name_arr.join(" ")
 	end
+    
 end
 	

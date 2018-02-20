@@ -2,6 +2,13 @@
 
 <div class="user-info">
     <h5>ABOUT</h5>
+        <div>
+            <%= image_tag("https:" + current_user.avatar.url(:normal), class: "js-avatar") %>
+            <div class="">
+                <%= f.file_field :avatar %>
+            </div>
+        </div>
+
         <%= f.text_area :about, :value => current_user.about, disabled: "disabled", class: "js-my-profile-textarea" %>
             <span class="js-my-profile-textarea-edit-icon"><i class="glyphicon glyphicon-pencil"></i></span>
             <span class="js-my-profile-textarea-edit-submit my-profile-form__textarea-edit-submit"><i class="glyphicon glyphicon-ok"></i></span>
@@ -14,9 +21,6 @@
                 <span class="js-my-profile-inputs-edit-submit my-profile-form__input-group-edit-submit"><i class="glyphicon glyphicon-ok"></i></span>
         </div>
 
-        <div class="">
-            <%= f.file_field :avatar %>
-        </div>
 
 <%
 =begin %>

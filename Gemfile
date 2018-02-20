@@ -62,7 +62,10 @@ gem 'jquery-ui-rails'
 
 # helps with s3 avatar upload
 gem 'paperclip', '~> 5.2.1'
-gem 'aws-sdk'
+gem 'aws-sdk', '>= 2.0'
+
+# helps with file submission via ajax
+gem 'remotipart', '~> 1.2'
 
 
 group :development, :test do

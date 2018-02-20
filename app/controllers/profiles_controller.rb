@@ -23,6 +23,8 @@ class ProfilesController < ApplicationController
                 # flash[:notice] = 'Updated'
                 format.html { redirect_to my_profile_path, notice: 'Updated'
                 }
+                # prevents UndefinedConversionError
+                @my_profile_form.avatar = {}
 				format.json { render json: @my_profile_form
 				}
 			else
