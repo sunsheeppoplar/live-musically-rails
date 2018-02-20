@@ -3,7 +3,7 @@ class OpportunitiesController < ApplicationController
 	before_action :set_opportunity, only: [:edit, :destroy]
 
 	def new
-		if opportunity_policy.able_to_view?
+		if opportunity_policy.employer?
 			@employer_opportunity_form = EmployerOpportunityForm.new
 		else
 			redirect_to root_path, alert: "Not authorized, sorry!"

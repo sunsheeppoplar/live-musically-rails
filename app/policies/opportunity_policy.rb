@@ -6,7 +6,7 @@ class OpportunityPolicy
 		@resource = resource
 	end
 
-	def able_to_view?
+	def employer?
 		@current_user.artist_employer?
 	end
 
