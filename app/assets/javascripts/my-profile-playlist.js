@@ -6,6 +6,7 @@ function checkSoundcloudLinkFormat(link) {
     } else if (link.match(/^(?<![\w\d])https:\/\/www.soundcloud.com(?![\w\d])/) != null  || link.match(/^(?<![\w\d])http:\/\/www.soundcloud.com(?![\w\d])/) != null) {
         track_id = link.split("/")[link.split("/").length-1];
     } else {
+        alert("PLACEHOLDER ERROR -> track url must be in one of these formats: \nhttps://soundcloud.com/xxx/yyy \nhttp://soundcloud.com/xxx/yyy");
         console.log("fucked up sc link");
         return null;
     }
@@ -23,6 +24,7 @@ function checkYoutubeLinkFormat(link) {
         video_id = link.split("v=")[1];
     } else {
         console.log("fucked up yt link");
+        alert("PLACEHOLDER ERROR -> video url must be in one of these formats: \nhttps://youtu.be/xxx \nhttp://youtu.be/xxx \nhttps://www.youtube.com/watch?v=xxx \nhttp://www.youtube.com/watch?v=xxx");
         return null;
     }
     return video_id;
