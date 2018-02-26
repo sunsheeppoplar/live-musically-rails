@@ -19,6 +19,7 @@ class User < ApplicationRecord
     has_attached_file   :avatar, 
                         :styles => {
                             normal: ["250x250#", :png],
+                            small: ["215x215#", :png],
                             thumb: ["50x50#", :png]
                         }
     validates_attachment_content_type :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
