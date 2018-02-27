@@ -8,6 +8,7 @@
 			<%= opp.event_date %><br />
 			<%= opp.venue_name %><br />
 			<%= opp.venue_full_address %><br />
+			<%= link_to "APPLY NOW", new_apply_opportunity_path(opp_id: opp.id), remote: :true, class: "js-apply-opp-form__open-modal-button" %>
 			<%= link_to "VIEW DETAILS", opportunity_path(opp.id) %>
 		</section><br />
 	<% end %>
