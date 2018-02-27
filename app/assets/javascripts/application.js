@@ -20,6 +20,7 @@
 //= require config
 //= require authentication
 //= require autocomplete
+//= require apply-opportunity-form
 //= require datepicker
 //= require my-profile
 //= require new-opportunity-form
