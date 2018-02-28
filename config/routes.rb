@@ -21,8 +21,6 @@ Rails.application.routes.draw do
 
 	get '/auth', to: 'authentications#landing'
 
-	get 'tests/index'
-
 	get '/home', to: 'search/opportunities#new'
 	root 'search/opportunities#new'
 end
