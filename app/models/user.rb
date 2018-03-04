@@ -3,7 +3,7 @@ class User < ApplicationRecord
 	# :confirmable, :lockable, :timeoutable and :omniauthable
 	devise :database_authenticatable, :registerable,
 	:recoverable, :rememberable, :trackable, :validatable,
-	:omniauthable, :omniauth_providers => [:facebook]
+	:omniauthable, :omniauth_providers => [:facebook, :stripe_connect]
 
 	enum role: { musician: 0, artist_employer: 1 }
 
@@ -16,25 +16,14 @@ class User < ApplicationRecord
     has_many :artist_locations
     has_many :external_links
     has_many :submissions
-
-	def self.from_omniauth(auth)
-		where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-			user.email = auth.info.email
-			user.password = Devise.friendly_token[0,20]
-			parse_name(user, auth.info.name)
-			user.role = auth.user_role
-		end
-	end
+    has_many :oauth_identities, dependent: :destroy
 
 	def owner?(opportunity)
 		id == opportunity.employer_id
 	end
 
-	private
-	def self.parse_name(user, name)
-		name_arr = name.split(" ")
-		user.last_name = name_arr.pop
-		user.first_name = name_arr.join(" ")
+	def not_stripe_user?
+		OauthIdentity.where(provider: "stripe_connect", user_id: self.id).count < 1
 	end
 end
 	

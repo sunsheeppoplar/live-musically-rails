@@ -14,8 +14,19 @@ class ApplicationController < ActionController::Base
 	def resource_class
 		User
 	end
+
 	def devise_mapping
 		@devise_mapping ||= Devise.mappings[:user]
+	end
+
+	protected
+	def after_sign_in_path_for(resource)
+		binding.pry
+		if resource.is_a?(User) && resource.not_stripe_user?
+			onboard_path
+		else
+			super
+		end
 	end
 
 	private
