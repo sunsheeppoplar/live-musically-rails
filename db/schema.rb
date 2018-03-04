@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180227200705) do
+ActiveRecord::Schema.define(version: 20180304205841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,13 @@ ActiveRecord::Schema.define(version: 20180227200705) do
     t.string "country"
   end
 
+  create_table "oauth_identities", force: :cascade do |t|
+    t.string  "provider"
+    t.string  "uid"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_oauth_identities_on_user_id", using: :btree
+  end
+
   create_table "opportunities", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
@@ -99,8 +106,6 @@ ActiveRecord::Schema.define(version: 20180227200705) do
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "role"
-    t.string   "provider"
-    t.string   "uid"
     t.text     "about"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
@@ -124,6 +129,7 @@ ActiveRecord::Schema.define(version: 20180227200705) do
   add_foreign_key "artist_locations", "locations"
   add_foreign_key "artist_locations", "users"
   add_foreign_key "external_links", "users"
+  add_foreign_key "oauth_identities", "users"
   add_foreign_key "opportunities", "users", column: "employer_id"
   add_foreign_key "submissions", "opportunities"
   add_foreign_key "submissions", "users"
