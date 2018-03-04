@@ -56,4 +56,7 @@ Rails.application.configure do
 
   # Devise
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # API keys
+  STRIPE_CLIENT_ID = Rails.application.secrets[:stripe_oauth_client_id]
 end

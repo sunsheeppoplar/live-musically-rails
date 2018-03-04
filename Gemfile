@@ -43,6 +43,7 @@ gem 'devise'
 
 # oauth
 gem 'omniauth-facebook'
+gem 'omniauth-stripe-connect'
 
 # helps with attribute boilerplate on POROs
 gem 'virtus'
