@@ -24,6 +24,7 @@
 //= require datepicker
 //= require my-profile
 //= require new-opportunity-form
+//= require onboard
 //= require search-opportunities-form
 //= require timepicker
 //= require_tree .
