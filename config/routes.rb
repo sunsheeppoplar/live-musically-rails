@@ -5,6 +5,10 @@ Rails.application.routes.draw do
 	}
 	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+	resources :conversations do
+		resources :messages
+	end
+
 	resources :opportunities
     get '/my_profile', to: 'profiles#my_profile'
     get '/my_profile/get_single_zipcode', to: 'profiles#get_single_zipcode'
