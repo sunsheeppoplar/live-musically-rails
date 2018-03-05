@@ -22,6 +22,10 @@ class User < ApplicationRecord
 		id == opportunity.employer_id
 	end
 
+	def recently_registered?
+		not_stripe_user? && sign_in_count == 1
+	end
+
 	def not_stripe_user?
 		OauthIdentity.where(provider: "stripe_connect", user_id: self.id).count < 1
 	end

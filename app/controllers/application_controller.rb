@@ -21,8 +21,7 @@ class ApplicationController < ActionController::Base
 
 	protected
 	def after_sign_in_path_for(resource)
-		binding.pry
-		if resource.is_a?(User) && resource.not_stripe_user?
+		if resource.recently_registered?
 			onboard_path
 		else
 			super
