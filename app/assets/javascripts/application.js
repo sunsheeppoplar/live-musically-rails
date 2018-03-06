@@ -26,4 +26,4 @@
 //= require my-profile
 //= require new-opportunity-form
 //= require timepicker
-//= require_tree .
+//= require_tree ./channels

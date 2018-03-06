@@ -32,7 +32,12 @@ class MessagesController < ApplicationController
   def create
     @message = @conversation.messages.new(message_params)
     if @message.save
-      redirect_to conversation_messages_path(@conversation)
+      ActionCable.server.broadcast "conversations:#{@conversation.id}",
+        conversation_id: @conversation.id,
+        message: @message.body,
+        user: @message.user.email
+      head :ok
+      # redirect_to conversation_messages_path(@conversation)
     end
   end
 

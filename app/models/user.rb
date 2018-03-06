@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_many :artist_instruments
   has_many :locations, :through => :artist_locations
   has_many :artist_locations
-  has_many :external_links
+	has_many :external_links
 
   has_attached_file   :avatar,
                       :styles => {
@@ -24,6 +24,9 @@ class User < ApplicationRecord
                       }
   validates_attachment_content_type :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
+	def included_conversations
+		Conversation.where("sender_id = ? OR recipient_id = ?", self.id, self.id)
+	end
 
 	def self.from_omniauth(auth)
 		where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
