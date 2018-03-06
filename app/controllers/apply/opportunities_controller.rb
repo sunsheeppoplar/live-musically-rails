@@ -4,15 +4,19 @@ module Apply
 
 		def new
 			respond_to do |format|
-				if opportunity_policy.artist?
+				if opportunity_policy.fully_onboarded_musician?
 					opportunity = Opportunity.find(params[:opp_id])
 					@opportunity_apply_form = OpportunityApplyForm.new(opportunity: opportunity)
 					format.json {
 						render json: {new_application: partial_to_string }, status: 200
 					}
+				elsif opportunity_policy.partially_onboarded_musician?
+					format.json {
+						render json: {notice: "Please complete Stripe registration before posting an opportunity", location: onboard_path}, status: 302
+					}
 				else
 					format.json {
-						render json: {error: "Not authorized, sorry!", location: root_path}, status: 403
+						render json: {alert: "Not authorized, sorry!", status: 403, location: root_path}, status: 403
 					}
 				end
 			end
