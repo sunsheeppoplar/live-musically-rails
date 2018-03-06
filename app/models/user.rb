@@ -16,6 +16,14 @@ class User < ApplicationRecord
     has_many :artist_locations
     has_many :external_links
 
+    has_attached_file   :avatar, 
+                        :styles => {
+                            normal: ["250x250#", :png],
+                            thumb: ["50x50#", :png]
+                        }
+    validates_attachment_content_type :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+
+
 	def self.from_omniauth(auth)
 		where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
 			user.email = auth.info.email
@@ -35,5 +43,6 @@ class User < ApplicationRecord
 		user.last_name = name_arr.pop
 		user.first_name = name_arr.join(" ")
 	end
+    
 end
 	
