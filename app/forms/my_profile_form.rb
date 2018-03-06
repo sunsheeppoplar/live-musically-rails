@@ -2,7 +2,8 @@ class MyProfileForm
 	include ActiveModel::Model
 	include Virtus.model
 
-	attribute :about, String
+    attribute :about, String
+    attribute :avatar, Hash
 	attribute :current_user, Hash
     attribute :email, String
     attribute :soundcloud_links, Array
@@ -12,8 +13,8 @@ class MyProfileForm
     attribute :last_name, String
     attribute :locations, Array
 	attribute :password, String
-	attribute :password_confirmation, String
-
+    attribute :password_confirmation, String
+    
 	# validates :last_name, presence: true
 
     def update
@@ -49,6 +50,7 @@ class MyProfileForm
         update_locations(locations)
         update_soundcloud_links(soundcloud_links)
         update_youtube_links(youtube_links)
+        update_avatar
 		current_user.update!(sanitized_hash)
 	end
 
@@ -88,6 +90,13 @@ class MyProfileForm
             end
         end
         current_user.save!
+    end
+
+    def update_avatar
+        if avatar != {}
+            current_user.avatar = avatar
+            current_user.save!
+        end
     end
 
 	def user_params

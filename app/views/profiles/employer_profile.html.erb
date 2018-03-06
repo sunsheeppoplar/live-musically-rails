@@ -1,1 +1,14 @@
 <%= render "profiles/my_profile" %>
+
+<h3>OPPORTUNITIES CREATED</h3><br />
+
+<% @my_profile_form.decorated_employing_opportunities.each do |o| %>
+	<h5>DETAILS</h5>
+	<p><%= o.full_address %></p>
+	<p><%= o.formatted_time %></p>
+	<p><%= o.formatted_date %></p>
+	<%= link_to 'EDIT / REMOVE', edit_opportunity_path(o.id) %>
+<% end %>
+</br>
+
+<%= link_to "POST NEW OPPORTUNITY", new_opportunity_path %>

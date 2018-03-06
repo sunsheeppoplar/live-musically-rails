@@ -1,0 +1,42 @@
+<div class="playlist-container">
+
+<h4 class="playlist-container__subheader">MY PLAYLIST</h4>
+
+    <div class="soundcloud-wrapper">
+        <h4 class="soundcloud-wrapper__subheader">MUSIC</h4>
+        <div id="js-soundcloud-container">
+            <% current_user.external_links.where(origin_site:"sc").each do |ext_link| %>
+                <%= content_tag(:div, ext_link.link_to_content, :class => "js-soundcloud-list-node") %>
+                <%= hidden_field_tag('my_profile_form[soundcloud_links][]', ext_link.link_to_content, id: Digest::MD5.hexdigest(ext_link.link_to_content)) %>
+            <% end %>
+        </div>
+
+        <%= text_field_tag 'my_profile_form_soundcloud', '', placeholder: "soundcloud link here", :data => { } %>
+
+        <div id="js-embedded-soundcloud-container">
+            <% current_user.external_links.where(origin_site: "sc").each do |ext_link| %>
+                <%= ArtistProfileService.soundcloud_frame(ext_link.link_to_content) %>
+            <% end %>
+        </div>
+    </div>
+
+    <div class="youtube-wrapper">
+        <h4 class="youtube-wrapper__subheader">VIDEOS</h4>
+
+        <div id="js-youtube-container">
+            <% current_user.external_links.where(origin_site:"yt").each do |ext_link| %>
+                <%= content_tag(:div, ext_link.link_to_content, :class => "js-youtube-list-node") %>
+                <%= hidden_field_tag('my_profile_form[youtube_links][]', ext_link.link_to_content, id: Digest::MD5.hexdigest(ext_link.link_to_content))  %>
+            <% end %>
+        </div>
+
+        <%= text_field_tag 'my_profile_form_youtube', '', placeholder: "youtube link here", :data => { } %>
+
+        <div id="js-embedded-youtube-container">
+            <% current_user.external_links.where(origin_site: "yt").each do |ext_link| %>
+                <%= ArtistProfileService.youtube_frame(ext_link.link_to_content) %>
+            <% end %>
+        </div>
+    </div>
+    
+</div>

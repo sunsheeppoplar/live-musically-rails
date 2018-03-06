@@ -1,53 +1,11 @@
-<button id="js-the-button">THE SUBMIT BUTTON</button>
+<div class="my-profile-form">
 
-<%=form_for @my_profile_form, remote: :true, url: { action: "update"}, method: :patch, html: {class: "js-my-profile--basic", :multipart => true } do |f| %>
-
-	<div id="js-instrument-container" style="margin: 50px; border: 1px solid red; height:150px; width: 300px;"></div>
-
-    <%= text_field_tag 'my_profile_form_instruments', '', placeholder: "instrument here", :data => { :autocomplete_source => ARTIST_INSTRUMENTS } %>
-    <br/>
-    <br/>
-    
-    <% ARTIST_INSTRUMENTS.each_with_index do |val, index| %>
-        <div class="my-profile-form__checkbox-input-group" style="display:none">
-
-                <%= check_box_tag 'my_profile_form[instruments][]', val, nil, :id => "instruments_#{val}", class: "my-profile-form__checkbox" %>
-                <%= label :instrument_, val, class: "my-profile-form__label" %>
-        </div>
-        
-	<% end %>
-<% end %>
-
-<div id="js-location-container" style="margin: 50px; border: 1px solid blue; height:150px; width: 300px;"></div>
-
-<%= form_tag "/my_profile/get_single_zipcode", method: 'get', remote: true do %>
-    <%= text_field_tag 'my_profile_form_locations', '', placeholder: "zipcode here", :data => { } %>
-<% end %>
-
-<script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>
-
-<div id="js-soundcloud-container" style="margin: 50px; border: 1px solid orange; height:150px; width: 300px;"></div>
-
-<%= text_field_tag 'my_profile_form_soundcloud', '', placeholder: "soundcloud link here", :data => { } %>
-
-<br/>
-<br/>
-
-<div id="js-embedded-soundcloud-container">
-    <% for ext_link in current_user.external_links.where(origin_site: "sc") %>
-        <%= ExternalContentService.soundcloud_frame(ext_link.link_to_content) %>
+    <%=form_for @my_profile_form, remote: :true, url: { action: "update"}, method: :patch, html: {class: "js-my-profile--basic" } do |f| %>
+        <%= render "profiles/my_profile", f: f %>
+        <%= render "profiles/instruments_and_locations_section", f: f %>
+        <%= render "profiles/playlist_section", f: f %>
+        <%= render "profiles/artist_opportunities_section" %>
+        <%= f.submit "PLACEHOLDER SUBMIT", id: "js-the-button"%>
     <% end %>
-</div>
 
-<div id="js-youtube-container" style="margin: 50px; border: 1px solid purple; height:150px; width: 300px;"></div>
-
-<%= text_field_tag 'my_profile_form_youtube', '', placeholder: "youtube link here", :data => { } %>
-
-<br/>
-<br/>
-
-<div id="js-embedded-youtube-container">
-    <% for ext_link in current_user.external_links.where(origin_site: "yt") %>
-        <%= ExternalContentService.youtube_frame(ext_link.link_to_content) %>
-    <% end %>
 </div>

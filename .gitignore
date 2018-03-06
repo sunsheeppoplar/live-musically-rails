@@ -24,6 +24,8 @@
 ######################
 *.log
 *.sql
+!formatted_usa_zips.sql
+
 *.sqlite
 tmp
 

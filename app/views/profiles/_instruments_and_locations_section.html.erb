@@ -1,0 +1,30 @@
+ <div class="instruments-and-locations-container">
+   
+    <div class="instrument-wrapper">
+        <h4 class="instrument-wrapper__subheader">MY INSTRUMENTS</h4>
+        <div id="js-instrument-container">
+            <% current_user.instruments.each do |instrument| %>
+                <%= content_tag(:div, instrument.name, :class => "js-instrument-list-node") %>
+                <%= hidden_field_tag("my_profile_form[instruments][]", instrument.name, id: Digest::MD5.hexdigest(instrument.name)) %>
+            <% end %>
+        </div>
+
+        <%= text_field_tag 'my_profile_form_instruments', '', placeholder: "instrument here", :data => { :autocomplete_source => ARTIST_INSTRUMENTS } %>
+
+    </div>
+
+
+    <div class="location-wrapper">
+        <h4 class="location-wrapper__subheader">MY LOCATIONS</h4>
+        <div id="js-location-container">
+            <% current_user.locations.each do |location| %>
+                <%= content_tag(:div, "#{location.zipcode} - #{location.city}, #{location.state}", :class => "js-location-list-node") %>
+                <%= hidden_field_tag("my_profile_form[locations][]", location.zipcode, id: Digest::MD5.hexdigest(location.zipcode)) %>
+            <% end %>
+        </div>
+
+        <%#= form_tag "/my_profile/get_single_zipcode", method: 'get', remote: true do %>
+        <%= text_field_tag 'my_profile_form_locations', '', placeholder: "zipcode here", :data => { } %>
+        <%# end %>
+    </div>
+</div>

@@ -5,7 +5,6 @@ class ProfilesController < ApplicationController
 		layout = find_user_role(current_user.role)
         @my_profile_form = MyProfileForm.new(current_user: current_user)
         respond_to do |format|
-            # binding.pry
             format.html { render layout }
             format.json { render json: 
                 { 
@@ -24,6 +23,8 @@ class ProfilesController < ApplicationController
                 # flash[:notice] = 'Updated'
                 format.html { redirect_to my_profile_path, notice: 'Updated'
                 }
+                # prevents UndefinedConversionError
+                @my_profile_form.avatar = {}
 				format.json { render json: @my_profile_form
 				}
 			else
@@ -63,7 +64,7 @@ class ProfilesController < ApplicationController
     
 	private
 	def profile_form_params
-		params.require(:my_profile_form).permit(:about, :email, :first_name, :last_name, :password, :password_confirmation, :instruments => [], :locations => [], :soundcloud_links => [], :youtube_links => []).merge(current_user: current_user)
+		params.require(:my_profile_form).permit(:about, :avatar, :email, :first_name, :last_name, :password, :password_confirmation, :instruments => [], :locations => [], :soundcloud_links => [], :youtube_links => []).merge(current_user: current_user)
 	end
 
 	def find_user_role(role)

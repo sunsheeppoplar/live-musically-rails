@@ -18,6 +18,13 @@ class User < ApplicationRecord
     has_many :submissions
     has_many :oauth_identities, dependent: :destroy
 
+    has_attached_file   :avatar, 
+                        :styles => {
+                            normal: ["250x250#", :png],
+                            thumb: ["50x50#", :png]
+                        }
+    validates_attachment_content_type :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+
 	def owner?(opportunity)
 		id == opportunity.employer_id
 	end
@@ -29,5 +36,6 @@ class User < ApplicationRecord
 	def not_stripe_user?
 		OauthIdentity.where(provider: "stripe_connect", user_id: self.id).count < 1
 	end
+    
 end
 	

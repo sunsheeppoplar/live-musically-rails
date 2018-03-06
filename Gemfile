@@ -61,6 +61,13 @@ gem 'bootstrap-sass'
 # autocomplete functionality
 gem 'jquery-ui-rails'
 
+# helps with s3 avatar upload
+gem 'paperclip', '~> 5.2.1'
+gem 'aws-sdk', '>= 2.0'
+
+# helps with file submission via ajax
+gem 'remotipart', '~> 1.2'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
