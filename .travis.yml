@@ -11,5 +11,6 @@ before_script:
 
 script:
   - export RAILS_ENV=test
+  - export SECRET_KEY_BASE="$(bundle exec rake secret)"
   - bundle exec rake db:migrate
   - bundle exec rspec spec --require spec_helper --require rails_helper
