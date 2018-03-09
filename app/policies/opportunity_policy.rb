@@ -14,11 +14,11 @@ class OpportunityPolicy
 		current_user.artist_employer?
 	end
 
-	def fully_onboarded_musician?
+	def fully_onboarded_artist?
 		current_user.musician? && !current_user.not_stripe_user?
 	end
 
-	def partially_onboarded_musician?
+	def partially_onboarded_artist?
 		current_user.musician?
 	end
 

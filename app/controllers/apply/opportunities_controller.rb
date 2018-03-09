@@ -4,13 +4,13 @@ module Apply
 
 		def new
 			respond_to do |format|
-				if opportunity_policy.fully_onboarded_musician?
+				if opportunity_policy.fully_onboarded_artist?
 					opportunity = Opportunity.find(params[:opp_id])
 					@opportunity_apply_form = OpportunityApplyForm.new(opportunity: opportunity)
 					format.json {
 						render json: {new_application: partial_to_string }, status: 200
 					}
-				elsif opportunity_policy.partially_onboarded_musician?
+				elsif opportunity_policy.partially_onboarded_artist?
 					format.json {
 						render json: {notice: "Please complete Stripe registration before posting an opportunity", location: onboard_path}, status: 302
 					}
@@ -37,7 +37,7 @@ module Apply
 
 		private
 		def opportunity_policy
-			OpportunityPolicy.new(current_user, nil)
+			@opportunity_policy ||= OpportunityPolicy.new(current_user, nil)
 		end
 
 		def partial_to_string

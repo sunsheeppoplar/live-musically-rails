@@ -23,13 +23,13 @@ RSpec.describe Apply::OpportunitiesController, type: :controller do
 				expect(OpportunityPolicy)
 					.to receive(:new).with(artist, nil)
 					.and_return(policy_double)
-				expect(policy_double).to receive(:artist?).and_return(policy_result)
 			end
 
 			context 'as authorized user' do
 				render_views
 
 				before do
+					expect(policy_double).to receive(:fully_onboarded_artist?).and_return(policy_result)
 					expect(Opportunity).to receive(:find).and_return(resource)
 					trigger
 				end
@@ -46,8 +46,33 @@ RSpec.describe Apply::OpportunitiesController, type: :controller do
 				end
 			end
 
+			context 'as non-onboarded user' do
+				before do
+					expect(policy_double).to receive(:fully_onboarded_artist?).and_return(false)
+					expect(policy_double).to receive(:partially_onboarded_artist?).and_return(policy_result)
+					trigger
+				end
+
+				setup_devise
+				let(:policy_result) { true }
+
+				it 'should return not authorized status' do
+					expect(response.status).to eq 302
+				end
+
+				it 'should include location to redirect to' do
+					expect(parsed_body["location"]).to eq "/onboard"
+				end
+
+				it 'should include an error message' do
+					expect(parsed_body["notice"]).to eq 'Please complete Stripe registration before posting an opportunity'
+				end
+			end
+
 			context 'as non-authorized user' do
 				before do
+					expect(policy_double).to receive(:fully_onboarded_artist?).and_return(false)
+					expect(policy_double).to receive(:partially_onboarded_artist?).and_return(false)
 					trigger
 				end
 
@@ -63,7 +88,7 @@ RSpec.describe Apply::OpportunitiesController, type: :controller do
 				end
 
 				it 'should include an error message' do
-					expect(parsed_body["error"]).to eq 'Not authorized, sorry!'
+					expect(parsed_body["alert"]).to eq 'Not authorized, sorry!'
 				end
 			end
 		end
