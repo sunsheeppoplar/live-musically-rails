@@ -36,8 +36,7 @@ class MessagesController < ApplicationController
         conversation_id: @conversation.id,
         message: @message.body,
         user: @message.user.email
-      head :ok
-      # redirect_to conversation_messages_path(@conversation)
+      redirect_to conversation_messages_path(@conversation)
     end
   end
 

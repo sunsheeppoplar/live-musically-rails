@@ -1,6 +1,6 @@
 class ConversationsChannel < ApplicationCable::Channel
   def subscribed
-    User.find(1).included_conversations.each do |conversation|
+    current_user.included_conversations.each do |conversation|
       stream_from "conversations:#{conversation.id}"
     end
   end
