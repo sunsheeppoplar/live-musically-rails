@@ -3,9 +3,9 @@ class OpportunitiesController < ApplicationController
 	before_action :set_opportunity, only: [:edit, :destroy]
 
 	def new
-		if opportunity_policy.fully_onboarded?
+		if opportunity_policy.fully_onboarded_employer?
 			@employer_opportunity_form = EmployerOpportunityForm.new
-		elsif opportunity_policy.partially_onboarded?
+		elsif opportunity_policy.partially_onboarded_employer?
 			redirect_to onboard_path, notice: "Please complete Stripe registration before posting an opportunity"
 		else
 			redirect_to root_path, alert: "Not authorized, sorry!"
