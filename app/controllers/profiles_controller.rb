@@ -5,6 +5,10 @@ class ProfilesController < ApplicationController
 		layout = find_user_role(current_user.role)
 		@my_profile_form = MyProfileForm.new(current_user: current_user)
 		respond_to do |format|
+			if profile_policy.registered_with_stripe?
+				stripe_account = current_user.oauth_identities.where(provider: "stripe_connect").first
+				@stripe_link = StripeDashboardService.new(stripe_account).call
+			end
 			format.html { render layout }
 			format.json { render json:
 				{
@@ -61,4 +65,10 @@ class ProfilesController < ApplicationController
 			"employer_profile.html.erb"
 		end
 	end
+
+	def profile_policy
+		@profile_policy ||= ProfilePolicy.new(current_user)
+	end
+
+	helper_method :profile_policy
 end

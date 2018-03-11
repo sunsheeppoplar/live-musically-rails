@@ -68,6 +68,9 @@ gem 'aws-sdk', '>= 2.0'
 # helps with file submission via ajax
 gem 'remotipart', '~> 1.2'
 
+# helps with Stripe-related actions
+gem 'stripe'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

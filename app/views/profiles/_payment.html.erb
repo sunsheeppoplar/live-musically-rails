@@ -1,0 +1,5 @@
+<% if profile_policy.registered_with_stripe? %>
+	<%= link_to "Your Stripe Account", @stripe_link, target: "_blank" %>
+<% else %>
+	<%= link_to "Register With Stripe", onboard_path %>
+<% end %>
