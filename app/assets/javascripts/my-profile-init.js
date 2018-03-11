@@ -9,47 +9,47 @@ $(document).on('turbolinks:load', function() {
         );
     };
 
-    $('#js-the-button').on('click', function() {
-        var instruments = $('.js-instrument-list-node'),
-            locations = $('.js-location-list-node'),
-            sc_links = $('.js-soundcloud-list-node'),
-            yt_links = $('.js-youtube-list-node');
+    // $('#js-the-button').on('click', function() {
+    //     var instruments = $('.js-instrument-list-node'),
+    //         locations = $('.js-location-list-node'),
+    //         sc_links = $('.js-soundcloud-list-node'),
+    //         yt_links = $('.js-youtube-list-node');
 
-        var plainInsArray = [],
-            plainZipArray = [],
-            scLinksArray = [],
-            ytLinksArray = [];
+    //     var plainInsArray = [],
+    //         plainZipArray = [],
+    //         scLinksArray = [],
+    //         ytLinksArray = [];
 
-        $.each(instruments, function(index, value) {
-            plainInsArray[index] = instruments[index].firstChild.nodeValue;
-        });
-        $.each(locations, function(index, value) {
-            plainZipArray[index] = locations[index].firstChild.nodeValue.split(" ")[0];
-        });
-        $.each(sc_links, function(index, value) {
-            scLinksArray[index] = sc_links[index].firstChild.nodeValue;
-        });
-        $.each(yt_links, function(index, value) {
-            ytLinksArray[index] = yt_links[index].firstChild.nodeValue;
-        });
+    //     $.each(instruments, function(index, value) {
+    //         plainInsArray[index] = instruments[index].firstChild.nodeValue;
+    //     });
+    //     $.each(locations, function(index, value) {
+    //         plainZipArray[index] = locations[index].firstChild.nodeValue.split(" ")[0];
+    //     });
+    //     $.each(sc_links, function(index, value) {
+    //         scLinksArray[index] = sc_links[index].firstChild.nodeValue;
+    //     });
+    //     $.each(yt_links, function(index, value) {
+    //         ytLinksArray[index] = yt_links[index].firstChild.nodeValue;
+    //     });
 
-        $.ajax({
-            method: "PATCH",
-            url: "/my_profile",
-            data: {
-                "my_profile_form": {
-                    "instruments": plainInsArray,
-                    "locations": plainZipArray,
-                    "soundcloud_links": scLinksArray,
-                    "youtube_links": ytLinksArray
-                }
-            },
-            dataType: "json"
-        })
-        .done(function(response) {
-            console.log(response);
-        });
-    });
+    //     $.ajax({
+    //         method: "PATCH",
+    //         url: "/my_profile",
+    //         data: {
+    //             "my_profile_form": {
+    //                 "instruments": plainInsArray,
+    //                 "locations": plainZipArray,
+    //                 "soundcloud_links": scLinksArray,
+    //                 "youtube_links": ytLinksArray
+    //             }
+    //         },
+    //         dataType: "json"
+    //     })
+    //     .done(function(response) {
+    //         console.log(response);
+    //     });
+    // });
 
 	$('#my_profile_form_instruments').autocomplete({
 		select: function(event, ui) {
@@ -108,7 +108,6 @@ $(document).on('turbolinks:load', function() {
                 .remove();
                 $('#' + md5(this.parentNode.firstChild.textContent)).remove();
                 var text = this.parentNode.firstChild.textContent;
-                // var video_id = text.split("v=")[1];
                 destroyEmbeddedYoutubeFrame(md5(this.parentNode.firstChild.textContent));
             })
     );
@@ -131,7 +130,7 @@ $(document).on('turbolinks:load', function() {
         if (e.keyCode == 13) {
             e.preventDefault();
             var scVideoId = checkSoundcloudLinkFormat($('#my_profile_form_soundcloud').val());
-            if ( scVideoId != null ) {
+            if ( scVideoId != null && !isDuplicate("js-soundcloud-list-node", $('#my_profile_form_soundcloud').val()) ) {
                 appendSoundcloudLink($('#my_profile_form_soundcloud').val());
                 appendEmbeddedSoundcloud(scVideoId, $('#my_profile_form_soundcloud').val());
             } else {
@@ -145,7 +144,7 @@ $(document).on('turbolinks:load', function() {
         if (e.keyCode == 13) {
             e.preventDefault();
             var ytVideoId = checkYoutubeLinkFormat($('#my_profile_form_youtube').val());
-            if ( ytVideoId != null ) {
+            if ( ytVideoId != null && !isDuplicate("js-youtube-list-node", $('#my_profile_form_youtube').val()) ) {
                 appendYoutubeLink($('#my_profile_form_youtube').val())
                 appendEmbeddedYoutube(ytVideoId, $('#my_profile_form_youtube').val());
             } else {
