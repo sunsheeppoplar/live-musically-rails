@@ -124,8 +124,8 @@ function destroyEmbeddedYoutubeFrame(div_id) {
     $(id).remove();
 }
 
-function appendHiddenNode(formAttribute, value) {
-    var name = "my_profile_form[" + formAttribute + "][]";
+function appendHiddenNode(form_attribute, value) {
+    var name = "my_profile_form[" + form_attribute + "][]";
     var id = md5(value);
     $('.js-my-profile--basic').append(
         $('<input/>')
@@ -135,4 +135,15 @@ function appendHiddenNode(formAttribute, value) {
             .css({display: "none"})
     );
     return id;
+}
+
+function isDuplicate(container_class, link) {
+  var id = md5(link);
+  for ( var i = 0; i < $("." + container_class).length; i++ ) {
+    if ( md5($("." + container_class)[i].textContent) == id ) {
+      alert("duplicate link!")
+      return true;
+    }
+  }
+  return false;
 }

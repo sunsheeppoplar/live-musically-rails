@@ -21,8 +21,8 @@
 //= require jquery-ui/widgets/autocomplete
 //= require config
 //= require authentication
-//= require autocomplete
 //= require apply-opportunity-form
+//= require my-profile-init
 //= require datepicker
 //= require my-profile
 //= require new-opportunity-form
