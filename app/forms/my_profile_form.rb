@@ -32,7 +32,7 @@ class MyProfileForm
 
 	# decorators
 	def decorated_employing_opportunities
-		opp = Opportunity.includes(:venue).where(employer_id: current_user.id)
+		opp = Opportunity.includes(:venue, :submissions).where(employer_id: current_user.id)
 		opp.map do |o|
 			OpportunityDecorator.new(o)
 		end

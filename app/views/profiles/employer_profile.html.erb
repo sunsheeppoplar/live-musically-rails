@@ -12,6 +12,10 @@
 	<p><%= o.formatted_time %></p>
 	<p><%= o.formatted_date %></p>
 	<%= link_to 'EDIT / REMOVE', edit_opportunity_path(o.id) %>
+	<br />
+	<h5>ARTIST HIRED</h5>
+	<p><%= o.submissions_count %> Submissions Pending</p>
+	<%= link_to "View Submissions", opportunity_submissions_path(o.id) %>
 <% end %>
 </br>
 

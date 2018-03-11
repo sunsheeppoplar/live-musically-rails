@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 	}
 	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-	resources :opportunities
+	resources :opportunities do
+		resources :submissions
+	end
 	resource :onboard, only: [:show]
 	namespace :search do
 		resources :opportunities
@@ -14,6 +16,7 @@ Rails.application.routes.draw do
 	namespace :apply do
 		resources :opportunities
 	end
+
 
     get '/my_profile', to: 'profiles#my_profile'
     get '/my_profile/get_single_zipcode', to: 'profiles#get_single_zipcode'

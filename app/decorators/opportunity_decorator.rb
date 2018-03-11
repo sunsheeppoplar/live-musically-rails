@@ -25,7 +25,6 @@ class OpportunityDecorator
 		"#{@opportunity.venue.city}, #{opportunity.venue.state}"
 	end
 
-
 	def title
 		@opportunity.title.upcase
 	end
@@ -48,6 +47,10 @@ class OpportunityDecorator
 
 	def id
 		@opportunity.id
+	end
+
+	def submissions_count
+		"#{(opportunity.submissions.count)}"
 	end
 
 	private
