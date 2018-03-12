@@ -1,0 +1,6 @@
+<% conversation_thread.messages.each do |message| %>
+	<div>
+    <span>(<%= User.find(message.user_id).email %>)<span>
+    <span><%= message.body %></span>
+  </div>
+<% end %>

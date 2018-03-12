@@ -7,13 +7,17 @@ Rails.application.routes.draw do
 
 	mount ActionCable.server => '/cable'
 
+	get '/conversations/load_conversation', to: 'conversations#load_conversation', as: "load_conversation", defaults: { format: 'json' }
+
 	resources :conversations do
 		resources :messages
 	end
 
+	# get '/conversations', to: 'conversations#index'
+
 	resources :opportunities
-    get '/my_profile', to: 'profiles#my_profile'
-    get '/my_profile/get_single_zipcode', to: 'profiles#get_single_zipcode'
+	get '/my_profile', to: 'profiles#my_profile'
+	get '/my_profile/get_single_zipcode', to: 'profiles#get_single_zipcode'
 	patch 'my_profile', to: 'profiles#update'
 	patch 'my_profile/update_password', to: 'profiles#update_password'
 

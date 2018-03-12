@@ -15,9 +15,26 @@ class ConversationsController < ApplicationController
     redirect_to conversation_messages_path(@conversation)
   end
 
- private
+  def load_conversation
+    convo_html = partial_to_string(Conversation.find(params[:conversationId]))
+    # @conversation = Conversation.find(params[:conversationId])
+    render json: { 
+        loaded_convo: convo_html
+      }, 
+      status: 200
+  end
+
+  private
   def conversation_params
     params.permit(:sender_id, :recipient_id)
   end
- end
  
+  def partial_to_string(conversation)
+    render_to_string(
+      partial: 'conversations/conversation_thread', 
+      layout: false, 
+      formats: [:html], 
+      locals: { conversation_thread: conversation}
+    )
+  end
+end

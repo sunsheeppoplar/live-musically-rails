@@ -1,0 +1,18 @@
+.item:active {
+  background: darkgrey;
+}
+
+.the-message {
+  height: 300px;
+  width: 500px;
+  background: white;
+  border: solid black;
+
+  overflow: auto;
+}
+
+.the-message-input {
+  > textarea {
+    width: 500px;
+  }
+}
