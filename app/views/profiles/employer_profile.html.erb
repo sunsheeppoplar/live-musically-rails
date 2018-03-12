@@ -8,15 +8,17 @@
 
 <% @my_profile_form.decorated_employing_opportunities.each do |o| %>
 	<h5>DETAILS</h5>
+	<p><%= o.title %></p>
+	<p><%= o.formatted_date %></p>
 	<p><%= o.full_address %></p>
 	<p><%= o.formatted_time %></p>
-	<p><%= o.formatted_date %></p>
 	<%= link_to 'EDIT / REMOVE', edit_opportunity_path(o.id) %>
-	<br />
+	<br /><br />
+
 	<h5>ARTIST HIRED</h5>
 	<p><%= o.submissions_count %> Submissions Pending</p>
 	<%= link_to "View Submissions", opportunity_submissions_path(o.id) %>
 <% end %>
-</br>
+</br></br>
 
 <%= link_to "POST NEW OPPORTUNITY", new_opportunity_path %>

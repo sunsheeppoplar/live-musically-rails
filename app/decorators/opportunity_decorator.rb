@@ -50,7 +50,7 @@ class OpportunityDecorator
 	end
 
 	def submissions_count
-		"#{(opportunity.submissions.count)}"
+		"(#{opportunity.submissions.count})"
 	end
 
 	private

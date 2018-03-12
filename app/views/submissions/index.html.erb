@@ -1,1 +1,16 @@
-index.html.erb
+<h3>SUBMISSIONS</h3>
+<h5>DETAILS</h5>
+<p><%= @opportunity.full_address %></p>
+<p><%= @opportunity.formatted_time %></p>
+<p><%= @opportunity.formatted_date %></p>
+
+<% @submissions.each do |s| %>
+	<%= link_to "/" do %>
+		<%= image_tag(s.avatar_link) %>
+		<span><%= s.full_name %></span>
+	<% end %>
+	<span><i class="glyphicon glyphicon-ok"></i></span>
+	<span><i class="glyphicon glyphicon-remove"></i></span>
+	<button>Message</button>
+	</br>
+<% end %>
