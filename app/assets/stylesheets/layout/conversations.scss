@@ -1,5 +1,7 @@
 .wrapper {
 
+  font-size: 11pt;
+
   display: grid;
   grid-template-columns: 20% 1fr;
   
@@ -38,14 +40,14 @@
       
       .individual-message {
         border: solid grey;
-        border-width: 1px;
-        border-radius: 5px;
+        border-width: 0px;
+        border-radius: 0px;
         padding: 10px;
         margin: 10px;
 
         background: white;
 
-        box-shadow: 1px 1px 1px grey;
+        box-shadow: 1px 1px 1px 1px lightgrey;
 
         .message-user-info {
           display: inline-block;
