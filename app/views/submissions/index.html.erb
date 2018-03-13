@@ -9,8 +9,14 @@
 		<%= image_tag(s.avatar_link) %>
 		<span><%= s.full_name %></span>
 	<% end %>
-	<span><i class="glyphicon glyphicon-ok"></i></span>
-	<span><i class="glyphicon glyphicon-remove"></i></span>
+	<%= form_for @submission_form, remote: :true, url: opportunity_submission_path(@opportunity.id, s.id), method: :patch, html: {class: "js-new-submission-form-#{s.id}"} do |f| %>
+		<%= f.hidden_field :employer_approval %>
+	<% end %>
+	<span class="js-open-decision-modal" data-decision="approve" data-id=<%= s.id %>><i class="glyphicon glyphicon-ok"></i></span>
+	<span class="js-open-decision-modal" data-decision="decline" data-id=<%= s.id %>><i class="glyphicon glyphicon-remove"></i></span>
 	<button>Message</button>
 	</br>
+	<div class="js-decision-modal-<%= s.id %>" style="display: none">
+		<div>Are you sure you want to <span></span>, <%= s.full_name %>'s application?</div>
+	</div>
 <% end %>

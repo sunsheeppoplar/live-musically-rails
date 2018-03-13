@@ -24,6 +24,7 @@
 //= require apply-opportunity-form
 //= require my-profile-init
 //= require datepicker
+//= require employer-submissions
 //= require my-profile
 //= require new-opportunity-form
 //= require onboard

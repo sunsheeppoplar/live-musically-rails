@@ -7,7 +7,13 @@ class SubmissionsController < ApplicationController
 
 		@opportunity = OpportunityDecorator.new(opportunity)
 		@submissions = SubmissionDecorator.wrap(submissions)
+		@submission_form = SubmissionForm.new
+	end
+
+	def update
 	end
 
 	private
+	def submission_params
+	end
 end
