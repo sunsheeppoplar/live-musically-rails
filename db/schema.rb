@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180304195454) do
+ActiveRecord::Schema.define(version: 20180304205841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,13 @@ ActiveRecord::Schema.define(version: 20180304195454) do
     t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
+  create_table "oauth_identities", force: :cascade do |t|
+    t.string  "provider"
+    t.string  "uid"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_oauth_identities_on_user_id", using: :btree
+  end
+
   create_table "opportunities", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
@@ -90,6 +97,15 @@ ActiveRecord::Schema.define(version: 20180304195454) do
     t.datetime "timeframe_of_post"
     t.integer  "employer_id"
     t.index ["employer_id"], name: "index_opportunities_on_employer_id", using: :btree
+  end
+
+  create_table "submissions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "opportunity_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["opportunity_id"], name: "index_submissions_on_opportunity_id", using: :btree
+    t.index ["user_id"], name: "index_submissions_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -108,8 +124,6 @@ ActiveRecord::Schema.define(version: 20180304195454) do
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "role"
-    t.string   "provider"
-    t.string   "uid"
     t.text     "about"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
@@ -123,7 +137,7 @@ ActiveRecord::Schema.define(version: 20180304195454) do
     t.string   "name"
     t.string   "address"
     t.string   "city"
-    t.integer  "zip"
+    t.string   "zip"
     t.integer  "category"
     t.integer  "opportunity_id"
     t.datetime "created_at",     null: false
@@ -137,5 +151,8 @@ ActiveRecord::Schema.define(version: 20180304195454) do
   add_foreign_key "artist_locations", "locations"
   add_foreign_key "artist_locations", "users"
   add_foreign_key "external_links", "users"
+  add_foreign_key "oauth_identities", "users"
   add_foreign_key "opportunities", "users", column: "employer_id"
+  add_foreign_key "submissions", "opportunities"
+  add_foreign_key "submissions", "users"
 end

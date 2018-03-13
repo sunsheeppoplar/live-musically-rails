@@ -1,4 +1,8 @@
-<%= render "profiles/my_profile" %>
+<%=form_for @my_profile_form, remote: :true, url: { action: "update"}, method: :patch, html: {class: "js-my-profile--basic" } do |f| %>
+
+	<%= render "profiles/my_profile", f: f %>
+	<%= render "profiles/payment" %>
+<% end %>
 
 <h3>OPPORTUNITIES CREATED</h3><br />
 

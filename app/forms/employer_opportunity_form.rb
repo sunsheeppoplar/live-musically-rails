@@ -18,7 +18,7 @@ class EmployerOpportunityForm
 	attribute :state, String
 	attribute :timeframe_of_post, String
 	attribute :title, String
-	attribute :zip, Integer
+	attribute :zip, String
 
 	attr_reader :venue, :opportunity, :artist_types
 

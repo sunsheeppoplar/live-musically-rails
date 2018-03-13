@@ -21,10 +21,13 @@
 //= require jquery-ui/widgets/autocomplete
 //= require config
 //= require authentication
+//= require apply-opportunity-form
 //= require my-profile-init
 //= require datepicker
 //= require my-profile
 //= require new-opportunity-form
+//= require onboard
+//= require search-opportunities-form
 //= require timepicker
 //= require_tree
 //= require_tree ./channels

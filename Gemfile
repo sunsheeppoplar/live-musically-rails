@@ -43,6 +43,7 @@ gem 'devise'
 
 # oauth
 gem 'omniauth-facebook'
+gem 'omniauth-stripe-connect'
 
 # helps with attribute boilerplate on POROs
 gem 'virtus'
@@ -66,6 +67,9 @@ gem 'aws-sdk', '>= 2.0'
 
 # helps with file submission via ajax
 gem 'remotipart', '~> 1.2'
+
+# helps with Stripe-related actions
+gem 'stripe'
 
 
 group :development, :test do
@@ -95,6 +99,9 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  # creates an Entity-Relationship Diagram based on app state
+  gem 'rails-erd', require: false, group: :development
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -1,0 +1,5 @@
+<%= form_for(opportunity_apply_form, url: apply_opportunities_path) do |f| %>
+	Apply to <%= opportunity_apply_form.title %>
+	<%= f.hidden_field :opportunity_id, value: opportunity_apply_form.opp_id %>
+	<%= f.submit "SUBMIT APPLICATION" %>
+<% end %>

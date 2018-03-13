@@ -1,55 +1,10 @@
-// before this file gets renamed: look under my-profile-* for function declarations
-
 $(document).on('turbolinks:load', function() {
-
     String.prototype.escapeSelector = function () {
         return this.replace(
             /([$%&()*+,./:;<=>?@\[\\\]^\{|}~])/g,
             '\\$1'
         );
     };
-
-    // $('#js-the-button').on('click', function() {
-    //     var instruments = $('.js-instrument-list-node'),
-    //         locations = $('.js-location-list-node'),
-    //         sc_links = $('.js-soundcloud-list-node'),
-    //         yt_links = $('.js-youtube-list-node');
-
-    //     var plainInsArray = [],
-    //         plainZipArray = [],
-    //         scLinksArray = [],
-    //         ytLinksArray = [];
-
-    //     $.each(instruments, function(index, value) {
-    //         plainInsArray[index] = instruments[index].firstChild.nodeValue;
-    //     });
-    //     $.each(locations, function(index, value) {
-    //         plainZipArray[index] = locations[index].firstChild.nodeValue.split(" ")[0];
-    //     });
-    //     $.each(sc_links, function(index, value) {
-    //         scLinksArray[index] = sc_links[index].firstChild.nodeValue;
-    //     });
-    //     $.each(yt_links, function(index, value) {
-    //         ytLinksArray[index] = yt_links[index].firstChild.nodeValue;
-    //     });
-
-    //     $.ajax({
-    //         method: "PATCH",
-    //         url: "/my_profile",
-    //         data: {
-    //             "my_profile_form": {
-    //                 "instruments": plainInsArray,
-    //                 "locations": plainZipArray,
-    //                 "soundcloud_links": scLinksArray,
-    //                 "youtube_links": ytLinksArray
-    //             }
-    //         },
-    //         dataType: "json"
-    //     })
-    //     .done(function(response) {
-    //         console.log(response);
-    //     });
-    // });
 
 	$('#my_profile_form_instruments').autocomplete({
 		select: function(event, ui) {

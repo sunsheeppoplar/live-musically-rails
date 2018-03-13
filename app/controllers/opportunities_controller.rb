@@ -1,13 +1,20 @@
 class OpportunitiesController < ApplicationController
 	before_action :authenticate_user!
-	before_action :set_opportunity, only: [:create, :edit, :destroy]
+	before_action :set_opportunity, only: [:edit, :destroy]
 
 	def new
-		if opportunity_policy.able_to_view?
+		if opportunity_policy.fully_onboarded_employer?
 			@employer_opportunity_form = EmployerOpportunityForm.new
+		elsif opportunity_policy.partially_onboarded_employer?
+			redirect_to onboard_path, notice: "Please complete Stripe registration before posting an opportunity"
 		else
 			redirect_to root_path, alert: "Not authorized, sorry!"
 		end
+	end
+
+	def show
+		opportunity = Opportunity.includes(:artist_opportunities, :employer, :venue).find(params[:id])
+		@opportunity = OpportunityDecorator.new(opportunity)
 	end
 
 	def create

@@ -26,14 +26,9 @@ class MyProfileForm
 		end
 	end
 
-	def update_password
-		if valid?
-			persist_password!
-			true
-		else
-			false
-		end
-	end
+    def updating_password?
+        password.present? && password_confirmation.present?
+    end
 
 	# decorators
 	def decorated_employing_opportunities
@@ -53,10 +48,6 @@ class MyProfileForm
         update_avatar
 		current_user.update!(sanitized_hash)
 	end
-
-	def persist_password!
-		current_user.update!(user_password_params)
-    end
     
     def update_instruments(ins_name_array)
         selected_ins_array = Instrument.where(name: ins_name_array)
@@ -104,14 +95,9 @@ class MyProfileForm
 			about: about,
 			email: email,
 			first_name: first_name,
-			last_name: last_name
-		}
-	end
-
-	def user_password_params
-		{
-			password: password,
-			password_confirmation: password_confirmation
+			last_name: last_name,
+            password: password,
+            password_confirmation: password_confirmation
 		}
 	end
 
