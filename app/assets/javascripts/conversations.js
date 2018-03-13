@@ -29,6 +29,7 @@ $(document).on('turbolinks:load', function() {
       // console.log(response);
       $('.the-message').empty();
       $('.the-message').append(response.loaded_convo);
+      $('.the-message')[0].scrollTop = $('.the-message')[0].scrollHeight;
     })
   });
   

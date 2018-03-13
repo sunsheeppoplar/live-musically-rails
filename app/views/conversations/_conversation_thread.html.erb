@@ -1,6 +1,12 @@
-<% conversation_thread.messages.each do |message| %>
-	<div>
-    <span>(<%= User.find(message.user_id).email %>)<span>
-    <span><%= message.body %></span>
+<% message_set.each do |message| %>
+<% user = User.find(message.user.id) %>
+	<div class="individual-message">
+    <div class="message-user-info">
+      <div> <img src=<%= "https:" + user.avatar(:thumb) %>> </div>
+      <div class="message-user-name"> <%= user.first_name + " " + user.last_name %> </div>
+    </div>
+    <div class="message-body">
+      <div> <%= message.body %> </div>
+    </div>
   </div>
 <% end %>

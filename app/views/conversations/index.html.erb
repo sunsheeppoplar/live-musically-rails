@@ -1,4 +1,6 @@
-<div class="ui segment">
+<div class="wrapper">
+
+<div class="ui segment interlocutor-list-column">
   <h3>Mailbox</h3>
 
   <div class="ui list">
@@ -10,10 +12,10 @@
         <% else %>
           <% recipient = User.find(conversation.sender_id) %>
         <% end %>
-        <%= link_to recipient.first_name + " " + recipient.last_name, 
-          # conversation_messages_path(conversation) 
-          load_conversation_path()
-        %>
+        <div class="item-user-info">
+          <div> <img src=<%= "https:" + recipient.avatar(:thumb) %>> </div>
+          <div class="item-user-name"> <%= recipient.first_name + " " + recipient.last_name %> </div>
+        </div>
         <span class="conversationId"><%= conversation.id %></span>
         <br/>
         <%= conversation.messages.last.try(:body) || "" %>
@@ -25,15 +27,16 @@
   </div>
 </div>
 
-<div>
+<div class="thread-column">
   <div class="the-message">
-    <%= render 'conversations/conversation_thread', conversation_thread: @conversations.first %>
+    <%#= render 'conversations/conversation_thread', conversation_thread: @conversations.first %>
   </div>
   <div class="the-message-input">
   <textarea></textarea>
   </div>
 </div>
 
+</div>
 
 <!-- temporary section until Send Message implemented on profile pages -->
 

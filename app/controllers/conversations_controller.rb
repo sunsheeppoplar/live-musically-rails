@@ -3,7 +3,8 @@ class ConversationsController < ApplicationController
 
   def index
     @users = User.all
-    @conversations = Conversation.all
+    # @conversations = Conversation.all
+    @conversations = current_user.included_conversations
   end
   
   def create
@@ -16,12 +17,18 @@ class ConversationsController < ApplicationController
   end
 
   def load_conversation
-    convo_html = partial_to_string(Conversation.find(params[:conversationId]))
-    # @conversation = Conversation.find(params[:conversationId])
+    # convo_html = partial_to_string(Conversation.find(params[:conversationId]).messages)
+    last_ten_messages_html = partial_to_string(Conversation.find(params[:conversationId]).messages.last(10))
     render json: { 
-        loaded_convo: convo_html
-      }, 
-      status: 200
+        loaded_convo: last_ten_messages_html
+    }, status: 200
+  end
+
+  def load_new_message
+    message_html = partial_to_string([Conversation.find(params[:conversationId]).messages.last])
+    render json: {
+      loaded_message: message_html
+    }, status: 200
   end
 
   private
@@ -29,12 +36,12 @@ class ConversationsController < ApplicationController
     params.permit(:sender_id, :recipient_id)
   end
  
-  def partial_to_string(conversation)
+  def partial_to_string(message_set)
     render_to_string(
       partial: 'conversations/conversation_thread', 
       layout: false, 
       formats: [:html], 
-      locals: { conversation_thread: conversation}
+      locals: { message_set: message_set}
     )
   end
 end

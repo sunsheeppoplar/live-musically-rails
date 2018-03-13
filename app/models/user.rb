@@ -25,7 +25,7 @@ class User < ApplicationRecord
   validates_attachment_content_type :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
 	def included_conversations
-		Conversation.where("sender_id = ? OR recipient_id = ?", self.id, self.id)
+		Conversation.includes(:messages).where("sender_id = ? OR recipient_id = ?", self.id, self.id)
 	end
 
 	def self.from_omniauth(auth)
