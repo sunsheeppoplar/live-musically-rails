@@ -2,7 +2,7 @@
 <% user = User.find(message.user.id) %>
 	<div class="individual-message">
     <div class="message-user-info">
-      <div> <img src=<%= "https:" + user.avatar(:thumb) %>> </div>
+      <div> <%= image_tag user.avatar(:thumb) %> </div>
       <div class="message-user-name"> <%= user.first_name + " " + user.last_name %> </div>
     </div>
     <div class="message-body">

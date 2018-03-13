@@ -11,7 +11,7 @@ console.log("conversations.js invoked")
 App.messages = App.cable.subscriptions.create("ConversationsChannel", {
 
   received: function(data) {
-    console.log("i got it");
+    // console.log("i got it");
     // console.log(data);
     $.ajax({
       method: "GET",
@@ -22,7 +22,7 @@ App.messages = App.cable.subscriptions.create("ConversationsChannel", {
       dataType: "json"
     })
     .done(function(response) {
-      console.log(response);
+      // console.log(response);
 
       // this is where the notification vs. append logic should go
 

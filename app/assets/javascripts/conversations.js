@@ -31,7 +31,7 @@ $(document).on('turbolinks:load', function() {
       dataType: "json"
     })
     .done(function(response) {
-      console.log(response);
+      // console.log(response);
 
       current_conversation = response.current_conversation;
 
