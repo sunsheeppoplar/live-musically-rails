@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
 	get '/conversations/load_conversation', to: 'conversations#load_conversation', as: "load_conversation", defaults: { format: 'json' }
 	get '/conversations/load_new_message', to: 'conversations#load_new_message', as: "load_new_message", defaults: { format: 'json' }
+	get '/conversations/send_message', to: 'messages#ajax_create', as: "send_message", defaults: { format: 'json' }
 
 	resources :conversations do
 		resources :messages

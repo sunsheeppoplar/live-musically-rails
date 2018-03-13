@@ -12,6 +12,7 @@ App.messages = App.cable.subscriptions.create("ConversationsChannel", {
 
   received: function(data) {
     console.log("i got it");
+    // console.log(data);
     $.ajax({
       method: "GET",
       url: "/conversations/load_new_message",
@@ -21,9 +22,15 @@ App.messages = App.cable.subscriptions.create("ConversationsChannel", {
       dataType: "json"
     })
     .done(function(response) {
-      // console.log(response);
-      $('.the-message').append(response.loaded_message);
-      $('.the-message')[0].scrollTop = $('.the-message')[0].scrollHeight;
+      console.log(response);
+
+      // this is where the notification vs. append logic should go
+
+      if (response.current_conversation == current_conversation) {
+        $('.the-message').append(response.loaded_message);
+        $('.the-message')[0].scrollTop = $('.the-message')[0].scrollHeight;
+      }
+
     })
   },
 

@@ -40,8 +40,21 @@ class MessagesController < ApplicationController
     end
   end
 
+  def ajax_create
+    @message = @conversation.messages.new(message_params)
+    if @message.save
+      ActionCable.server.broadcast "conversations:#{@conversation.id}",
+        conversation_id: @conversation.id,
+        message: @message.body,
+        user: current_user.email
+
+        render json: { did_it_work: "yes" }, status: 200
+    end
+  end
+
   private
     def message_params
+      params[:message][:user_id] = current_user.id
       params.require(:message).permit(:body, :user_id)
     end
   end
