@@ -26,6 +26,19 @@ class User < ApplicationRecord
 						}
 	validates_attachment_content_type :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
+	def included_conversations
+		Conversation.includes(:messages).where("sender_id = ? OR recipient_id = ?", self.id, self.id)
+	end
+
+	def self.from_omniauth(auth)
+		where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+			user.email = auth.info.email
+			user.password = Devise.friendly_token[0,20]
+			parse_name(user, auth.info.name)
+			user.role = auth.user_role
+		end
+	end
+
 	def owner?(opportunity)
 		id == opportunity.employer_id
 	end

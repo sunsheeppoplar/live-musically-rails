@@ -29,4 +29,5 @@
 //= require onboard
 //= require search-opportunities-form
 //= require timepicker
-//= require_tree .
+//= require_tree
+//= require_tree ./channels

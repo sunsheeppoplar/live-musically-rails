@@ -5,7 +5,20 @@ Rails.application.routes.draw do
 	}
 	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+	mount ActionCable.server => '/cable'
+
+	get '/conversations/load_conversation', to: 'conversations#load_conversation', as: "load_conversation", defaults: { format: 'json' }
+	get '/conversations/load_new_message', to: 'conversations#load_new_message', as: "load_new_message", defaults: { format: 'json' }
+	get '/conversations/send_message', to: 'messages#ajax_create', as: "send_message", defaults: { format: 'json' }
+
+	resources :conversations do
+		resources :messages
+	end
+
+	# get '/conversations', to: 'conversations#index'
+
 	resources :opportunities
+	
 	resource :onboard, only: [:show]
 	namespace :search do
 		resources :opportunities

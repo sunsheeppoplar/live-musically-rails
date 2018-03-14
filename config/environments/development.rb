@@ -71,4 +71,8 @@ Rails.application.configure do
 			s3_region: "us-east-1"
 		}
 	}
+
+	Rails.application.configure do
+		config.action_cable.url = "ws://localhost:3000/cable"
+	end
 end

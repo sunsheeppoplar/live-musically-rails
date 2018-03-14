@@ -1,0 +1,55 @@
+<div class="wrapper">
+
+<div class="ui segment interlocutor-list-column">
+  <h3>Mailbox</h3>
+
+  <div class="ui list">
+    <% @conversations.each do |conversation| %>
+    <div class="item">
+      <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+        <% if conversation.sender_id == current_user.id %>
+          <% recipient = User.find(conversation.recipient_id) %>
+        <% else %>
+          <% recipient = User.find(conversation.sender_id) %>
+        <% end %>
+        <div class="item-user-info">
+          <div> <%= image_tag recipient.avatar(:thumb) %> </div>
+          <div class="item-user-name"> <%= recipient.first_name + " " + recipient.last_name %> </div>
+        </div>
+        <span class="conversationId" style="display:none"><%= conversation.id %></span>
+        <br/>
+        <%= conversation.messages.last.try(:body) || "" %>
+        <br/>
+        <br/>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="thread-column">
+  <div class="the-message">
+    <%#= render 'conversations/conversation_thread', conversation_thread: @conversations.first %>
+  </div>
+  <div class="the-message-input">
+  <textarea id="message-body"></textarea>
+  <button id="send-message">send</button>
+  </div>
+</div>
+
+</div>
+
+<!-- temporary section until Send Message implemented on profile pages -->
+
+<div class="ui segment">
+  <h3>All Users</h3>
+  <div class="ui list">
+    <% @users.each do |user| %>
+      <% if user.id != current_user.id %>
+      <div class="different-type-of-item">
+        <%= user.first_name + " " + user.last_name %> (<%= user.email %> ) <%= link_to 'Send Message', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: 'post'%>
+      </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
