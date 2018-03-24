@@ -1,1 +1,4 @@
 Stripe.api_key = Rails.application.secrets.stripe_oauth_app_secret
+STRIPE_PUBLISHABLE_KEY = Rails.application.secrets.stripe_publishable_key
+STRIPE_YEARLY_SUBSCRIPTION_ID = Rails.application.secrets.stripe_subscription_yearly_id
+STRIPE_MONTHLY_SUBSCRIPTION_ID = Rails.application.secrets.stripe_subscription_monthly_id

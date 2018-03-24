@@ -9,5 +9,3 @@
 <%= radio_button_tag "company_type", "company", false, class: "js-stripe-radio-button" %>
 </br>
 <%= link_to "Setup Payments on Stripe", "https://connect.stripe.com/express/oauth/authorize?client_id=#{STRIPE_CLIENT_ID}", class: "js-setup-stripe-button" %>
-</br>
-<%= link_to "Skip", my_profile_path %>
