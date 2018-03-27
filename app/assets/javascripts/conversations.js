@@ -36,8 +36,24 @@ $(document).on('turbolinks:load', function() {
       current_conversation = response.current_conversation;
 
       $('.the-message').empty();
+      $('.the-message').prepend($("<div class=individual-message id=load-previous>load previous messages</div>"));
       $('.the-message').append(response.loaded_convo);
       $('.the-message')[0].scrollTop = $('.the-message')[0].scrollHeight;
+
+      $('#load-previous').click( function() {
+        $.ajax({
+          method: "GET",
+          url: "/conversations/load_full_conversation",
+          data: {
+              "conversationId": current_conversation
+          },
+          dataType: "json"
+        })
+        .done(function(response) {
+          $('.the-message').empty();
+          $('.the-message').append(response.loaded_convo);
+        })
+      });
     })
   });
 

@@ -29,6 +29,12 @@ App.messages = App.cable.subscriptions.create("ConversationsChannel", {
       if (response.current_conversation == current_conversation) {
         $('.the-message').append(response.loaded_message);
         $('.the-message')[0].scrollTop = $('.the-message')[0].scrollHeight;
+      } else {
+        $('#conversation' + response.current_conversation).css(
+          {
+            "background":"#c639d6"
+          }
+        )
       }
 
     })
