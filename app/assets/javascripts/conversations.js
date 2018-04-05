@@ -2,11 +2,17 @@
 var current_conversation;
 
 function highlightSelected(div) {
-  $('.item').css(
-    {
-      "background":"#fcfcfc"
+  $('.item').each( function() {
+    if ($(this).css('background-color') === "rgb(198, 57, 214)") {
+      return;
+    } else {
+      $(this).css(
+        {
+          "background":"#fcfcfc"
+        }
+      )
     }
-  );
+  });
   
   $(div).css(
     {

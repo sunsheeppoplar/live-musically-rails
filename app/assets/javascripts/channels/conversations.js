@@ -32,6 +32,7 @@ App.messages = App.cable.subscriptions.create("ConversationsChannel", {
       } else {
         $('#conversation' + response.current_conversation).css(
           {
+            // violet highlighting for live messages that aren't currently loaded
             "background":"#c639d6"
           }
         )
