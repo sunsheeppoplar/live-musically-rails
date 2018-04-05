@@ -18,6 +18,30 @@ function highlightSelected(div) {
 $(document).on('turbolinks:load', function() {
   console.log('conversations.js (2) loaded');
 
+  // sidebar listeners for search function
+
+  $('#search').keyup(function() {
+
+    var filter = $(this).val();
+    // if (!filter) {
+    //   $('.item-user-name').hide();
+    //   return;
+    // }
+
+    var regex = new RegExp(filter, "i");
+
+
+    $('.item-user-name').each(function() {
+      if ($(this).text().search(regex) < 0) {
+        $(this).parent().parent().fadeOut();
+      } else {
+        $(this).parent().parent().fadeIn();
+        // count++;
+      }
+    });
+
+  });
+
   // sidebar listeners for conversations#load_conversation
   
   $('.item').click( function() {
