@@ -257,7 +257,10 @@ Devise.setup do |config|
   config.omniauth :facebook, Rails.application.secrets[:facebook_oauth_app_id],
   Rails.application.secrets[:facebook_oauth_app_secret], display: 'popup'
 
-  config.omniauth :stripe_connect, Rails.application.secrets[:stripe_oauth_client_id], Rails.application.secrets[:stripe_oauth_app_secret]
+  stripe_oauth_client_id = Rails.env.production? ? ENV["STRIPE_OAUTH_CLIENT_ID"] : Rails.application.secrets[:stripe_oauth_client_id]
+  stripe_oauth_app_secret = Rails.env.production? ? ENV["STRIPE_OAUTH_APP_SECRET"] : Rails.application.secrets[:stripe_oauth_app_secret]
+
+  config.omniauth :stripe_connect, stripe_oauth_client_id, stripe_oauth_app_secret
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

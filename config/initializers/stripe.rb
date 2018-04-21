@@ -1,1 +1,1 @@
-Stripe.api_key = Rails.application.secrets.stripe_oauth_app_secret
+Stripe.api_key = Rails.env.production? ? ENV["STRIPE_OAUTH_APP_SECRET"] : Rails.application.secrets.stripe_oauth_app_secret
