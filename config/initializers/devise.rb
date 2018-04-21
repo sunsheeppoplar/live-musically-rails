@@ -254,8 +254,10 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :facebook, Rails.application.secrets[:facebook_oauth_app_id],
-  Rails.application.secrets[:facebook_oauth_app_secret], display: 'popup'
+  facebook_oauth_app_id = Rails.env.production? ? ENV["FACEBOOK_OAUTH_APP_ID"] : Rails.application.secrets[:facebook_oauth_app_id]
+  facebook_oauth_app_secret = Rails.env.production? ? ENV["FACEBOOK_OAUTH_APP_SECRET"] : Rails.application.secrets[:facebook_oauth_app_secret]
+
+  config.omniauth :facebook, facebook_oauth_app_id, facebook_oauth_app_secret, display: 'popup'
 
   stripe_oauth_client_id = Rails.env.production? ? ENV["STRIPE_OAUTH_CLIENT_ID"] : Rails.application.secrets[:stripe_oauth_client_id]
   stripe_oauth_app_secret = Rails.env.production? ? ENV["STRIPE_OAUTH_APP_SECRET"] : Rails.application.secrets[:stripe_oauth_app_secret]
