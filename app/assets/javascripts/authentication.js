@@ -90,7 +90,7 @@ $(document).on('turbolinks:load', function(){
 
 	function assignUserRoleCallbackQueryString(form, role) {
 		var userRoleQueryString = "?user_role=" + role;
-		var facebookAuthUrl = 'http://localhost:3000/users/auth/facebook';
+		var facebookAuthUrl = window.location.origin + '/users/auth/facebook';
 		$(form).attr('href', '');
 		$(form).attr('href', facebookAuthUrl.concat(userRoleQueryString));
 	}
