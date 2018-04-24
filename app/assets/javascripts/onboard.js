@@ -1,4 +1,28 @@
 $(document).on('turbolinks:load', function() {
+
+	function setDefaultStripeLink() {
+		// naive implementation, cache it, etc. when merging rest of stripe-signup feature branch
+		$('.js-setup-stripe-button').attr('href', function(i, val) {
+			var baseHref = val;
+			var redirectURI = setStripeConnectCallbackParameter();
+			var companyType = setDefaultBusinessTypeParameter();
+
+			return baseHref + redirectURI + companyType;
+		})
+	}
+
+	function setStripeConnectCallbackParameter() {
+		return '&redirect_uri=' + window.location.origin + '/users/auth/stripe_connect/callback';
+	}
+
+	function setDefaultBusinessTypeParameter() {
+		var companyType = $('.js-stripe-radio-button').filter(':checked').val()
+
+		return  '&stripe_user[business_type]=' + companyType;
+	}
+
+	setDefaultStripeLink();
+
 	$('.js-stripe-radio-button').on("change", function(event) { 
 		var companyType = this.value;
 
