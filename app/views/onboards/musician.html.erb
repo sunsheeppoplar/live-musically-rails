@@ -1,5 +1,5 @@
-Musician
-<%= render "stripe_subscription_form", stripe_subscription_form: stripe_subscription_form %>
-<%= render "stripe_account" %>
+<%= render "subscription_info" %></br></br></br></br>
+<%= render "stripe_subscription_form", stripe_subscription_form: stripe_subscription_form %></br></br></br></br>
+<%= render "stripe_account" %></br>
 <%= render "skip_onboard_button" %>
 <%= hidden_field_tag(:step, step, class: "js-onboard-form-step") %>
