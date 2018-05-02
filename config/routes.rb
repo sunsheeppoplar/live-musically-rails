@@ -19,7 +19,12 @@ Rails.application.routes.draw do
 
 	resources :opportunities
 	
-	resource :onboard, only: [:show]
+	resources :opportunities do
+		resources :submissions
+	end
+
+	resource :onboard, only: [:show, :create]
+
 	namespace :search do
 		resources :opportunities
 	end
