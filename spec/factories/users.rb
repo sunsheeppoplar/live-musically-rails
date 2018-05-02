@@ -13,5 +13,13 @@ FactoryGirl.define do
 			email "a@a.com"
 			role "musician"
 		end
+
+		trait :has_stripe_subscription do
+			stripe_customer_token "string"
+		end
+
+		trait :does_not_have_stripe_subscription do
+			stripe_customer_token nil
+		end
 	end
 end

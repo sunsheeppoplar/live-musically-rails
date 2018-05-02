@@ -17,6 +17,7 @@ class User < ApplicationRecord
     has_many :external_links
     has_many :submissions
     has_many :oauth_identities, dependent: :destroy
+    has_one :subscription
 
     has_attached_file   :avatar, 
                         :styles => {
@@ -30,12 +31,15 @@ class User < ApplicationRecord
 	end
 
 	def recently_registered?
-		not_stripe_user? && sign_in_count == 1
+		not_stripe_subscribed? && not_stripe_payable? && sign_in_count == 1
 	end
 
-	def not_stripe_user?
+	def not_stripe_subscribed?
+		stripe_customer_token.blank?
+	end
+
+	def not_stripe_payable?
 		OauthIdentity.where(provider: "stripe_connect", user_id: self.id).count < 1
 	end
-    
 end
 	
