@@ -28,7 +28,7 @@ class StripeSubscriptionService
 			subscription = subscription_helper.create({
 			    customer: customer,
 			    items: [{plan: subscription_types[subscription_type_to_symbol]}],
-			    coupon: request_params.stripe_promotion
+			    coupon: apply_coupon
 			})
 
 			if customer.present? && subscription.present?
@@ -118,6 +118,10 @@ class StripeSubscriptionService
 
 	def slack_formatted_link(displayed_text, resource)
 		"<#{stripe_base_url + resource}/#{displayed_text}|#{displayed_text}>"
+	end
+
+	def apply_coupon
+		request_params.subscription_type == "yearly" ? request_params.stripe_promotion : nil
 	end
 
 	def subscription_type_to_symbol
