@@ -17,7 +17,7 @@
 	<%= f.radio_button :subscription_type, "yearly" %>
 	<%= f.label :subscription_type, "Annual", value: "yearly" %>
 
-	<div class="js-stripe-subscription-form__voucher-text">Have a promotional code?</div>
+	<div class="js-stripe-subscription-form__voucher-text stripe-subscription-form__voucher-text">Have a promotional code?</div>
 	<%= f.text_field :stripe_promotion, placeholder: "ABC123" %>
 
 	<button>Submit Payment</button>
