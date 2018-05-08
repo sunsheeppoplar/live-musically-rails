@@ -5,6 +5,8 @@ $(document).on('turbolinks:load', function() {
 			$subscriptionButton: $('.js-subscription-info__button'),
 			$stripeConnectForm: $('.js-stripe-connect-form'),
 			$stripeSubscriptionForm: $('.js-stripe-subscription-form'),
+			$stripeSubscriptionFormCouponInput: $('#stripe_subscription_form_stripe_promotion'),
+			$stripeSubscriptionFormCouponText: $('.js-stripe-subscription-form__voucher-text'),
 			$stripeSubscriptionFormErrors: $('#js-stripe-subscription-form__errors'),
 			$stripeSubscriptionFormNotices: $('.notice')
 		}
@@ -139,6 +141,14 @@ $(document).on('turbolinks:load', function() {
 			return $('#stripe_subscription_form_stripe_promotion').val();
 		}
 
+		function hideStripeSubscriptionFormCouponInput() {
+			cachedDom.$stripeSubscriptionFormCouponInput.hide();
+		}
+
+		function showStripeSubscriptionFormCouponInput() {
+			cachedDom.$stripeSubscriptionFormCouponInput.show();
+		}
+
 		$('.js-stripe-radio-button').on("change", function(event) { 
 			var companyType = this.value;
 
@@ -153,7 +163,10 @@ $(document).on('turbolinks:load', function() {
 			})
 		})
 
-		cachedDom.$subscriptionButton.on('click', switchMembershipType);
 		setDefaultStripeLink();
+		hideStripeSubscriptionFormCouponInput();
+
+		cachedDom.$stripeSubscriptionFormCouponText.on('click', showStripeSubscriptionFormCouponInput);
+		cachedDom.$subscriptionButton.on('click', switchMembershipType);
 	}
 })
