@@ -7,7 +7,11 @@ function previewFile() {
 	reader.addEventListener("load", function () {
 		preview.src = reader.result;
 
-		var basic = $('#demo-basic').croppie({
+		el = document.getElementById('demo-basic');
+		btn = document.getElementById('demo-basic-button');
+		form = document.getElementById('new-my-profile-form');
+
+		var basic = new Croppie(el, {
 			viewport: {
         width: 100,
         height: 100,
@@ -18,18 +22,26 @@ function previewFile() {
 				height: 200
 			}
 		});
-		basic.croppie('bind', {
+		basic.bind({
 			url: preview.src,
 		});
 		//on button click
-		basic.croppie('result', 'html').then(function(html) {
-			// html is div (overflow hidden)
-			// with img positioned inside.
+		btn.addEventListener('click', function(event) {
+			event.preventDefault();
+			basic.result('blob').then(function(blob) {
+
+				document.querySelector('#my_profile_form_cropped_avatar').value = blob;
+
+				basic.destroy();
+				// html is div (overflow hidden)
+				// with img positioned inside.
+			});
 		});
 
 	}, false);
 
 	if (file) {
-		reader.readAsDataURL(file);	
+		reader.readAsDataURL(file);
 	}
+
 }

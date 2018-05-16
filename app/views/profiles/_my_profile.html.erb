@@ -6,9 +6,11 @@
 		<%= image_tag("https:" + current_user.avatar.url(:normal), class: "js-avatar") %>
 		<div class="">
 			<%= f.file_field :avatar %>
+			<%= f.hidden_field :cropped_avatar %>
 			<img id="avatar-preview" src="" height="200" alt="Image preview...">
 			<div>
 				<div id="demo-basic"></div>
+				<button id="demo-basic-button">result</button>
 			</div>
 		</div>
 	</div>
