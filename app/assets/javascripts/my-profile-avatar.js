@@ -13,9 +13,9 @@ function previewFile() {
 
 		var basic = new Croppie(el, {
 			viewport: {
-        width: 100,
-        height: 100,
-        type: 'circle'
+				width: 100,
+				height: 100,
+				type: 'circle'
 			},
 			boundary: {
 				width: 200,
@@ -28,9 +28,9 @@ function previewFile() {
 		//on button click
 		btn.addEventListener('click', function(event) {
 			event.preventDefault();
-			basic.result('blob').then(function(blob) {
+			basic.result('base64').then(function(crop) {
 
-				document.querySelector('#my_profile_form_cropped_avatar').value = blob;
+				document.querySelector('#my_profile_form_cropped_avatar').value = crop;
 
 				basic.destroy();
 				// html is div (overflow hidden)

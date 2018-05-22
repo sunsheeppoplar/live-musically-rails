@@ -46,7 +46,7 @@ class MyProfileForm
         update_locations(locations)
         update_soundcloud_links(soundcloud_links)
         update_youtube_links(youtube_links)
-        update_avatar
+        update_avatar(cropped_avatar)
 		current_user.update!(sanitized_hash)
 	end
     
@@ -84,10 +84,9 @@ class MyProfileForm
         current_user.save!
     end
 
-    def update_avatar
-        binding.pry
-        if cropped_avatar != {}
-            current_user.avatar = cropped_avatar
+    def update_avatar(avatar)
+        if avatar != {}
+            current_user.avatar = avatar
             current_user.save!
         end
     end
