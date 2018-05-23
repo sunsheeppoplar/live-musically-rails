@@ -85,7 +85,7 @@ class MyProfileForm
     end
 
     def update_avatar(avatar)
-        if avatar != {}
+        if avatar != "{}"
             current_user.avatar = avatar
             current_user.save!
         end
