@@ -28,7 +28,12 @@ function previewFile() {
 		//on button click
 		btn.addEventListener('click', function(event) {
 			event.preventDefault();
-			basic.result('base64').then(function(crop) {
+			basic.result( 
+				{
+					type: 'base64',
+					size: 'original'
+				}
+			).then(function(crop) {
 
 				document.querySelector('#my_profile_form_cropped_avatar').value = crop;
 
