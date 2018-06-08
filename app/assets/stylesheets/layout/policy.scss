@@ -1,0 +1,39 @@
+.policy {
+	&__container {
+		margin: 0em 1em;
+	}
+
+	&__header {
+		font-weight: bold;
+		margin-bottom: 0.5em;
+	}
+
+	&__ordered-list {
+		list-style-position: inside;
+
+		&--arabic-numeral > li {
+			list-style-type: decimal;
+		}
+
+		&--bulleted > li {
+			list-style-type: disc;
+		}
+
+		&--latin-alphabet > li {
+			list-style-type: upper-latin;
+		}
+
+		&--roman-numeral > li {
+			list-style-type: upper-roman;
+		}
+	}
+
+	&__subheader {
+		margin-bottom: 0.5em;
+		text-decoration: underline;
+	}
+
+	&__text {
+		margin-bottom: 0.5em;
+	}
+}
