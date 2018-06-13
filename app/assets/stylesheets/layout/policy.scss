@@ -1,6 +1,6 @@
 .policy {
 	&__container {
-		margin: 0em 1em;
+		margin: 0em 2em;
 	}
 
 	&__header {
@@ -9,23 +9,32 @@
 	}
 
 	&__ordered-list {
-		list-style-position: inside;
+		list-style-position: outside;
+		margin: 0em 0em 0.5em 2em;
 
 		&--arabic-numeral > li {
 			list-style-type: decimal;
+			margin-left: 1em;
 		}
 
 		&--bulleted > li {
 			list-style-type: disc;
+			margin-left: 1em;
 		}
 
 		&--latin-alphabet > li {
 			list-style-type: upper-latin;
+			margin-left: 3em;
 		}
 
 		&--roman-numeral > li {
 			list-style-type: upper-roman;
+			margin-left: 1em;
 		}
+	}
+
+	&__section {
+		margin-bottom: 2em;
 	}
 
 	&__subheader {
@@ -35,5 +44,10 @@
 
 	&__text {
 		margin-bottom: 0.5em;
+
+		&--within-list {
+			margin-left: -2em;
+			margin-top: 0.5em;
+		}
 	}
 }
