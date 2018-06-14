@@ -5,31 +5,43 @@
 
 	&__header {
 		font-weight: bold;
-		margin-bottom: 0.5em;
+		margin-bottom: 1em;
 	}
 
 	&__ordered-list {
 		list-style-position: outside;
-		margin: 0em 0em 0.5em 2em;
+		margin: 0em 0em 1em 2em;
 
 		&--arabic-numeral > li {
 			list-style-type: decimal;
 			margin-left: 1em;
+			padding-left: 0.5em;
 		}
 
 		&--bulleted > li {
 			list-style-type: disc;
 			margin-left: 1em;
+			padding-left: 0.5em;
 		}
 
 		&--latin-alphabet > li {
 			list-style-type: upper-latin;
 			margin-left: 3em;
+			padding-left: 0.5em;
 		}
 
 		&--roman-numeral > li {
 			list-style-type: upper-roman;
 			margin-left: 1em;
+			padding-left: 0.5em;
+		}
+
+		&--separated-list {
+			margin-bottom: 1em;
+		}
+
+		&--within-list {
+			margin-left: 0em;
 		}
 	}
 
@@ -38,16 +50,16 @@
 	}
 
 	&__subheader {
-		margin-bottom: 0.5em;
+		margin-bottom: 1em;
 		text-decoration: underline;
 	}
 
 	&__text {
-		margin-bottom: 0.5em;
+		margin-bottom: 1em;
 
 		&--within-list {
 			margin-left: -2em;
-			margin-top: 0.5em;
+			margin-top: 1em;
 		}
 	}
 }
