@@ -1,0 +1,15 @@
+.footer {
+	bottom: $footer-bottom;
+	height: $footer-height;
+	position: $footer-position;
+	text-align: $footer-text-alignment;
+	width: $footer-width;
+
+	&:before {
+		background-color: $footer-border-color;
+		content: "";
+		display: block;
+		height: $footer-border-height;
+		margin: $footer-border-offset;
+	}
+}
