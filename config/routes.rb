@@ -34,7 +34,7 @@ Rails.application.routes.draw do
 	end
 
 	get '/policies/terms', to: 'policies#terms_of_service'
-	get '/policies/privacy', to: 'policies#private_policy'
+	get '/policies/privacy', to: 'policies#privacy_policy'
 
     get '/my_profile', to: 'profiles#my_profile'
     get '/my_profile/get_single_zipcode', to: 'profiles#get_single_zipcode'

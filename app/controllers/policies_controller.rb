@@ -1,5 +1,5 @@
 class PoliciesController < ApplicationController
-	def private_policy
+	def privacy_policy
 	end
 
 	def terms_of_service
