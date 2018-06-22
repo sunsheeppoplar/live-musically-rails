@@ -1,4 +1,14 @@
 <div class="footer">
-	<%= link_to "Terms of Service", policies_terms_path %>
-	<%= link_to "Privacy Policy", policies_privacy_path %>
+	<div class="footer__company-links">
+		<div class="footer__company-links__header">About</div>
+		<%= link_to "Privacy Policy", policies_privacy_path, class: "footer__company-links__links" %>
+		<%= link_to "Terms of Service", policies_terms_path, class: "footer__company-links__links" %>
+		<%= mail_to "team@live-musically.com", "Contact", class: "footer__company-links__links" %>
+	</div>
+	<div class="footer__social-links">
+		<%= link_to "https://wwww.facebook.com/livemusicallyllc/", target: "_blank" do %>
+			<i class="fab fa-facebook fa-2x footer__social-links__icons"></i>
+		<% end %>
+	</div>
+	<div>Copyright &copy; <%= Time.now.strftime("%Y") %> Live Musically LLC</div>
 </div>
