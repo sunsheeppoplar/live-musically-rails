@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Live Musically</title>
-	<%= csrf_meta_tags %>
+	<head>
+		<title>Live Musically</title>
+		<%= csrf_meta_tags %>
 
-	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-	<!-- page specific javascript meta tag -->
-	 <%= tag :meta, name: :psj, action: action_name, controller: controller_name %>
-	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+		<!-- page specific javascript meta tag -->
+		 <%= tag :meta, name: :psj, action: action_name, controller: controller_name %>
+		<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-	<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/base-min.css">
-	<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-min.css">
-	<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/base-min.css">
+		<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-min.css">
+		<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
-	<script src="https://js.stripe.com/v3/"></script>
-	<%= tag :meta, name: :stripe, content: STRIPE_PUBLISHABLE_KEY %>
-</head>
+		<script src="https://js.stripe.com/v3/"></script>
+		<%= tag :meta, name: :stripe, content: STRIPE_PUBLISHABLE_KEY %>
+	</head>
 
-<body>
-	<%= render "shared/header" %>
-
-	<p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
-	<%= yield %>
-</body>
+	<body>
+		<%= render "shared/header" %>
+		<p class="notice"><%= notice %></p>
+	    <p class="alert"><%= alert %></p>
+		<div class="content">
+			<%= yield %>
+		</div>
+		<%= render "shared/footer" %>
+	</body>
 </html>

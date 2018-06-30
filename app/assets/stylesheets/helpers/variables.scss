@@ -22,11 +22,10 @@ $footer-background-color: $grey-2;
 $footer-bottom: 0;
 $footer-color: white;
 $footer-display: flex;
+$footer-flex-shrink: 0;
 $footer-flex-wrap: wrap;
-$footer-height: 10em;
 $footer-inner-container-width: 50%;
 $footer-padding: 1em 5% 0em 5%;
-$footer-position: absolute;
 $footer-width: 100%;
 
 $footer-border-color: grey;
@@ -37,6 +36,8 @@ $footer-border-width: 0.0625em;
 $footer-company-links-header-font-weight: 600;
 $footer-company-links-hover-color: $grey-1;
 $footer-company-links-width: 10em;
+
+$footer-copyright-margin: 2em 0em 1em 0em;
 
 $footer-social-links-display: flex;
 $footer-social-links-justify-content: flex-end;
