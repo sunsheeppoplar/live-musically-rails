@@ -1,9 +1,58 @@
 .header {
 	border-bottom: 0.125em solid grey;
+	display: flex;
+	flex-shrink: 0;
 	font-size: 1.125em;
 	height: 9.5%;
 
-	&__sign-up {
+	&__avatar {
 		cursor: pointer;
+		
+		> img {
+			border-radius: 50%;
+		}
+
+		&__dropdown {
+		    border: 0;
+		    height: 100px;
+		    overflow: hidden;
+		    padding: 0;
+			position: absolute;
+		    top: 9.5%;
+		    text-align: center;
+		    right: 1%;
+		    width: 125px;
+
+		    &--hidden {
+		    	clip: rect(0 0 0 0);
+		    }
+		}
+	}
+
+	&__banner {
+		align-self: center;
+		border-right: solid 0.01em;
+		font-size: 1.25em;
+		letter-spacing: 0.1em;
+		text-align: center;
+		width: 20%;
+	}
+
+	&__primary-actions {
+		align-self: center;
+		display: flex;
+		padding: 0 5%;
+		width: 40%;
+
+		&__links {
+			width: 50%;
+		}
+	}
+
+	&__secondary-actions {
+		align-self: center;
+		padding: 0 1% 0 5%;
+		text-align: right;
+		width: 40%;
 	}
 }

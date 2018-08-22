@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 	protect_from_forgery with: :exception
 
-	helper_method :resource_name, :resource, :devise_mapping, :resource_class
+	helper_method :resource_name, :resource, :devise_mapping, :resource_class, :current_user
 
 	def resource_name
 		:user
@@ -17,6 +17,14 @@ class ApplicationController < ActionController::Base
 
 	def devise_mapping
 		@devise_mapping ||= Devise.mappings[:user]
+	end
+
+	def current_user
+		@current_user ||= super || GuestUser.new
+	end
+
+	def user_signed_in?
+		super && !current_user.is_a?(GuestUser)
 	end
 
 	protected

@@ -1,0 +1,10 @@
+<%= link_to(conversations_path) do %>
+	<i class="far fa-comment-alt"></i>
+<% end %>
+<%= link_to(notifications_path) do %>
+	<i class="far fa-bell"></i>
+<% end %>
+<%= link_to(my_profile_path) do %>
+	<%= HeaderDecorator.new(current_user).html %>
+<% end %>
+<%= link_to("Logout", destroy_user_session_path, method: :delete) %>
