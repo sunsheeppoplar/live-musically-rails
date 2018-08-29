@@ -19,7 +19,7 @@ while i < 501 do
 		timeframe_of_post: DateTime.now.beginning_of_hour + 1.month + 4.hours,
 	)
 	# 2208 is count of locations in NY with our data
-	location = Location.where(state: "NY")[rand(0..2208)]
+	location = Location.where(state: "NY")[rand(0..2207)]
 	opp.create_venue!(
 		name: "Bar #{i}",
 		address: "#{i} Index Avenue",
