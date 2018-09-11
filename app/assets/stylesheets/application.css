@@ -14,5 +14,6 @@
  *= require bootstrap-datepicker
  *= require bootstrap-timepicker
  *= require jquery-ui/autocomplete
+ *= require croppie
  *= require main
  */

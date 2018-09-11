@@ -26,6 +26,15 @@ class ConversationsController < ApplicationController
     }, status: 200
   end
 
+  def load_full_conversation
+    conversation_id = params[:conversationId]
+    all_messages_html = partial_to_string(Conversation.find(params[:conversationId]).messages)
+    render json: { 
+        loaded_convo: all_messages_html,
+        current_conversation: conversation_id
+    }, status: 200
+  end
+
   def load_new_message
     conversation_id = params[:conversationId]
     message_html = partial_to_string([Conversation.find(params[:conversationId]).messages.last])

@@ -2,10 +2,11 @@
 
 <div class="ui segment interlocutor-list-column">
   <h3>Mailbox</h3>
+  <input id="search" type="text"></input>
 
   <div class="ui list">
     <% @conversations.each do |conversation| %>
-    <div class="item">
+    <div class="item" id="<%= "conversation" + conversation.id.to_s %>">
       <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
         <% if conversation.sender_id == current_user.id %>
           <% recipient = User.find(conversation.recipient_id) %>
