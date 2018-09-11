@@ -1,12 +1,104 @@
+/* grid implementation */
+// @supports (display:grid) {
+
+//   .wrapper {
+
+//     font-size: 11pt;
+
+//     display: grid;
+//     grid-template-columns: 20% 1fr;
+    
+//     .interlocutor-list-column {
+//       grid-column-start: 1;
+
+//       .item-user-info {
+//         display: inline-block;
+//         padding: 5px;
+
+//         > div {
+//           display: inline-block;
+
+//           > img {
+//             display: inline-block;
+//             border-radius: 50%;
+//           }
+//         }
+      
+//         .item-user-name {
+//           display: inline-block;
+//           font-weight: bolder;
+//         }
+//       }
+//     }
+    
+//     .thread-column {
+//       grid-column-start: 2;
+
+//       .the-message {
+//         height: 80vh;
+//         width: 100%;
+//         border: none;
+
+//         overflow: auto;
+        
+//         .individual-message {
+//           border: solid grey;
+//           border-width: 0px;
+//           border-radius: 0px;
+//           padding: 10px;
+//           margin: 10px;
+
+//           background: white;
+
+//           box-shadow: 1px 1px 1px 1px lightgrey;
+
+//           .message-user-info {
+//             display: inline-block;
+//             padding: 5px;
+
+//             > div {
+//               display: inline-block;
+
+//               > img {
+//                 display: inline-block;
+//                 border-radius: 50%;
+//               }
+//             }
+          
+//             .message-user-name {
+//               display: inline-block;
+//               font-weight: bolder;
+//             }
+//           }
+
+//           .message-body {
+//             padding-left: 20px;
+//             padding-right: 20px;
+//             padding-top: 10px;
+//             padding-bottom: 30px;
+//           }
+
+//         }
+//       }
+
+//       .the-message-input {
+//         > textarea {
+//           width: 100%;
+//         }
+//       }
+//     }
+//   }
+// }
+
+/* flexbox implementation */
+
 .wrapper {
-
   font-size: 11pt;
+  display: flex;
 
-  display: grid;
-  grid-template-columns: 20% 1fr;
-  
   .interlocutor-list-column {
-    grid-column-start: 1;
+    height: 100%;
+    width: 20%;
 
     .item-user-info {
       display: inline-block;
@@ -27,10 +119,10 @@
       }
     }
   }
-  
-  .thread-column {
-    grid-column-start: 2;
 
+  .thread-column {
+    width: 80%;
+    
     .the-message {
       height: 80vh;
       width: 100%;
@@ -75,12 +167,6 @@
           padding-bottom: 30px;
         }
 
-      }
-    }
-
-    .the-message-input {
-      > textarea {
-        width: 100%;
       }
     }
   }
