@@ -7,6 +7,9 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '2109f51ab8ab345e23f0d7ee0fcd88829a2297dd954971a993b7e0ae8b8db5dd665a5082bdf4e89fc509463ad8233358bda44169e2f4b995e5d0ac7d4e66d35c'
+  if Rails.env.production?
+    config.secret_key = ENV["SECRET_KEY_BASE"]
+  end
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -251,10 +254,15 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :facebook, Rails.application.secrets[:facebook_oauth_app_id],
-  Rails.application.secrets[:facebook_oauth_app_secret], display: 'popup'
+  facebook_oauth_app_id = Rails.env.production? ? ENV["FACEBOOK_OAUTH_APP_ID"] : Rails.application.secrets[:facebook_oauth_app_id]
+  facebook_oauth_app_secret = Rails.env.production? ? ENV["FACEBOOK_OAUTH_APP_SECRET"] : Rails.application.secrets[:facebook_oauth_app_secret]
 
-  config.omniauth :stripe_connect, Rails.application.secrets[:stripe_oauth_client_id], Rails.application.secrets[:stripe_oauth_app_secret]
+  config.omniauth :facebook, facebook_oauth_app_id, facebook_oauth_app_secret, display: 'popup'
+
+  stripe_oauth_client_id = Rails.env.production? ? ENV["STRIPE_OAUTH_CLIENT_ID"] : Rails.application.secrets[:stripe_oauth_client_id]
+  stripe_oauth_app_secret = Rails.env.production? ? ENV["STRIPE_OAUTH_APP_SECRET"] : Rails.application.secrets[:stripe_oauth_app_secret]
+
+  config.omniauth :stripe_connect, stripe_oauth_client_id, stripe_oauth_app_secret
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

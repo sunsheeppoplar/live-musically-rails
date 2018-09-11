@@ -6,6 +6,6 @@ class OnboardPolicy
 	end
 
 	def registered_with_stripe?
-		!current_user.not_stripe_user?
+		!current_user.not_stripe_subscribed? && !current_user.not_stripe_payable?
 	end
 end

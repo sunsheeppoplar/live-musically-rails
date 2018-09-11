@@ -71,6 +71,9 @@ gem 'remotipart', '~> 1.2'
 # helps with Stripe-related actions
 gem 'stripe'
 
+# helps us with Slack integrations
+gem 'slack-notifier'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,0 +1,13 @@
+<div class='js-stripe-connect-form'>
+	<p>Connect your Live Musically account to Stripe</p>
+
+	<p>We use Stripe to make sure you get paid on time and keep your personal and bank details secure.</p>
+
+	<%= label_tag "company_type_individual", "Individual" %>
+	<%= radio_button_tag "company_type", "individual", true, class: "js-stripe-radio-button" %>
+
+	<%= label_tag "company_type_company", "Company" %>
+	<%= radio_button_tag "company_type", "company", false, class: "js-stripe-radio-button" %>
+	</br>
+	<%= link_to "Setup Payments on Stripe", "https://connect.stripe.com/express/oauth/authorize?client_id=#{STRIPE_CLIENT_ID}", class: "js-setup-stripe-button" %>
+</div>

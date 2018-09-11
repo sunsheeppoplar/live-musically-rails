@@ -7,7 +7,7 @@ class OpportunityPolicy
 	end
 
 	def fully_onboarded_employer?
-		current_user.artist_employer? && !current_user.not_stripe_user?
+		current_user.artist_employer? && !current_user.not_stripe_payable?
 	end
 
 	def partially_onboarded_employer?

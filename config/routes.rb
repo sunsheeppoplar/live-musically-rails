@@ -20,7 +20,12 @@ Rails.application.routes.draw do
 
 	resources :opportunities
 	
-	resource :onboard, only: [:show]
+	resources :opportunities do
+		resources :submissions
+	end
+
+	resource :onboard, only: [:show, :create]
+
 	namespace :search do
 		resources :opportunities
 	end
@@ -28,6 +33,9 @@ Rails.application.routes.draw do
 	namespace :apply do
 		resources :opportunities
 	end
+
+	get '/policies/terms', to: 'policies#terms_of_service'
+	get '/policies/privacy', to: 'policies#privacy_policy'
 
     get '/my_profile', to: 'profiles#my_profile'
     get '/my_profile/get_single_zipcode', to: 'profiles#get_single_zipcode'
