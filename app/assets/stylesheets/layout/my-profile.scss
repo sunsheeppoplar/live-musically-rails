@@ -1,199 +1,193 @@
+/* flexbox implementation */
+
 .my-profile-form {
+  width: 100%;
 
-    display: grid;
-    grid-template-columns: 7% 86% 7%;
-    
-    .js-my-profile--basic {
-        grid-column-start: 2;
+  &__header {
+    background-color: $header-color;
+    color: $header-text-color;
+    text-align: center;
+    padding: 1%;
+
+  }
+
+  h4 {
+    background-color: lightgrey;
+    margin: unset;
+    width: fit-content;
+    padding: 10px 30px 10px 30px      
+  }
+
+  .user-info {
+
+    .avatar-name-email-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 5vh 0 5vh 0;
+
+      > div {
+        width: 50%;
+      }
+
+      .avatar-holder {
+        margin-left: 20vw;
+        width: fit-content;
+      }
+
+      .js-avatar {
+        border-radius: 50%;
+      }
+
+      .name-email-password {
+        display: flex;
+        >div {
+          display: inline-block;
+          > .js-my-profile-user-info-input-group, .js-my-profile-user-password-input-group {
+            display: block;
+            background-color: transparent;
+            border: unset;
+            border-bottom: solid grey 1px;
+            padding: 10px 150px 5px 5px;
+          }
+        }
+      }
+
+
     }
 
+    .about-social {
+      display: flex;
+      flex-direction: row;
+      
+      margin: 5vh 0 5vh 0;
+      margin-left: 10vw;
 
-    .js-my-profile--password {
-        grid-column-start: 2;
+      
+      .about {
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+
+        > textarea {
+          width: 55vw;
+          min-height: 30vh;
+          border: grey solid 1px;
+          border-radius: 2px;
+          background-color: transparent;
+          font-size: smaller;
+        }
+
+      }
+
+      .social {
+        display: flex;
+        flex-direction: column;
+        margin-left: auto;
+        margin-right: 10vw;
+
+        >input {
+          margin: 10px;
+        }
+      }
+    }
+  }
+
+  .instruments-and-locations-container {
+    display: flex;
+    margin: 5vh 0 5vh 0;
+
+    .instrument-wrapper, .location-wrapper{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 30vw;
+
+      &__subheader {
+        width: 100%;
+        text-align: center;
+      }
     }
 
-        &__header {
-            background-color: $header-color;
-            color: $header-text-color;
-            text-align: center;
-            padding: 1%;
+    .instrument-wrapper {
+      margin-left: 10vw;
+    }
 
-            grid-column-start: 1;
-            grid-column-end: 4;
-        }
+    .location-wrapper {
+      margin-left: auto;
+      margin-right: 10vw;
+    }
 
-        .user-info {
-            grid-column-start: 2;
+    .js-instrument-list-node, .js-location-list-node {
+      display: flex;
+      width: fit-content;
+      padding: 5px;
+      margin: 10px;
+      background-color: white;
+      border: grey solid 1px;
+      border-radius: 3px;
+    }
 
-            display: grid;
-            grid-template-columns: 10% 40% 40% 10%;
+  }
 
-            .js-avatar {
-                grid-column-start: 2;
-                border-radius: 50%;
-                margin: 5%;
-            }
+  .playlist-container {
+    display: flex;
+    flex-direction: column;
+    margin: 5vh 0 5vh 0;
 
-            [class^="js-my-profile-"] {
-                grid-column-start: 3;
-            }
-        }
+    &__subheader {
+      margin-left: 10vw;
+      margin-right: 10vw;
+      width: 80%;
+      text-align: center;
+    }
 
-        .instruments-and-locations-container {
-            grid-column-start: 2;
+    .sc-and-yt-wrapper {
+      display: flex;
+      margin: 3vh 0 5vh 0;
+    }
 
-            display: grid;
-            grid-template-columns: 33% 33% 33%;
-            grid-column-gap: 10px;
-            justify-content: center;
+    .soundcloud-wrapper, .youtube-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 40vw;
 
-            .instrument-wrapper {
-                grid-column-start: 2;
+      &__subheader {
+        width: 80%;
+        text-align: center;
+        background-color: transparent;
+        border-bottom: grey solid 1px;
+        margin-bottom: 10px;
+      }
 
-                &__subheader {
-                    background-color: $grey-1;
-                    color: black;
-                    text-align: center;
-                    padding: 1%;
-                }
+    }
 
-                .js-instrument-list-node {
-                    display: inline-block;
+    .soundcloud-wrapper {
+      margin-left: 10vw;
+    }
 
-                    border: solid;
-                    border-width: 1px;
-                    border-color: lightgrey;
-                    border-radius: 5px;
+    .youtube-wrapper {
+      margin-left: auto;
+      margin-right: 10vw;
+    }
 
-                    background-color: white;
-                    padding: 1%;
-                    margin: 2%;
-                    &:hover {
-                        background-color: $purple-1;
-                    }
-                }
-            }
-
-            .location-wrapper {
-                grid-column-start: 3;
-
-                &__subheader {
-                    background-color: $grey-1;
-                    color: black;
-                    text-align: center;
-                    padding: 1%;
-                }
-                .js-location-list-node {
-                    display: inline-block;
-
-                    border: solid;
-                    border-width: 1px;
-                    border-color: lightgrey;
-                    border-radius: 5px;
-
-                    background-color: white;
-                    padding: 1%;
-                    margin: 2%;
-                    &:hover {
-                        background-color: $purple-1;
-                    }
-                }
-            }
-        }
-
-        .playlist-container {
-            grid-column-start: 2;
-
-            display: grid;
-            grid-template-columns: 50% 50%;
-            grid-column-gap: 10px;
-            justify-content: center;
-
-            margin: 10% 0 10% 0;
-
-            &__subheader {
-                grid-column-start: 1;
-                grid-column-end: 3;
-
-                background-color: $grey-1;
-                color: black;
-                text-align: center;
-                padding: 1%;
-            }
-
-            .soundcloud-wrapper {
-                grid-column-start: 1;
-
-                &__subheader {
-                    text-align: center;
-                }
-
-                .js-soundcloud-list-node {
-                    display: inline-block;
-
-                    border: solid;
-                    border-width: 1px;
-                    border-color: lightgrey;
-                    border-radius: 5px;
-
-                    background-color: white;
-                    padding: 1%;
-                    margin: 2%;
-                    &:hover {
-                        background-color: $purple-1;
-                    }
-                }
-            }
-
-            .youtube-wrapper {
-                grid-column-start: 2;
-
-                &__subheader {
-                    text-align: center;
-                }
-
-                .js-youtube-list-node {
-                    display: inline-block;
-
-                    border: solid;
-                    border-width: 1px;
-                    border-color: lightgrey;
-                    border-radius: 5px;
-
-                    background-color: white;
-                    padding: 1%;
-                    margin: 2%;
-                    &:hover {
-                        background-color: $purple-1;
-                    }
-                }
-            }
-        }
-
-        .opportunities-container {
-
-            .opportunity-wrapper {
-                
-                .js-opportunity-list-node {
-                    display: block;
-
-                    border: solid;
-                    border-width: 1px;
-                    border-color: lightgrey;
-                    border-radius: 5px;
-
-                    background-color: white;
-                    padding: 1%;
-                    margin: 2%;
-                    &:hover {
-                        background-color: $purple-1;
-                    }
-                }
-            }
-        }
-
-        &__textarea-edit-submit, &__input-group-edit-submit, &__password-edit-submit, &__password-fields {
-            visibility: hidden;
-        }
+    // .soundcloud-wrapper__subheader, .youtube-wrapper__subheader {
+    //   width: fit-content;
+    //   background-color: transparent;
+    //   border-bottom: grey solid 1px;
+    //   margin-bottom: 10px;
     // }
+
+    .js-soundcloud-list-node, .js-youtube-list-node {
+      display: flex;
+      width: fit-content;
+      padding: 5px;
+      margin: 10px;
+      background-color: white;
+      border: grey solid 1px;
+      border-radius: 3px;
+    }
+  }
+
 }

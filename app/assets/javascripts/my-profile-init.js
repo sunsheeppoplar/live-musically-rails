@@ -6,6 +6,10 @@ $(document).on('turbolinks:load', function() {
         );
     };
 
+    $('#my_profile_form_avatar').bind("change", function() {
+         previewFile();
+    });
+
 	$('#my_profile_form_instruments').autocomplete({
 		select: function(event, ui) {
 			selectInstrument(ui)

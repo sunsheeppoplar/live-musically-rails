@@ -2,11 +2,17 @@
 var current_conversation;
 
 function highlightSelected(div) {
-  $('.item').css(
-    {
-      "background":"#fcfcfc"
+  $('.item').each( function() {
+    if ($(this).css('background-color') === "rgb(198, 57, 214)") {
+      return;
+    } else {
+      $(this).css(
+        {
+          "background":"#fcfcfc"
+        }
+      )
     }
-  );
+  });
   
   $(div).css(
     {
@@ -17,6 +23,30 @@ function highlightSelected(div) {
 
 $(document).on('turbolinks:load', function() {
   console.log('conversations.js (2) loaded');
+
+  // sidebar listeners for search function
+
+  $('#search').keyup(function() {
+
+    var filter = $(this).val();
+    // if (!filter) {
+    //   $('.item-user-name').hide();
+    //   return;
+    // }
+
+    var regex = new RegExp(filter, "i");
+
+
+    $('.item-user-name').each(function() {
+      if ($(this).text().search(regex) < 0) {
+        $(this).parent().parent().fadeOut();
+      } else {
+        $(this).parent().parent().fadeIn();
+        // count++;
+      }
+    });
+
+  });
 
   // sidebar listeners for conversations#load_conversation
   
@@ -36,8 +66,24 @@ $(document).on('turbolinks:load', function() {
       current_conversation = response.current_conversation;
 
       $('.the-message').empty();
+      $('.the-message').prepend($("<div class=individual-message id=load-previous>load previous messages</div>"));
       $('.the-message').append(response.loaded_convo);
       $('.the-message')[0].scrollTop = $('.the-message')[0].scrollHeight;
+
+      $('#load-previous').click( function() {
+        $.ajax({
+          method: "GET",
+          url: "/conversations/load_full_conversation",
+          data: {
+              "conversationId": current_conversation
+          },
+          dataType: "json"
+        })
+        .done(function(response) {
+          $('.the-message').empty();
+          $('.the-message').append(response.loaded_convo);
+        })
+      });
     })
   });
 
