@@ -4,6 +4,7 @@ class MyProfileForm
 
     attribute :about, String
     attribute :avatar, Hash
+    attribute :cropped_avatar, Hash
 	attribute :current_user, Hash
     attribute :email, String
     attribute :soundcloud_links, Array
@@ -45,7 +46,7 @@ class MyProfileForm
         update_locations(locations)
         update_soundcloud_links(soundcloud_links)
         update_youtube_links(youtube_links)
-        update_avatar
+        update_avatar(cropped_avatar)
 		current_user.update!(sanitized_hash)
 	end
     
@@ -83,8 +84,8 @@ class MyProfileForm
         current_user.save!
     end
 
-    def update_avatar
-        if avatar != {}
+    def update_avatar(avatar)
+        if avatar != "{}"
             current_user.avatar = avatar
             current_user.save!
         end

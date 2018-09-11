@@ -25,7 +25,9 @@ class User < ApplicationRecord
 							small: ["215x215#", :png],
 							thumb: ["50x50#", :png]
 						}
-	validates_attachment_content_type :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+	# validates_attachment_content_type :cropped_avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+
+	do_not_validate_attachment_file_type :avatar
 
 	def included_conversations
 		Conversation.includes(:messages).where("sender_id = ? OR recipient_id = ?", self.id, self.id)
