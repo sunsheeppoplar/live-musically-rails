@@ -11,7 +11,9 @@ Rails.application.configure do
 		bucket: "live-musically-dev",
 		access_key_id: AWS_ACCESS_KEY_ID,
 		secret_access_key: AWS_SECRET_ACCESS_KEY,
+		s3_host_name: "s3.amazonaws.com",
 		s3_region: "us-east-1"
 		}
 	}
 end
+
