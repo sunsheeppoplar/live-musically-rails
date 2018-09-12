@@ -85,6 +85,19 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Additional config for libraries
+  # Paperclip
+  Paperclip.options[:command_path] = "/usr/local/bin/"
+  config.paperclip_defaults = {
+    storage: :s3,
+    s3_credentials: {
+      bucket: "live-musically-dev",
+      access_key_id: ENV["AWS_ACCESS_KEY_ID"],
+      secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
+      s3_host_name: "s3.amazonaws.com",
+      s3_region: "us-east-1"
+    }
+  }
+
   # Stripe
   STRIPE_CLIENT_ID = ENV["STRIPE_OAUTH_CLIENT_ID"]
 end
