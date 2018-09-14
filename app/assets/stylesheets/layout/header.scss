@@ -3,25 +3,29 @@
 	display: flex;
 	flex-shrink: 0;
 	font-size: 1.125em;
-	height: 9.5%;
+	height: $header-height;
 
 	&__avatar {
 		cursor: pointer;
 		
 		> img {
+			border: 2px solid;
 			border-radius: 50%;
 		}
 
 		&__dropdown {
+			background-color: whitesmoke;
 		    border: 0;
+		    box-shadow: 0.5px 0.5px 0.5px 0.5px grey;
 		    height: 100px;
 		    overflow: hidden;
 		    padding: 0;
 			position: absolute;
-		    top: 9.5%;
+		    top: $header-height;
 		    text-align: center;
 		    right: 1%;
 		    width: 125px;
+		    z-index: 100;
 
 		    &--hidden {
 		    	clip: rect(0 0 0 0);
@@ -54,5 +58,13 @@
 		padding: 0 1% 0 5%;
 		text-align: right;
 		width: 40%;
+
+		&__links {
+			margin: 0 0.5em;
+
+			&__icons {
+				font-size: 25px;
+			}
+		}
 	}
 }

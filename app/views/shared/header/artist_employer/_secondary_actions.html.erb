@@ -1,10 +1,17 @@
-<%= link_to(conversations_path) do %>
-	<i class="far fa-comment-alt"></i>
-<% end %>
-<%= link_to(notifications_path) do %>
-	<i class="far fa-bell"></i>
-<% end %>
-<%= link_to(my_profile_path) do %>
+<span class="header__secondary-actions__links">
+	<%= link_to(conversations_path) do %>
+		<i class="far fa-comment-alt header__secondary-actions__links__icons"></i>
+	<% end %>
+</span>
+<span class="header__secondary-actions__links">
+	<%= link_to(notifications_path) do %>
+		<i class="far fa-bell header__secondary-actions__links__icons"></i>
+	<% end %>
+</span>
+<span class="js-header-avatar header__avatar">
 	<%= HeaderDecorator.new(current_user).html %>
-<% end %>
-<%= link_to("Logout", destroy_user_session_path, method: :delete) %>
+	<ul class="js-header-avatar-dropdown-menu header__avatar__dropdown header__avatar__dropdown--hidden">
+		<li><%= link_to("Profile", my_profile_path) %></li>
+		<li><%= link_to("Logout", destroy_user_session_path, method: :delete) %></li>
+	</ul>
+</span>

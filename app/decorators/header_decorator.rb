@@ -17,6 +17,6 @@ class HeaderDecorator
 	end
 
 	def user_initials
-		content_tag(:div, (current_user.first_name.first || "").capitalize + (current_user.last_name.first || "").capitalize)
+		content_tag(:span, (current_user.first_name.first || "").capitalize + (current_user.last_name.first || "").capitalize)
 	end
 end
