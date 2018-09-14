@@ -1,9 +1,70 @@
 .header {
 	border-bottom: 0.125em solid grey;
+	display: flex;
+	flex-shrink: 0;
 	font-size: 1.125em;
-	height: 9.5%;
+	height: $header-height;
 
-	&__sign-up {
+	&__avatar {
 		cursor: pointer;
+		
+		> img {
+			border: 2px solid;
+			border-radius: 50%;
+		}
+
+		&__dropdown {
+			background-color: whitesmoke;
+		    border: 0;
+		    box-shadow: 0.5px 0.5px 0.5px 0.5px grey;
+		    height: 100px;
+		    overflow: hidden;
+		    padding: 0;
+			position: absolute;
+		    top: $header-height;
+		    text-align: center;
+		    right: 1%;
+		    width: 125px;
+		    z-index: 100;
+
+		    &--hidden {
+		    	clip: rect(0 0 0 0);
+		    }
+		}
+	}
+
+	&__banner {
+		align-self: center;
+		border-right: solid 0.01em;
+		font-size: 1.25em;
+		letter-spacing: 0.1em;
+		text-align: center;
+		width: 20%;
+	}
+
+	&__primary-actions {
+		align-self: center;
+		display: flex;
+		padding: 0 5%;
+		width: 40%;
+
+		&__links {
+			width: 50%;
+		}
+	}
+
+	&__secondary-actions {
+		align-self: center;
+		padding: 0 1% 0 5%;
+		text-align: right;
+		width: 40%;
+
+		&__links {
+			margin: 0 0.5em;
+
+			&__icons {
+				font-size: 25px;
+			}
+		}
 	}
 }
