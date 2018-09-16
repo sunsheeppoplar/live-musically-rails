@@ -6,8 +6,7 @@
 	height: $header-height;
 
 	&__avatar {
-		background: whitesmoke;
-		border: 2px solid black;
+		background: lightgrey;
 		border-radius: 50%;
 		cursor: pointer;
 		height: 50px;
@@ -16,7 +15,6 @@
 		width: 50px;
 		
 		> img {
-			border: 2px solid;
 			border-radius: 50%;
 		}
 
