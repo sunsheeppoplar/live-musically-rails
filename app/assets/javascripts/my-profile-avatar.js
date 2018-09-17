@@ -37,7 +37,7 @@ function previewFile() {
 
 				document.querySelector('#my_profile_form_cropped_avatar').value = crop;
 				
-				let avatar = document.querySelector('.js-avatar')
+				var avatar = document.querySelector('.js-avatar')
 				avatar.src = crop;
 				avatar.setAttribute("style","height:250px; width:250px;");
 
