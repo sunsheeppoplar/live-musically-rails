@@ -84,8 +84,10 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # Additional config for libraries
+  # Set for Heroku
+  config.secret_key_base = ENV["SECRET_KEY_BASE"]
 
+  # Additional config for libraries
   # Stripe
   STRIPE_CLIENT_ID = ENV["STRIPE_OAUTH_CLIENT_ID"]
 end
