@@ -4,7 +4,7 @@
 	<div class="the-top-part">
 		<div class="avatar-name-email-container">
 			<div class="avatar-holder">
-				<%= image_tag("https:" + current_user.avatar.url(:normal), class: "js-avatar") %>
+				<%= image_tag(current_user.avatar.url(:normal), class: "js-avatar") %>
 				<div class="">
 					<%= f.file_field :avatar %>
 					<%= f.hidden_field :cropped_avatar %>

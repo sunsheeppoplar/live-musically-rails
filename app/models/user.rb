@@ -24,7 +24,9 @@ class User < ApplicationRecord
 							normal: ["250x250#", :png],
 							small: ["215x215#", :png],
 							thumb: ["50x50#", :png]
-						}
+						},
+						:default_url => ActionController::Base.helpers.asset_path("avatars/:style/missing.png")
+
 	# validates_attachment_content_type :cropped_avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
 	do_not_validate_attachment_file_type :avatar
