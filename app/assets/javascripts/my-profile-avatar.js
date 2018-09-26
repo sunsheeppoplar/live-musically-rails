@@ -5,12 +5,12 @@ function openModal() {
 	var closeButton = document.querySelector(".close-button");
 	uniquename.classList.toggle("show-modal");
 	closeButton.addEventListener("click", closeModal);
-	closeButton.addEventListener("click", function() { basic.destroy(); });
 }
 
 function closeModal() {
 	var uniquename = document.querySelector(".cropper-modal");
 	uniquename.classList.toggle("show-modal");
+	basic.destroy();
 }
 
 function previewFile() {
@@ -24,7 +24,7 @@ function previewFile() {
 		preview.src = reader.result;
 
 		el = document.getElementById('demo-basic');
-		btn = document.getElementById('demo-basic-button');
+		resultBtn = document.getElementById('demo-basic-button');
 		form = document.getElementById('new-my-profile-form');
 
 		basic = new Croppie(el, {
@@ -38,11 +38,13 @@ function previewFile() {
 				height: 200
 			}
 		});
+
 		basic.bind({
 			url: preview.src,
 		});
+
 		//on button click
-		btn.addEventListener('click', function(event) {
+		resultBtn.addEventListener('click', function(event) {
 			event.preventDefault();
 			basic.result( 
 				{
@@ -58,7 +60,6 @@ function previewFile() {
 				avatar.setAttribute("style","height:250px; width:250px;");
 
 				closeModal();
-				basic.destroy();
 				// html is div (overflow hidden)
 				// with img positioned inside.
 			});
@@ -68,6 +69,7 @@ function previewFile() {
 
 	if (file) {
 		reader.readAsDataURL(file);
+		document.querySelector('#my_profile_form_avatar').value = null;
 	}
 
 }
