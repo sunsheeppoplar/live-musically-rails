@@ -1,5 +1,21 @@
+var basic;
+
+function openModal() {
+	var uniquename = document.querySelector(".cropper-modal");
+	var closeButton = document.querySelector(".close-button");
+	uniquename.classList.toggle("show-modal");
+	closeButton.addEventListener("click", closeModal);
+	closeButton.addEventListener("click", function() { basic.destroy(); });
+}
+
+function closeModal() {
+	var uniquename = document.querySelector(".cropper-modal");
+	uniquename.classList.toggle("show-modal");
+}
+
 function previewFile() {
 	console.log("previewFile called");
+	openModal();
 	var preview = document.querySelector('#demo-basic');
 	var file    = document.querySelector('#my_profile_form_avatar').files[0];
 	var reader  = new FileReader();
@@ -11,7 +27,7 @@ function previewFile() {
 		btn = document.getElementById('demo-basic-button');
 		form = document.getElementById('new-my-profile-form');
 
-		var basic = new Croppie(el, {
+		basic = new Croppie(el, {
 			viewport: {
 				width: 100,
 				height: 100,
@@ -41,6 +57,7 @@ function previewFile() {
 				avatar.src = crop;
 				avatar.setAttribute("style","height:250px; width:250px;");
 
+				closeModal();
 				basic.destroy();
 				// html is div (overflow hidden)
 				// with img positioned inside.
