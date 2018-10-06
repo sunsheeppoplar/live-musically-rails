@@ -17,6 +17,7 @@ class User < ApplicationRecord
 	has_many :external_links
 	has_many :submissions
 	has_many :oauth_identities, dependent: :destroy
+	has_one :artist_profile
     has_one :subscription
 
 	has_attached_file	:avatar,

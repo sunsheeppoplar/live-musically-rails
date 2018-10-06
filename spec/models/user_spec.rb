@@ -8,6 +8,11 @@ RSpec.describe User, type: :model do
 		it "has many oauth identities" do
 			expect(subject).to have_many(:oauth_identities)
 		end
+
+		# has_one
+		it "has one artist profile" do
+			expect(subject).to have_one(:artist_profile)
+		end
 	end
 
 	describe "instance methods" do
