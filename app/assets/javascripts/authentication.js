@@ -101,7 +101,65 @@ $(document).on('turbolinks:load', function(){
 		$(form).find(hiddenInput)[0].value = role;
 	}
 
+	function handleLoginError(e, xhr, status, error) {
+		var errorText = xhr.responseJSON.error;
+		var errorTextContainerClass = '.js-login-error';
+		var errorTextContainerCSSClass = 'auth-form__error-container';
+		var targetInputClass = 'input.auth-form__input';
+		var inputErrorCSSClass = 'auth-form__input--error';
+
+
+		$(errorTextContainerClass).html(errorText)
+			.addClass(errorTextContainerCSSClass);
+		$(this).find(targetInputClass)
+			.addClass(inputErrorCSSClass);
+	}
+
+	function handleLoginSuccess(e, data, status, xhr) {
+		var redirectURL = xhr.responseJSON.redirect_url;
+		window.location = redirectURL;
+	}
+
+	function handleSignupError(e, xhr, status, error) {
+		xhr.responseJSON.errors.map(function(error) {
+			var affectedInput = error.toLowerCase().split(' ');
+			var target = {
+				input: '',
+				errorContainer: ''
+			};
+			var targetClassBeginning = '.js-signup-';
+			var targetErrorClassEnd = '-error';
+			var targetInputClassEnd = '-input';
+			var inputErrorCSSClass = 'auth-form__input--error';
+			var errorTextContainerCSSClass = 'auth-form__error-container';
+
+			function buildErrorTargets(affectedInput) {
+				if (affectedInput[1] === "confirmation" || affectedInput[1] === "name") {
+					target.errorContainer = targetClassBeginning + affectedInput[0] + "-" + affectedInput[1] + targetErrorClassEnd;
+					target.erroContainer = targetClassBeginning + affectedInput[0] + "-" + affectedInput[1] + targetInputClassEnd;
+				} else {
+					target.errorContainer = targetClassBeginning + affectedInput[0] + targetErrorClassEnd;
+					target.erroContainer = targetClassBeginning + affectedInput[0] + targetInputClassEnd;
+				}
+			}
+
+			buildErrorTargets(affectedInput);
+
+			$(target.errorContainer).html(error)
+				.addClass(errorTextContainerCSSClass);
+			$(target.erroContainer).addClass(inputErrorCSSClass);
+		})
+	}
+
+	function handleSignupSuccess(e, data, status, xhr) {
+		// debugger;
+	}
+
 	// assign event handlers
-	$('.auth-form-toggler').click(handleAuthClick)
-	$('.auth-form__user-roles-button').click(chooseUserRole)
+	$('.auth-form-toggler').click(handleAuthClick);
+	$('.auth-form__user-roles-button').click(chooseUserRole);
+	$('.js-login').on('ajax:success', handleLoginSuccess)
+		.on('ajax:error', handleLoginError)
+	$('.js-signup-secondary').on('ajax:success', handleSignupSuccess)
+		.on('ajax:error', handleSignupError)
 })

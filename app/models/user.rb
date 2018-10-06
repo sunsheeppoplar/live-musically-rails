@@ -17,6 +17,7 @@ class User < ApplicationRecord
 	has_many :external_links
 	has_many :submissions
 	has_many :oauth_identities, dependent: :destroy
+	has_one :artist_profile
     has_one :subscription
 
 	has_attached_file	:avatar,
@@ -28,6 +29,9 @@ class User < ApplicationRecord
 	# validates_attachment_content_type :cropped_avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
 	do_not_validate_attachment_file_type :avatar
+
+	validates :first_name, presence: true
+	validates :last_name, presence: true
 
 	def included_conversations
 		Conversation.includes(:messages).where("sender_id = ? OR recipient_id = ?", self.id, self.id)

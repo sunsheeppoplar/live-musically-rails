@@ -14,6 +14,10 @@ a, a:hover, a:visited {
 	text-decoration: none;
 }
 
+a, a:hover {
+	color: black;
+}
+
 html, body, form, fieldset, h1, h2, h3, h4, h5, h6, p, pre, blockquote, ul, ol, dl, address {
 	margin: 0;
 	padding: 0;
