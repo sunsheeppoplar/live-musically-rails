@@ -13,3 +13,7 @@ module LiveMusicallyRails
     # -- all .rb files in that directory are automatically loaded.
   end
 end
+
+Rails.application.configure do
+	config.autoload_paths << Rails.root.join('lib')
+end

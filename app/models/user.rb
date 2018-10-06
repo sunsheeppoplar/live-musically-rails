@@ -29,6 +29,9 @@ class User < ApplicationRecord
 
 	do_not_validate_attachment_file_type :avatar
 
+	validates :first_name, presence: true
+	validates :last_name, presence: true
+
 	def included_conversations
 		Conversation.includes(:messages).where("sender_id = ? OR recipient_id = ?", self.id, self.id)
 	end
