@@ -1,5 +1,21 @@
+var basic;
+
+function openModal() {
+	var uniquename = document.querySelector(".cropper-modal");
+	var closeButton = document.querySelector(".close-button");
+	uniquename.classList.toggle("show-modal");
+	closeButton.addEventListener("click", closeModal);
+}
+
+function closeModal() {
+	var uniquename = document.querySelector(".cropper-modal");
+	uniquename.classList.toggle("show-modal");
+	basic.destroy();
+}
+
 function previewFile() {
 	console.log("previewFile called");
+	openModal();
 	var preview = document.querySelector('#demo-basic');
 	var file    = document.querySelector('#my_profile_form_avatar').files[0];
 	var reader  = new FileReader();
@@ -8,10 +24,10 @@ function previewFile() {
 		preview.src = reader.result;
 
 		el = document.getElementById('demo-basic');
-		btn = document.getElementById('demo-basic-button');
+		resultBtn = document.getElementById('demo-basic-button');
 		form = document.getElementById('new-my-profile-form');
 
-		var basic = new Croppie(el, {
+		basic = new Croppie(el, {
 			viewport: {
 				width: 100,
 				height: 100,
@@ -22,11 +38,13 @@ function previewFile() {
 				height: 200
 			}
 		});
+
 		basic.bind({
 			url: preview.src,
 		});
+
 		//on button click
-		btn.addEventListener('click', function(event) {
+		resultBtn.addEventListener('click', function(event) {
 			event.preventDefault();
 			basic.result( 
 				{
@@ -41,7 +59,7 @@ function previewFile() {
 				avatar.src = crop;
 				avatar.setAttribute("style","height:250px; width:250px;");
 
-				basic.destroy();
+				closeModal();
 				// html is div (overflow hidden)
 				// with img positioned inside.
 			});
@@ -51,6 +69,7 @@ function previewFile() {
 
 	if (file) {
 		reader.readAsDataURL(file);
+		document.querySelector('#my_profile_form_avatar').value = null;
 	}
 
 }

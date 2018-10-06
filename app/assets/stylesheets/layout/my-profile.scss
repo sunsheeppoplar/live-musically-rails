@@ -3,19 +3,73 @@
 .my-profile-form {
   width: 100%;
 
+  // modal stuff
+
+  .cropper-modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+    z-index: 1;
+  }
+  .modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: darkgrey;
+    padding: 1rem 1.5rem;
+    width: 24rem;
+    border-radius: 0.5rem;
+  }
+  .close-button {
+    float: right;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    background-color: lightgray;
+  }
+  .close-button:hover {
+    background-color: darkgray;
+  }
+  .show-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+  }
+
   &__header {
     background-color: $header-color;
     color: $header-text-color;
-    text-align: center;
+    font-size: 15pt;
     padding: 1%;
+    text-align: center;
 
   }
 
+  .divider {
+    display: flex;
+    border-bottom: solid grey 1px;
+    margin: 10vh auto 10vh auto;
+    width: 60%;
+  }
+
   h4 {
+    font-size: 10pt;
     background-color: lightgrey;
     margin: unset;
-    width: fit-content;
-    padding: 10px 30px 10px 30px      
+    width: auto;
+    text-align: center;
+    padding: 10px 30px 10px 30px;
   }
 
   .user-info {
@@ -24,7 +78,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 5vh 0 5vh 0;
+      margin: 5vh auto 5vh auto;
 
       > div {
         width: 50%;
@@ -32,7 +86,42 @@
 
       .avatar-holder {
         margin-left: 20vw;
-        width: fit-content;
+        width: auto;
+
+        >img {
+          display: flex;
+          margin: auto;
+        }
+
+        .inputfile {
+          width: 0.1px;
+          height: 0.1px;
+          opacity: 0;
+          overflow: hidden;
+          position: absolute;
+          z-index: -1;
+        }
+
+        .inputfile + label {
+          font-size: 10pt;
+          font-weight: 700;
+          color: white;
+          background-color: black;
+          justify-content: center;
+          align-items: center;
+          display: flex;;
+          margin: 2vh auto 2vh auto;
+          width: 80%;
+          height: 30px;
+          transition-duration: 30ms;
+        }
+      
+        .inputfile:focus + label,
+        .inputfile + label:hover {
+          background-color: white;
+          color: black;
+          border: solid black 1px;
+        }
       }
 
       .js-avatar {
@@ -41,6 +130,8 @@
 
       .name-email-password {
         display: flex;
+        margin: 0 auto auto auto;
+
         >div {
           display: inline-block;
           > .js-my-profile-user-info-input-group, .js-my-profile-user-password-input-group {
@@ -68,6 +159,10 @@
         display: flex;
         flex-direction: column;
         width: 60%;
+
+        > h4 {
+          width: fit-content;
+        }
 
         > textarea {
           width: 55vw;
