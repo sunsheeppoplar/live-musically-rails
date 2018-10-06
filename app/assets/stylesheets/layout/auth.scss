@@ -7,11 +7,24 @@
 		display: block !important;
 	}
 
+	&__error-container {
+		margin-top: 0.5em;
+		color: red;
+	}
+
 	&__input {
 		@extend %auth-input;
 
 		&--halved {
 			width: 20% !important;
+		}
+
+		&--error {
+			border-bottom-color: red;
+
+			&::-webkit-input-placeholder {
+				color: red;
+			}
 		}
 	}
 
@@ -20,6 +33,15 @@
 
 		&__field {
 			margin-top: 2em;
+		}
+	}
+
+	&__name-errors {
+		display: flex;
+		margin: 0 30%;
+
+		> div {
+			width: 50%;
 		}
 	}
 
