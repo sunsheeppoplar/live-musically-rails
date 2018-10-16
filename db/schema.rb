@@ -39,6 +39,19 @@ ActiveRecord::Schema.define(version: 20180502043652) do
     t.index ["user_id"], name: "index_artist_opportunities_on_user_id", using: :btree
   end
 
+  create_table "artist_profiles", force: :cascade do |t|
+    t.text     "about"
+    t.integer  "desired_compensation_lower_bound"
+    t.integer  "desired_compensation_upper_bound"
+    t.string   "youtube_link"
+    t.string   "facebook_link"
+    t.string   "instagram_link"
+    t.integer  "user_id"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.index ["user_id"], name: "index_artist_profiles_on_user_id", using: :btree
+  end
+
   create_table "conversations", force: :cascade do |t|
     t.integer  "sender_id"
     t.integer  "recipient_id"
@@ -117,19 +130,6 @@ ActiveRecord::Schema.define(version: 20180502043652) do
     t.datetime "date_paid"
     t.datetime "date_paid_until"
     t.index ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
-  end
-
-  create_table "artist_profiles", force: :cascade do |t|
-    t.text     "about"
-    t.integer  "desired_compensation_lower_bound"
-    t.integer  "desired_compensation_upper_bound"
-    t.string   "youtube_link"
-    t.string   "facebook_link"
-    t.string   "instagram_link"
-    t.integer  "user_id"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.index ["user_id"], name: "index_artist_profiles_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

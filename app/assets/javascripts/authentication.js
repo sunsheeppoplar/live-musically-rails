@@ -97,7 +97,13 @@ $(document).on('turbolinks:load', function(){
 
 	function assignUserRoleToSignup(form, role) {
 		var hiddenInput = '#user_role';
+		var userRoleHeaderClass = ".js-signup-user-role-header";
 
+		var cleanedUpRoleString = function(role) {
+			return role.split('_').join(' ').toUpperCase();
+		}
+
+		$(userRoleHeaderClass).html(cleanedUpRoleString(role));
 		$(form).find(hiddenInput)[0].value = role;
 	}
 
@@ -152,7 +158,8 @@ $(document).on('turbolinks:load', function(){
 	}
 
 	function handleSignupSuccess(e, data, status, xhr) {
-		// debugger;
+		var redirectURL = xhr.responseJSON.url;
+		window.location = redirectURL;
 	}
 
 	// assign event handlers

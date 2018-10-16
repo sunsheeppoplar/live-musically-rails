@@ -1,5 +1,5 @@
 <div class="auth-form--hidden js-signup-secondary pure-g">
-
+	<h1 class="pure-u-1-1 js-signup-user-role-header auth-form__user-role-header"></h1>
 	<div class="pure-u-1-1">
 		<%= render "facebook_login" %>
 	</div>
@@ -31,13 +31,16 @@
 			<%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Password Confirmation', class: 'auth-form__input js-signup-password-confirmation-input' %>
 		</div>
 		<div class="js-signup-password-confirmation-error"></div>
-
-		<div class="auth-form__input-container__field">
-			<%= f.hidden_field :role, :value => "musician" %>
+		<div class="auth-form__policy-links">
+			By Signing up, you understand and agree to the Live Musically
+			<%= link_to "Terms of Service", policies_terms_path, target: "_blank" %>, including the
+			<%= link_to "User Agreement and Privacy Policy", policies_privacy_path, target: "_blank" %>.
 		</div>
-
 		<div class="auth-form__input-container__field">
 			<%= f.submit "SIGN UP", class: 'auth-form__submit-button' %>
+		</div>
+		<div class="auth-form__input-container__field">
+			<%= f.hidden_field :role, :value => "musician" %>
 		</div>
 		<% end %>
 	</div>
