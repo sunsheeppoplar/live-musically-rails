@@ -1,7 +1,7 @@
 <div class="auth-form--hidden js-signup-secondary pure-g">
 	<h1 class="pure-u-1-1 js-signup-user-role-header auth-form__user-role-header"></h1>
 	<div class="pure-u-1-1">
-		<%= render "facebook_login" %>
+		<%= render "facebook_oauth", locals: { form_type: 'Sign Up'} %>
 	</div>
 
 	<div class="pure-u-1-1 auth-form__input-container">
