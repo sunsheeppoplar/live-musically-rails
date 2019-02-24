@@ -1,0 +1,19 @@
+.search {
+	&__cta {
+		align-items: center;
+		background-color: $search-cta-bg-color;
+		display: flex;
+		flex-direction: column;
+		height: 15vh;
+		justify-content: center;
+		margin-bottom: 2em;
+
+		&__text {
+			color: $search-cta-color;
+			font-size: 1.25em;
+			font-weight: 300;
+			letter-spacing: $search-cta-letter-spacing;
+			text-transform: uppercase;
+		}
+	}
+}
