@@ -35,5 +35,6 @@ When:
 <%= f.hidden_field(:event_start_date) %>
 <%= f.hidden_field(:event_end_date) %>
 
-<%= f.submit "Search Opportunities" %>
+<%= f.submit "Search Opportunities", class: "search__submit" %>
 <% end %>
+<%= render "switch_user_action" %>

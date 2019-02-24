@@ -16,4 +16,17 @@
 			text-transform: uppercase;
 		}
 	}
+
+	&__submit {
+		@extend %button;
+		@include button-theme($grey-button-border-color, $grey-button-text-color, $grey-button-background-color);
+	}
+
+	&__switch-user {
+		text-align: center;
+
+		&__link {
+			font-weight: bold;
+		}
+	}
 }
