@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180313010234) do
+ActiveRecord::Schema.define(version: 20180502043652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,26 @@ ActiveRecord::Schema.define(version: 20180313010234) do
     t.index ["user_id"], name: "index_artist_opportunities_on_user_id", using: :btree
   end
 
+  create_table "artist_profiles", force: :cascade do |t|
+    t.text     "about"
+    t.integer  "desired_compensation_lower_bound"
+    t.integer  "desired_compensation_upper_bound"
+    t.string   "youtube_link"
+    t.string   "facebook_link"
+    t.string   "instagram_link"
+    t.integer  "user_id"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.index ["user_id"], name: "index_artist_profiles_on_user_id", using: :btree
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "external_links", force: :cascade do |t|
     t.integer "user_id"
     t.string  "origin_site"
@@ -60,6 +80,17 @@ ActiveRecord::Schema.define(version: 20180313010234) do
     t.string "long"
     t.string "world_region"
     t.string "country"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "conversation_id"
+    t.integer  "user_id"
+    t.boolean  "read",            default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
+    t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
   create_table "oauth_identities", force: :cascade do |t|
@@ -92,6 +123,17 @@ ActiveRecord::Schema.define(version: 20180313010234) do
     t.index ["user_id"], name: "index_submissions_on_user_id", using: :btree
   end
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.string   "duration"
+    t.string   "stripe_token"
+    t.integer  "user_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.datetime "date_paid"
+    t.datetime "date_paid_until"
+    t.index ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -113,6 +155,7 @@ ActiveRecord::Schema.define(version: 20180313010234) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "stripe_customer_token"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
@@ -139,4 +182,5 @@ ActiveRecord::Schema.define(version: 20180313010234) do
   add_foreign_key "opportunities", "users", column: "employer_id"
   add_foreign_key "submissions", "opportunities"
   add_foreign_key "submissions", "users"
+  add_foreign_key "subscriptions", "users"
 end

@@ -1,11 +1,11 @@
 <div class="auth-form--visible js-login pure-g" data-auth-type="login">
 
 	<div class="pure-u-1-1">
-		<%= render "facebook_login" %>
+		<%= render "facebook_oauth", locals: { form_type: 'Login'} %>
 	</div>
 
 	<div class="pure-u-1-1 auth-form__input-container">
-		<%= form_for(resource, as: resource_name, url:session_path(resource_name)) do |f| %>
+		<%= form_for(resource, as: resource_name, url: session_path(resource_name), remote: true) do |f| %>
 
 		<div class="auth-form__input-container__field">
 			<%= f.email_field :email, placeholder: 'Email', class: 'auth-form__input' %>
@@ -13,6 +13,9 @@
 
 		<div class="auth-form__input-container__field">
 			<%= f.password_field :password, autocomplete: "off", placeholder: 'Password', class: 'auth-form__input' %>
+		</div>
+
+		<div class="js-login-error">
 		</div>
 
 		<% if devise_mapping.rememberable? -%>

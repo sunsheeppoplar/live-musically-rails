@@ -53,7 +53,7 @@ class ProfilesController < ApplicationController
 
 	private
 	def profile_form_params
-		params.require(:my_profile_form).permit(:about, :avatar, :email, :first_name, :last_name, :password, :password_confirmation, :instruments => [], :locations => [], :soundcloud_links => [], :youtube_links => [])
+		params.require(:my_profile_form).permit(:about, :avatar, :cropped_avatar, :email, :first_name, :last_name, :password, :password_confirmation, :instruments => [], :locations => [], :soundcloud_links => [], :youtube_links => [])
 			.merge(current_user: current_user)
 			.reject {|k, v| (k == "password_confirmation" || k == "password") && v.blank? }
 	end

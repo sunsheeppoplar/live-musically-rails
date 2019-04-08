@@ -1,36 +1,69 @@
 <h3 class="my-profile-form__header">MY PROFILE</h3>
 
+<div class="cropper-modal">
+    <div class="modal-content">
+        <span class="close-button">×</span>
+				<div id="demo-basic"></div>
+				<button id="demo-basic-button">result</button>
+    </div>
+</div>
+
 <div class="user-info">
-	<h5>ABOUT</h5>
-	<div>
-		<%= image_tag("https:" + current_user.avatar.url(:normal), class: "js-avatar") %>
-		<div class="">
-			<%= f.file_field :avatar %>
+	<div class="the-top-part">
+		<div class="avatar-name-email-container">
+
+			<div class="avatar-holder">
+				<%= image_tag(current_user.avatar.url(:normal), class: "js-avatar") %>
+				<div class="">
+					<%= f.file_field :avatar, class: "inputfile" %>
+					<label for="my_profile_form_avatar">upload image</label>
+					<%= f.hidden_field :cropped_avatar %>
+					<div>
+					</div>
+				</div>
+			</div>
+
+			<div class="name-email-password">
+				<div>
+					<%= f.text_field :first_name, placeholder: current_user.first_name, disabled: "disabled", class: "js-my-profile-user-info-input-group", value: current_user.first_name %>
+					<%= f.text_field :last_name, placeholder: current_user.last_name, disabled: "disabled", class: "js-my-profile-user-info-input-group", value: current_user.last_name %>
+					<%= f.text_field :email, placeholder: current_user.email, disabled: "disabled", class: "js-my-profile-user-info-input-group", value: current_user.email %>
+					<span class="js-my-profile-inputs-edit-icon"><i class="glyphicon glyphicon-pencil"></i></span>
+					<span class="js-my-profile-inputs-edit-submit my-profile-form__input-group-edit-submit"><i class="glyphicon glyphicon-ok"></i></span>
+							<div class="js-my-profile--password my-profile-form__password-fields">
+				<div class="field">
+					<%#= f.label :password, "Password"<br /> %>
+					<%= f.password_field :password, placeholder: "password", :autocomplete => "off", class: "js-my-profile-user-password-input-group"  %>
+				</div>
+				<div class="field">
+					<%#= f.label :password_confirmation<br /> %>
+					<%= f.password_field :password_confirmation, placeholder: "password confirmation", class: "js-my-profile-user-password-input-group" %>
+				</div>
+				<span class="js-my-profile-user-password-edit-icon"><i class="glyphicon glyphicon-pencil"></i></span>
+				<span class="js-my-profile-user-info-edit-submit my-profile-form__input-group-submit"><i class="glyphicon glyphicon-ok"></i></span>
+			</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
-	<%= f.text_area :about, :value => current_user.about, disabled: "disabled", class: "js-my-profile-textarea" %>
-	<span class="js-my-profile-textarea-edit-icon"><i class="glyphicon glyphicon-pencil"></i></span>
-	<span class="js-my-profile-textarea-edit-submit my-profile-form__textarea-edit-submit"><i class="glyphicon glyphicon-ok"></i></span>
+	<div class="divider"></div>
 
-	<div class="">
-		<%= f.text_field :first_name, placeholder: current_user.first_name, disabled: "disabled", class: "js-my-profile-user-info-input-group", value: current_user.first_name %>
-		<%= f.text_field :last_name, placeholder: current_user.last_name, disabled: "disabled", class: "js-my-profile-user-info-input-group", value: current_user.last_name %>
-		<%= f.text_field :email, placeholder: current_user.email, disabled: "disabled", class: "js-my-profile-user-info-input-group", value: current_user.email %>
-		<span class="js-my-profile-inputs-edit-icon"><i class="glyphicon glyphicon-pencil"></i></span>
-		<span class="js-my-profile-inputs-edit-submit my-profile-form__input-group-edit-submit"><i class="glyphicon glyphicon-ok"></i></span>
+	<div class="about-social">
+		<div class="about">
+			<h4>ABOUT</h4>
+			<%= f.text_area :about, :value => current_user.about, disabled: "disabled", class: "js-my-profile-textarea" %>
+			<span class="js-my-profile-textarea-edit-icon"><i class="glyphicon glyphicon-pencil"></i></span>
+			<span class="js-my-profile-textarea-edit-submit my-profile-form__textarea-edit-submit"><i class="glyphicon glyphicon-ok"></i></span>
+		</div>
+		<div class="social">
+			<h4>SOCIAL MEDIA</h4>
+			<input></input>
+			<input></input>
+			<input></input>
+		</div>
 	</div>
 
-	<div class="js-my-profile--password my-profile-form__password-fields">
-		<div class="field">
-			<%= f.label :password, "Password" %><br />
-			<%= f.password_field :password, :autocomplete => "off", class: "js-my-profile-user-password-input-group"  %>
-		</div>
-		<div class="field">
-			<%= f.label :password_confirmation %><br />
-			<%= f.password_field :password_confirmation, class: "js-my-profile-user-password-input-group" %>
-		</div>
-		<span class="js-my-profile-user-password-edit-icon"><i class="glyphicon glyphicon-pencil"></i></span>
-		<span class="js-my-profile-user-info-edit-submit my-profile-form__input-group-submit"><i class="glyphicon glyphicon-ok"></i></span>
-	</div>
+	<div class="divider"></div>
+
 </div>

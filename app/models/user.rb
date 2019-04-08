@@ -17,26 +17,51 @@ class User < ApplicationRecord
 	has_many :external_links
 	has_many :submissions
 	has_many :oauth_identities, dependent: :destroy
+	has_one :artist_profile
+    has_one :subscription
 
 	has_attached_file	:avatar,
 						:styles => {
 							normal: ["250x250#", :png],
 							small: ["215x215#", :png],
 							thumb: ["50x50#", :png]
-						}
-	validates_attachment_content_type :avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+						},
+						:default_url => ActionController::Base.helpers.asset_path("avatars/:style/missing.png")
+
+	# validates_attachment_content_type :cropped_avatar, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+
+	do_not_validate_attachment_file_type :avatar
+
+	validates :first_name, presence: true
+	validates :last_name, presence: true
+
+	def included_conversations
+		Conversation.includes(:messages).where("sender_id = ? OR recipient_id = ?", self.id, self.id)
+	end
+
+	def self.from_omniauth(auth)
+		where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+			user.email = auth.info.email
+			user.password = Devise.friendly_token[0,20]
+			parse_name(user, auth.info.name)
+			user.role = auth.user_role
+		end
+	end
 
 	def owner?(opportunity)
 		id == opportunity.employer_id
 	end
 
 	def recently_registered?
-		not_stripe_user? && sign_in_count == 1
+		not_stripe_subscribed? && not_stripe_payable? && sign_in_count == 1
 	end
 
-	def not_stripe_user?
+	def not_stripe_subscribed?
+		stripe_customer_token.blank?
+	end
+
+	def not_stripe_payable?
 		OauthIdentity.where(provider: "stripe_connect", user_id: self.id).count < 1
 	end
-
 end
 	

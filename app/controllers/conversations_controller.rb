@@ -1,0 +1,60 @@
+class ConversationsController < ApplicationController
+  before_action :authenticate_user!
+
+  def index
+    @users = User.all
+    # @conversations = Conversation.all
+    @conversations = current_user.included_conversations
+  end
+  
+  def create
+    if Conversation.between(params[:sender_id],params[:recipient_id]).present?
+      @conversation = Conversation.between(params[:sender_id], params[:recipient_id]).first
+    else
+      @conversation = Conversation.create!(conversation_params)
+    end
+    redirect_to conversation_messages_path(@conversation)
+  end
+
+  def load_conversation
+    conversation_id = params[:conversationId]
+    # convo_html = partial_to_string(Conversation.find(params[:conversationId]).messages)
+    last_ten_messages_html = partial_to_string(Conversation.find(params[:conversationId]).messages.last(10))
+    render json: { 
+        loaded_convo: last_ten_messages_html,
+        current_conversation: conversation_id
+    }, status: 200
+  end
+
+  def load_full_conversation
+    conversation_id = params[:conversationId]
+    all_messages_html = partial_to_string(Conversation.find(params[:conversationId]).messages)
+    render json: { 
+        loaded_convo: all_messages_html,
+        current_conversation: conversation_id
+    }, status: 200
+  end
+
+  def load_new_message
+    conversation_id = params[:conversationId]
+    message_html = partial_to_string([Conversation.find(params[:conversationId]).messages.last])
+    render json: {
+      loaded_message: message_html,
+      current_conversation: conversation_id
+    }, status: 200
+  end
+
+  private
+  def conversation_params
+    params.permit(:sender_id, :recipient_id)
+  end
+ 
+  def partial_to_string(message_set)
+    render_to_string(
+      partial: 'conversations/conversation_thread', 
+      layout: false, 
+      formats: [:html], 
+      locals: { message_set: message_set}
+    )
+  end
+end

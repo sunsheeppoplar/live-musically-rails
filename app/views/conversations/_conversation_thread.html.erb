@@ -1,0 +1,12 @@
+<% message_set.each do |message| %>
+<% user = User.find(message.user.id) %>
+	<div class="individual-message">
+    <div class="message-user-info">
+      <div> <%= image_tag user.avatar(:thumb) %> </div>
+      <div class="message-user-name"> <%= user.first_name + " " + user.last_name %> </div>
+    </div>
+    <div class="message-body">
+      <div> <%= message.body %> </div>
+    </div>
+  </div>
+<% end %>

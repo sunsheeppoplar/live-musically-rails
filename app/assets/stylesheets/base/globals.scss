@@ -6,10 +6,16 @@ html, body {
 	height: 100%;
 	width: 100%;
 	background-color: $white;
+	display: flex;
+	flex-direction: column;
 }
 
 a, a:hover, a:visited {
 	text-decoration: none;
+}
+
+a, a:hover {
+	color: black;
 }
 
 html, body, form, fieldset, h1, h2, h3, h4, h5, h6, p, pre, blockquote, ul, ol, dl, address {

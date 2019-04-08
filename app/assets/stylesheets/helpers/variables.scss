@@ -1,19 +1,56 @@
+// c
 $checkbox-border-width: 0.0625em;
 $checkbox-height: 0.0625em;
 $checkbox-width: 0.0625em;
 $checkbox-checked-color: $grey-4;
 
+// f
+$footer-background-color: $grey-2;
+$footer-bottom: 0;
+$footer-color: white;
+$footer-display: flex;
+$footer-flex-shrink: 0;
+$footer-flex-wrap: wrap;
+$footer-inner-container-width: 50%;
+$footer-padding: 1em 5% 0em 5%;
+$footer-width: 100%;
+
+$footer-border-color: grey;
+$footer-border-display: block;
+$footer-border-height: 0.125em;
+$footer-border-width: 0.0625em;
+
+$footer-company-links-header-font-weight: 600;
+$footer-company-links-hover-color: $grey-1;
+$footer-company-links-width: 10em;
+
+$footer-copyright-margin: 2em 0em 1em 0em;
+
+$footer-social-links-display: flex;
+$footer-social-links-justify-content: flex-end;
+
+$form-section-border-color: $grey-6;
+
+// g
 $grey-button-background-color: $grey-4;
 $grey-button-border-color: $grey-4;
 $grey-button-text-color: $white;
 
+// h
+$header-color: $grey-2;
+$header-height: 10%;
+$header-text-color: $white;
+
+// i
 $input-background-color: $white;
 $input-border-bottom-width: 0.0625em;
 $input-border-color: $grey-5;
 $input-placeholder-color: $grey-5;
 
+// l
 $label-text-color: $grey-4;
 
-$header-color: $grey-2;
-$header-text-color: $white;
-$form-section-border-color: $grey-6;
+// s
+$search-cta-color: $white;
+$search-cta-bg-color: $grey-2;
+$search-cta-letter-spacing: $open-text;

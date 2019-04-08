@@ -7,11 +7,24 @@
 		display: block !important;
 	}
 
+	&__error-container {
+		margin-top: 0.5em;
+		color: red;
+	}
+
 	&__input {
 		@extend %auth-input;
 
 		&--halved {
 			width: 20% !important;
+		}
+
+		&--error {
+			border-bottom-color: red;
+
+			&::-webkit-input-placeholder {
+				color: red;
+			}
 		}
 	}
 
@@ -20,6 +33,15 @@
 
 		&__field {
 			margin-top: 2em;
+		}
+	}
+
+	&__name-errors {
+		display: flex;
+		margin: 0 30%;
+
+		> div {
+			width: 50%;
 		}
 	}
 
@@ -43,6 +65,12 @@
 	    width: 20%;
 	}
 
+	&__policy-links {
+		font-size: 0.75em;
+		margin: 2em 30%;
+		width: 40%;
+	}
+
 	&__remember-me {
 		&__checkbox {
 			@extend %checkbox;
@@ -63,6 +91,11 @@
 		height: 2.5em;
 		width: 15%;
 		margin-left: 42.5%
+	}
+
+	&__user-role-header {
+		font-size: 2.5em;
+		margin-bottom: 0;
 	}
 
 	&__user-roles {

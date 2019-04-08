@@ -8,23 +8,55 @@ RSpec.describe User, type: :model do
 		it "has many oauth identities" do
 			expect(subject).to have_many(:oauth_identities)
 		end
+
+		# has_one
+		it "has one artist profile" do
+			expect(subject).to have_one(:artist_profile)
+		end
 	end
 
 	describe "instance methods" do
-		describe "#not_stripe_user?" do
+		describe "#not_stripe_payable?" do
 			let(:user) { FactoryGirl.create(:user) }
 
 			context "has registered with Stripe" do
 				let!(:stripe) { FactoryGirl.create(:oauth_identity, uid: "uid", provider: "stripe_connect", user_id: user.id) }
 
 				it "returns false" do
-					expect(user.not_stripe_user?).to eq false
+					expect(user.not_stripe_payable?).to eq false
 				end
 			end
 
 			context "hasn't registered with Stripe" do
 				it "returns true" do
-					expect(user.not_stripe_user?).to eq true
+					expect(user.not_stripe_payable?).to eq true
+				end
+			end
+		end
+
+		describe "#not_stripe_subscribed?" do
+
+			context "has registered with Stripe" do
+				let(:user) { FactoryGirl.create(:user, :has_stripe_subscription) }
+
+				it "returns false" do
+					expect(user.not_stripe_subscribed?).to eq false
+				end
+
+				it "doesn't return true" do
+					expect(user.not_stripe_subscribed?).to_not eq true
+				end
+			end
+
+			context "has not registered with Stripe" do
+				let(:user) { FactoryGirl.create(:user, :does_not_have_stripe_subscription) }
+
+				it "returns true" do
+					expect(user.not_stripe_subscribed?).to eq true
+				end
+
+				it "doesn't return false" do
+					expect(user.not_stripe_subscribed?).to_not eq false
 				end
 			end
 		end
@@ -33,7 +65,8 @@ RSpec.describe User, type: :model do
 			let(:user) { FactoryGirl.create(:user) }
 
 			before do
-				expect(user).to receive(:not_stripe_user?).and_return(true)
+				expect(user).to receive(:not_stripe_payable?).and_return(true)
+				expect(user).to receive(:not_stripe_subscribed?).and_return(true)
 			end
 
 			context "just registered" do

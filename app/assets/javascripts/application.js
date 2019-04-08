@@ -25,9 +25,11 @@
 //= require my-profile-init
 //= require datepicker
 //= require employer-submissions
+//= require header
 //= require my-profile
 //= require new-opportunity-form
 //= require onboard
 //= require search-opportunities-form
 //= require timepicker
-//= require_tree .
+//= require_tree
+//= require_tree ./channels
